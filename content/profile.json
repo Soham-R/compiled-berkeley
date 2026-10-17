@@ -3,5 +3,11 @@
   "age": 7,
   "band": "early-2",
   "interests": ["her dog Biscuit", "dinosaurs", "her little sister Priya"],
-  "hard": ["decoding th- blends", "gets frustrated fast", "attention fades after ~8 minutes"]
+  "hard": ["decoding th- blends", "gets frustrated fast", "attention fades after ~8 minutes"],
+  "thresholds": {
+    "stumbleTimeoutSec": 2.5,
+    "silenceFlagSec": 6,
+    "stumblesToFlag": 3,
+    "expectedAttentionMin": 8
+  }
 }

@@ -1,0 +1,115 @@
+[
+  {
+    "day": 1,
+    "date": "2026-10-12",
+    "passageDay": 1,
+    "durationSec": 410,
+    "words": [
+      { "word": "through", "status": "stumbled", "hintLevel": 3 },
+      { "word": "think", "status": "stumbled", "hintLevel": 2 },
+      { "word": "there", "status": "stumbled", "hintLevel": 2 }
+    ],
+    "flagged": true,
+    "flagReason": "stumbles",
+    "secondsUntilFlag": 360,
+    "breakAnswer": "Through the park"
+  },
+  {
+    "day": 2,
+    "date": "2026-10-13",
+    "passageDay": 2,
+    "durationSec": 300,
+    "words": [
+      { "word": "through", "status": "stumbled", "hintLevel": 1 },
+      { "word": "think", "status": "clean", "hintLevel": 0 },
+      { "word": "there", "status": "clean", "hintLevel": 0 }
+    ],
+    "flagged": false,
+    "flagReason": null,
+    "secondsUntilFlag": null,
+    "breakAnswer": null
+  },
+  {
+    "day": 3,
+    "date": "2026-10-14",
+    "passageDay": 2,
+    "durationSec": 600,
+    "words": [
+      { "word": "through", "status": "stumbled", "hintLevel": 1 },
+      { "word": "think", "status": "clean", "hintLevel": 0 },
+      { "word": "there", "status": "clean", "hintLevel": 0 }
+    ],
+    "flagged": true,
+    "flagReason": "silence",
+    "secondsUntilFlag": 540,
+    "breakAnswer": "The grass"
+  },
+  {
+    "day": 4,
+    "date": "2026-10-15",
+    "passageDay": 5,
+    "durationSec": 520,
+    "words": [
+      { "word": "through", "status": "clean", "hintLevel": 0 },
+      { "word": "think", "status": "clean", "hintLevel": 0 },
+      { "word": "there", "status": "clean", "hintLevel": 0 },
+      { "word": "where", "status": "stumbled", "hintLevel": 2 },
+      { "word": "which", "status": "stumbled", "hintLevel": 2 }
+    ],
+    "flagged": false,
+    "flagReason": null,
+    "secondsUntilFlag": null,
+    "breakAnswer": null
+  },
+  {
+    "day": 5,
+    "date": "2026-10-16",
+    "passageDay": 5,
+    "durationSec": 720,
+    "words": [
+      { "word": "through", "status": "clean", "hintLevel": 0 },
+      { "word": "think", "status": "clean", "hintLevel": 0 },
+      { "word": "there", "status": "clean", "hintLevel": 0 },
+      { "word": "where", "status": "stumbled", "hintLevel": 1 },
+      { "word": "which", "status": "clean", "hintLevel": 0 }
+    ],
+    "flagged": true,
+    "flagReason": "silence",
+    "secondsUntilFlag": 660,
+    "breakAnswer": "Under the bed"
+  },
+  {
+    "day": 6,
+    "date": "2026-10-17",
+    "passageDay": 5,
+    "durationSec": 640,
+    "words": [
+      { "word": "through", "status": "clean", "hintLevel": 0 },
+      { "word": "think", "status": "clean", "hintLevel": 0 },
+      { "word": "there", "status": "clean", "hintLevel": 0 },
+      { "word": "where", "status": "stumbled", "hintLevel": 1 },
+      { "word": "which", "status": "clean", "hintLevel": 0 }
+    ],
+    "flagged": false,
+    "flagReason": null,
+    "secondsUntilFlag": null,
+    "breakAnswer": null
+  },
+  {
+    "day": 7,
+    "date": "2026-10-18",
+    "passageDay": 5,
+    "durationSec": 700,
+    "words": [
+      { "word": "through", "status": "clean", "hintLevel": 0 },
+      { "word": "think", "status": "clean", "hintLevel": 0 },
+      { "word": "there", "status": "clean", "hintLevel": 0 },
+      { "word": "where", "status": "clean", "hintLevel": 0 },
+      { "word": "which", "status": "clean", "hintLevel": 0 }
+    ],
+    "flagged": false,
+    "flagReason": null,
+    "secondsUntilFlag": null,
+    "breakAnswer": null
+  }
+]

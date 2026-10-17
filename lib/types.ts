@@ -15,3 +15,44 @@ export type NextPageRequest = {
   stumbledWords: string[];
   flagged: boolean;
 };
+
+// Age-dependent knobs. Live in content/profile.json so /read and the parent
+// summary read the same numbers; a session record itself is age-agnostic.
+export type Thresholds = {
+  stumbleTimeoutSec: number; // no match for the current word -> stumbled
+  silenceFlagSec: number; // silence mid-passage -> flagged
+  stumblesToFlag: number; // stumbles in one passage -> flagged
+  expectedAttentionMin: number; // what "normal" time-to-break looks like at this age
+};
+
+export type Profile = {
+  name: string;
+  age: number;
+  band: string;
+  interests: string[];
+  hard: string[];
+  thresholds: Thresholds;
+};
+
+// 0 none, 1 chunks shown, 2 first chunk sounded out, 3 whole word modeled.
+export type HintLevel = 0 | 1 | 2 | 3;
+
+export type WordResult = {
+  word: string;
+  status: "clean" | "stumbled";
+  hintLevel: HintLevel;
+};
+
+// One record per page read. /read writes these (raw facts only);
+// the parent summary interprets them. Never shown to the kid.
+export type Session = {
+  day: number; // session number since account start; drives the 1/3/7/weekly cadence
+  date: string; // ISO date, YYYY-MM-DD
+  passageDay: number; // which entry in content/passages.json was read
+  durationSec: number;
+  words: WordResult[]; // target words plus any stumbles, not every "the"
+  flagged: boolean;
+  flagReason: "stumbles" | "silence" | null;
+  secondsUntilFlag: number | null; // the "how long before she needed a break" number
+  breakAnswer: string | null; // what she picked on the Biscuit card
+};
