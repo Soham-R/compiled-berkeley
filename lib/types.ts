@@ -1,3 +1,12 @@
+/**
+ * Unified type definitions for Wren frontend.
+ */
+
+export * from "./types/profile";
+export * from "./types/telemetry";
+export * from "./types/tutor";
+
+// Backward compatibility types for existing hackathon routes
 export type Question = {
   prompt: string;
   options: string[];
@@ -8,6 +17,7 @@ export type Passage = {
   passage: string;
   targetWords: string[];
   question: Question;
+  source?: "claude" | "fallback";
 };
 
 export type NextPageRequest = {
@@ -16,6 +26,7 @@ export type NextPageRequest = {
   flagged: boolean;
   words?: WordResult[]; // preferred: carries hintLevel per word
   previousPassage?: string; // the page just read, so the story continues
+  childId?: string; // sent by the kid site; used only when WREN_BACKEND_URL is set
 };
 
 // Age-dependent knobs. Live in content/profile.json so /read and the parent
