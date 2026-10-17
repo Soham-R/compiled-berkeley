@@ -366,6 +366,9 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 .k-stroke-steps span { min-width: 44px; height: 44px; padding: 0 12px; border-radius: 14px; display: grid; place-items: center; font: 800 1.1rem var(--font-kid); background: var(--k-sky); color: var(--k-soft); border: 3px solid var(--k-line); }
 .k-stroke-steps span.now { background: #f3eeff; border-color: var(--k-write); color: var(--k-write-d); }
 .k-stroke-steps span.done { background: #e3f8ec; border-color: var(--k-brain); color: var(--k-brain-d); }
+.k-spell { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+.k-spell span { width: 72px; height: 84px; border-radius: 18px; border: 4px dashed var(--k-line); display: grid; place-items: center; font: 700 2.8rem var(--font-letter); color: var(--k-ink); background: #fff; }
+.k-spell span.on { border-style: solid; border-color: var(--k-brain); background: #e3f8ec; }
 .k-trace-tip { font-family: var(--font-kid); font-weight: 800; font-size: 1.25rem; min-height: 1.6em; }
 .trace-box { position: relative; width: min(340px, 78vw); aspect-ratio: 1; max-width: 100%; border-radius: 30px; background: #f6f2ff; border: 4px dashed #d6c8ff; touch-action: none; }
 .trace-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 26px; }
@@ -394,6 +397,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 .k-tile.soft-miss { opacity: 0.55; }
 .k-tile[disabled] { cursor: default; }
 .k-tile.letter { font-family: var(--font-letter); font-weight: 700; color: var(--k-ink); }
+.k-tile.wordtile { width: auto; min-width: 112px; padding: 0 18px; font-size: 2.2rem; }
 .k-word-show { font-family: var(--font-letter); font-weight: 700; font-size: clamp(3.4rem, 9vw, 5rem); letter-spacing: 0.06em; color: var(--k-ink); margin-top: 8px; }
 .k-level-tag { display: inline-block; font-family: var(--font-kid); font-weight: 800; font-size: 0.95rem; padding: 4px 12px; border-radius: 999px; background: var(--k-sky); color: var(--k-soft); }
 @media (max-width: 560px) { .k-explain { grid-template-columns: minmax(0, 1fr); } .k-explain-pic { width: 96px; height: 96px; font-size: 3.4rem; } }
@@ -619,7 +623,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
           <h3>Who's learning?</h3>
           <div class="row2">
             <div class="field"><label for="childName">First name</label><input type="text" id="childName" placeholder="e.g. Maya" autocomplete="off"></div>
-            <div class="field"><label for="childAge">Age</label><select id="childAge"><option value="3">3 years</option><option value="4">4 years</option><option value="5">5 years</option><option value="6">6 years</option></select></div>
+            <div class="field"><label for="childAge">Age</label><select id="childAge"><option value="3">3 years</option><option value="4">4 years</option><option value="5">5 years</option><option value="6">6 years</option><option value="7">7 years</option></select></div>
           </div>
           <div class="q"><label class="ql" for="interests">What do they love right now?</label><p class="hint">We'll build their world around these. Separate with commas.</p>
             <input type="text" id="interests" placeholder="e.g. trains, bugs, water" autocomplete="off"></div>
@@ -708,7 +712,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const rows = {
       Theme: `Every game reskinned with ${word}`,
       Voice: demo.sound ? 'Slow, low pitch, 70% volume, no sudden sounds' : 'Standard voice and sound effects',
-      Rounds: demo.adhd ? '3 quick questions, 2 choices, instant praise' : '5 questions, 3 choices',
+      Rounds: demo.adhd ? '5 quick questions, instant praise, simpler choices when stuck' : '6 questions, 3 choices',
       Answers: demo.speech ? 'Tap the picture · speaking is optional' : 'Read out loud · Wren listens',
       Visuals: demo.bold ? 'High contrast, thick outlines, big motion' : 'Standard contrast'
     };
@@ -724,7 +728,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   renderDemo();
 
   /* ================= Marquee ================= */
-  const MQ = [['ADHD traits', 'short rounds of 3, quick praise, steps simplified when stuck'], ['Autism', 'predictable routine, warning before every switch'], ['Dyslexia', 'sounds first, spaced letters, b and d in different colours'], ['Speech delay', 'speaking invited, never required'], ['Sound sensitive', 'slow, low, quieter voice'], ['Seeks bold visuals', 'thick outlines and big pictures'], ['Overwhelmed by busy screens', 'calm colours, no confetti'], ['Motor delay', 'bigger buttons, wider tracing paths'], ['Dislikes being timed', 'no countdowns, ever']];
+  const MQ = [['ADHD traits', 'shorter rounds, quick praise, steps simplified when stuck'], ['Autism', 'predictable routine, warning before every switch'], ['Dyslexia', 'sounds first, spaced letters, b and d in different colours'], ['Speech delay', 'speaking invited, never required'], ['Sound sensitive', 'slow, low, quieter voice'], ['Seeks bold visuals', 'thick outlines and big pictures'], ['Overwhelmed by busy screens', 'calm colours, no confetti'], ['Motor delay', 'bigger buttons, wider tracing paths'], ['Dislikes being timed', 'no countdowns, ever']];
   $('marquee').innerHTML = MQ.map(([a, b]) => `<div class="mq"><b>${a}</b><span>${b[0].toUpperCase() + b.slice(1)}</span></div>`).join('');
 
   /* ================= Wizard ================= */
@@ -788,6 +792,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       bold: p.sensory_profile.visual === 'Under_Responsive' || dx('Sensory_Seeking'),
       calm: p.sensory_profile.visual === 'Over_Responsive',
       roundLen: dx('ADHD_traits') ? 3 : 5,
+      readingRoundLen: dx('ADHD_traits') ? 5 : 6, // Reading rounds are never shorter than 5 questions
       transitionHelp: dx('Autism') || tr('Unexpected_Changes') || goal('Transitions'),
       soundsFirst: bm ? !bm.letters : (dx('Speech_Delay') || dx('Autism') || dx('Dyslexia_Risk') || age <= 3),
       gentle: tr('Getting_It_Wrong') || tr('Time_Pressure') || dx('ADHD_traits'),
@@ -910,7 +915,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   }
   try { VOICE = pickVoice(); speechSynthesis.addEventListener('voiceschanged', () => { VOICE = pickVoice(); }); } catch (e) {}
   // Speak sentence by sentence so the voice pauses naturally, like a teacher reading aloud.
-  function say(text, done) {
+  function say(text, done, essential) {
+    if (S && S.softAudio && !essential) { if (done) setTimeout(done, 500); return; } // shown on screen instead
     if (done) {
       // Some voices never fire their end event; a timer sized to the sentence makes sure the next step still happens.
       let called = false; const once = done; done = () => { if (!called) { called = true; once(); } };
@@ -925,7 +931,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         if (VOICE) u.voice = VOICE;
         u.lang = VOICE ? VOICE.lang : 'en-US';
         const slow = moodLevel !== 'calm', hush = moodLevel === 'soothe' || moodLevel === 'break';
-        u.rate = (S.softAudio ? 0.82 : 0.9) * (slow ? 0.9 : 1); u.pitch = S.softAudio || hush ? 1.0 : 1.12; u.volume = (S.softAudio ? 0.75 : 0.95) * (hush ? 0.7 : 1);
+        u.rate = (S.softAudio ? 0.82 : 0.9) * (slow ? 0.9 : 1); u.pitch = S.softAudio || hush ? 1.0 : 1.12; u.volume = (S.softAudio ? 0.55 : 0.95) * (hush ? 0.7 : 1);
         if (done && i === parts.length - 1) u.onend = done;
         speechSynthesis.speak(u);
       });
@@ -956,7 +962,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         </button>
         <button type="button" class="k-card write" data-go="writing">
           <div class="k-art"><span class="big" style="color:var(--k-write)">${esc((P.name[0] || 'A').toUpperCase())}</span></div>
-          <h2>Writing</h2><span class="sub">${S.preWriting ? 'Trace lines and shapes' : 'Trace your letters'}</span>${meter('writing')}<span class="k-play">Play ▶</span>
+          <h2>Writing</h2><span class="sub">${+P.age >= 6 ? 'Spell words' : +P.age === 5 ? 'Letters and spelling' : S.preWriting ? 'Trace lines and shapes' : 'Trace your letters'}</span>${meter('writing')}<span class="k-play">Play ▶</span>
         </button>
       </section>
       <button type="button" class="k-card story" data-go="story">
@@ -978,11 +984,11 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         </div>
       </section>`;
     $('kview').querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => openActivity(b.dataset.go)));
-    say(`${greet}, ${P.name}! What do you want to learn today?`);
   }
 
   /* ---------- activity shell ---------- */
   let cur = null, round = 0;
+  const roundLen = () => cur === 'reading' ? S.readingRoundLen : S.roundLen;
   function openActivity(subj) {
     clearTimers(); if (stopStory) stopStory(); cur = subj; round = 0;
     $('kview').innerHTML = `
@@ -990,7 +996,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         <div class="k-act-top">
           <button type="button" class="k-home" id="kHome" aria-label="Back to home">⌂</button>
           <h2 class="k-act-title" style="color:${SUBJ[subj].color}">${SUBJ[subj].name}</h2>
-          <div class="k-dots" id="kDots">${subj === 'story' ? '' : Array.from({ length: S.roundLen }, () => '<i></i>').join('')}</div>
+          <div class="k-dots" id="kDots">${subj === 'story' ? '' : Array.from({ length: roundLen() }, () => '<i></i>').join('')}</div>
         </div>
         <div class="k-stage" id="kStage"></div>
       </section>`;
@@ -1000,20 +1006,19 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       const st = $('kStage');
       st.innerHTML = `<div class="k-over"><div style="width:110px;margin:0 auto">${MASCOT('side')}</div><h2>Next up: ${SUBJ[subj].name}!</h2><p>Take a big breath. We start when the bar is full.</p><div class="k-tbar"><i id="tb"></i></div><div class="row"><button type="button" class="k-btn go" id="ready">I'm ready!</button></div></div>`;
       requestAnimationFrame(() => { const t = $('tb'); t.style.transition = 'width 3.5s linear'; t.style.width = '100%'; });
-      say(`Next up, ${SUBJ[subj].name}!`);
       const go = () => { clearTimers(); GAMES[subj](); };
       $('ready').addEventListener('click', go); later(go, 3500);
     } else GAMES[subj]();
   }
   const speaker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
-  function stage(prompt, why, extra = '', spoken) {
+  function stage(prompt, why, extra = '', spoken, quiet) {
     $('kStage').innerHTML = `
       <div class="k-prompt-row"><button type="button" class="k-hear" id="kHear" aria-label="Hear it again">${speaker}</button><p class="k-prompt">${prompt}</p></div>
       <p class="k-why">${why}</p>${extra}
       <div class="k-board" id="kBoard"></div>
       <div class="k-feedback"><span id="kFbM"></span><p id="kFb"></p></div>`;
-    $('kHear').addEventListener('click', () => say(spoken || $('kStage').querySelector('.k-prompt').textContent));
-    say(spoken || $('kStage').querySelector('.k-prompt').textContent);
+    $('kHear').addEventListener('click', () => say(spoken || $('kStage').querySelector('.k-prompt').textContent, null, true));
+    if (!quiet) say(spoken || $('kStage').querySelector('.k-prompt').textContent, null, true); // a retry of the same question isn't read out again
   }
   function feedback(text, kind) { $('kFbM').innerHTML = MASCOT('side'); const f = $('kFb'); f.className = kind; f.textContent = text; }
   const praise = () => pick(['Oh, wonderful!', 'Yes! I knew you could!', "That's exactly right!", 'Great listening!', `Beautiful work, ${P.name}!`]);
@@ -1023,7 +1028,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     round++; prog[cur]++; totalStars++; $('kStars').textContent = totalStars;
     $('kDots').querySelectorAll('i').forEach((d, i) => d.classList.toggle('on', i < round));
     save();
-    if (round >= S.roundLen) later(celebrate, 1400); else later(next, 1500);
+    if (round >= roundLen()) later(celebrate, 1400); else later(next, 1500);
   }
   function celebrate() {
     today[cur] = true; save();
@@ -1031,7 +1036,6 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const conf = (S.calm || reduced || moodLevel !== 'calm') ? '' : `<div class="confetti">${Array.from({ length: 40 }, () => `<i style="left:${Math.random() * 100}%;background:${pick(['#ff7a59', '#8b5cf6', '#3b82f6', '#22b46b', '#ffc93c'])};animation-delay:${Math.random() * .6}s"></i>`).join('')}</div>`;
     st.insertAdjacentHTML('beforeend', `${conf}<div class="k-over"><div class="k-stars"><span>★</span><span>★</span><span>★</span></div><h2>You did it, ${esc(P.name)}!</h2><p>${cur === 'reading' ? (readingProgress().waitingForDay ? `You learned so much today! Come back tomorrow to unlock level ${readingProgress().level + 1}.` : `Reading level ${readingProgress().level}: ${readingProgress().done} of ${readingProgress().need} stars.`) : `You finished ${SUBJ[cur].name}. Level ${level(prog[cur])}.`}</p><div class="row"><button type="button" class="k-btn go" id="again">Play again</button><button type="button" class="k-btn" id="home2">Home</button></div></div>`);
     $('again').addEventListener('click', () => openActivity(cur)); $('home2').addEventListener('click', dashboard);
-    say(`You did it, ${P.name}!`);
   }
 
   /* ---------- Reading ---------- */
@@ -1041,7 +1045,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     { e: '🐮', w: 'cow', snd: 'Moooo', l: 'C' }, { e: '🐶', w: 'dog', snd: 'Woof woof', l: 'D', re: /dog|pupp/ },
     { e: '🚗', w: 'car', snd: 'Vroom', l: 'C', re: /car/ }, { e: '🦁', w: 'lion', snd: 'Roar', l: 'L' }
   ];
-  /* ---------- Reading: five levels, a big question bank, gentle explanations ---------- */
+  /* ---------- Reading: levels follow California standards by age, a big question bank, gentle explanations ---------- */
   const PIC = { bee: '🐝', cow: '🐮', dog: '🐶', cat: '🐱', snake: '🐍', lion: '🦁', frog: '🐸', duck: '🦆', sheep: '🐑', pig: '🐷', train: '🚂', car: '🚗', owl: '🦉', horse: '🐴', mouse: '🐭', bell: '🔔', clock: '⏰', rocket: '🚀', water: '💧',
     ball: '⚽', bus: '🚌', banana: '🍌', bear: '🐻', cake: '🍰', fish: '🐟', fox: '🦊', moon: '🌙', monkey: '🐵', sun: '☀️', sock: '🧦', star: '⭐', tiger: '🐯', tree: '🌳', pizza: '🍕', penguin: '🐧', leaf: '🍃', lemon: '🍋', rabbit: '🐰', rainbow: '🌈',
     hat: '🎩', bat: '🦇', log: '🪵', box: '📦', house: '🏠', key: '🔑', spoon: '🥄', pear: '🍐', goat: '🐐', boat: '⛵', hen: '🐔', pen: '🖊️', bug: '🐛', cup: '🥤', bed: '🛏️', van: '🚐', map: '🗺️', web: '🕸️', drum: '🥁' };
@@ -1053,27 +1057,56 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   const CVC = ['cat', 'dog', 'sun', 'bus', 'pig', 'hat', 'bed', 'box', 'fox', 'van', 'map', 'pen', 'hen', 'web', 'bug', 'cup', 'bat', 'log'];
   const letterOf = w => w[0].toUpperCase() === 'K' ? 'C' : w[0].toUpperCase();
   const ending = w => w.slice(w.search(/[aeiou]/));
-  const LEVELS = [
-    { n: 1, name: 'Animal and thing sounds', short: 'Match the sounds' },
-    { n: 2, name: 'First sounds', short: 'First sounds' },
-    { n: 3, name: 'Rhyming words', short: 'Rhymes' },
-    { n: 4, name: 'Letters', short: 'Letters' },
-    { n: 5, name: 'Reading words out loud', short: 'Read words' },
-    { n: 6, name: 'Reading sentences out loud', short: 'Read sentences' }
-  ];
+  // Ages 3-4: California Preschool Learning Foundations (Language and Literacy). Age 5: CA Common Core RF.K. Ages 6-7: RF.1.
+  // Codes are shown to parents on every question so teachers can check the mapping.
   const SENTENCES = ['The cat sat on a mat.', 'A big dog can run.', 'The sun is hot.', 'I see a red bus.', 'The pig is in the mud.', 'Dad has a hat.', 'The fox got in the box.', 'A hen sat on a log.', 'Mom can hop and run.', 'I can see the bug.', 'The van is red.', 'We sit in the sun.', 'The dog can dig.', 'Sam has a cup.'];
+  const G1_SENTENCES = ['The ship sails on the sea.', 'Jake made a cake for Mom.', 'We play in the rain.', 'The frog can jump and swim.', 'I will ride my bike home.', 'The duck went to the pond.', 'They were looking for the boat.', 'Chad has a red shell.', 'The dog jumped in the mud.', 'We had lunch by the tree.', 'She said the kite is up high.', 'Who wants to read with me?'];
+  const LEVELS = [
+    { n: 1, kind: 'sound', name: 'Animal and thing sounds', short: 'Match the sounds', std: 'CA Preschool Foundations: listening for sounds' },
+    { n: 2, kind: 'first', name: 'First sounds', short: 'First sounds', std: 'CA Preschool Foundations: beginning sounds · RF.K.2d' },
+    { n: 3, kind: 'rhyme', name: 'Rhyming words', short: 'Rhymes', std: 'RF.K.2a' },
+    { n: 4, kind: 'letter', name: 'Letters and their sounds', short: 'Letters', std: 'RF.K.1d · RF.K.3a' },
+    { n: 5, kind: 'word', focus: 'cvc', name: 'Reading short words', short: 'Short words', std: 'RF.K.3b · RF.K.2d', words: CVC },
+    { n: 6, kind: 'word', focus: 'sight', name: 'Kindergarten sight words', short: 'Sight words', std: 'RF.K.3c', words: ['the', 'a', 'I', 'to', 'you', 'is', 'my', 'see', 'we', 'and', 'go', 'can', 'he', 'she', 'it', 'in', 'are', 'do', 'like', 'for'] },
+    { n: 7, kind: 'sentence', name: 'Reading sentences', short: 'Sentences', std: 'RF.K.4', items: SENTENCES },
+    { n: 8, kind: 'word', focus: 'blend', name: 'Blends', short: 'Blends', std: 'RF.1.2b', words: ['frog', 'stop', 'clap', 'flag', 'swim', 'drum', 'crab', 'sled', 'snap', 'plug', 'trip', 'spin', 'nest', 'hand', 'milk', 'jump'] },
+    { n: 9, kind: 'word', focus: 'digraph', name: 'sh, ch, th, wh, ck', short: 'Digraphs', std: 'RF.1.3a', words: ['ship', 'shop', 'fish', 'chin', 'chip', 'lunch', 'that', 'this', 'bath', 'when', 'whip', 'duck', 'sock', 'back', 'much', 'with'] },
+    { n: 10, kind: 'word', focus: 'magic', name: 'Magic e', short: 'Magic e', std: 'RF.1.3c', words: ['cake', 'bike', 'home', 'cute', 'game', 'kite', 'rope', 'tube', 'lake', 'time', 'bone', 'gate', 'hide', 'note', 'five'] },
+    { n: 11, kind: 'word', focus: 'team', name: 'Vowel teams', short: 'Vowel teams', std: 'RF.1.3c', words: ['rain', 'boat', 'feet', 'see', 'play', 'tree', 'road', 'mail', 'seed', 'coat', 'day', 'beach', 'team', 'soap'] },
+    { n: 12, kind: 'word', focus: 'sight', name: 'Grade 1 sight words', short: 'Sight words 1', std: 'RF.1.3g', words: ['said', 'was', 'where', 'what', 'come', 'could', 'would', 'there', 'they', 'have', 'from', 'some', 'one', 'two', 'who', 'were'] },
+    { n: 13, kind: 'word', focus: 'ending', name: 'Endings -s, -ed, -ing', short: 'Word endings', std: 'RF.1.3f', words: ['jumps', 'jumped', 'jumping', 'helps', 'helped', 'looking', 'played', 'plays', 'fishing', 'wished', 'runs', 'sits'] },
+    { n: 14, kind: 'sentence', name: 'Reading grade 1 sentences', short: 'Grade 1 sentences', std: 'RF.1.4', items: G1_SENTENCES }
+  ];
+  const LV = item => LEVELS[item.lvl - 1];
+  // Where a child starts: by age, then adjusted by the warm-up games.
+  function startLevel() {
+    const age = +P.age, bm = P.benchmark && !P.benchmark.skipped ? P.benchmark : null;
+    if (age <= 3) return S.soundsFirst ? 1 : 2;
+    if (age === 4) return bm && bm.letters ? 4 : 2;
+    if (age === 5) return bm && !bm.letters ? 3 : 4;
+    if (age === 6) return bm && !bm.letters ? 4 : 8;
+    return bm && !bm.letters ? 5 : 11;
+  }
   // A level is learned when the child gets 12 right first try, 8 of the last 10 right, on at least 2 different days.
   // Set MIN_DAYS to 1 for a single-sitting demo.
   const NEED_FIRST_TRY = 12, NEED_ACCURACY = 0.8, MIN_DAYS = 2;
   // Every question in the bank, by level. Each id is one exact question, so none repeats until a level's bank runs out.
   const BANK = {
-    1: Object.keys(SOUND_OF).map(w => ({ id: `s-${w}`, lvl: 1, w })),
-    2: Object.entries(STARTS).flatMap(([L, ws]) => ws.map(w => ({ id: `f-${w}`, lvl: 2, w, L }))),
-    3: RHYMES.flatMap(g => g.flatMap(a => g.filter(b => b !== a).map(b => ({ id: `r-${a}-${b}`, lvl: 3, w: b, from: a })))),
-    4: Object.entries(STARTS).flatMap(([L, ws]) => ws.map(w => ({ id: `l-${w}`, lvl: 4, w, L }))),
-    5: CVC.filter(w => PIC[w]).map(w => ({ id: `w-${w}`, lvl: 5, w })),
-    6: SENTENCES.map((t, i) => ({ id: `t-${i}`, lvl: 6, w: t, text: t }))
+    1: Object.keys(SOUND_OF).map(w => ({ id: `s-${w}`, lvl: 1, kind: 'sound', w })),
+    2: Object.entries(STARTS).flatMap(([L, ws]) => ws.map(w => ({ id: `f-${w}`, lvl: 2, kind: 'first', w, L }))),
+    3: RHYMES.flatMap(g => g.flatMap(a => g.filter(b => b !== a).map(b => ({ id: `r-${a}-${b}`, lvl: 3, kind: 'rhyme', w: b, from: a })))),
+    4: Object.entries(STARTS).flatMap(([L, ws]) => ws.map(w => ({ id: `l-${w}`, lvl: 4, kind: 'letter', w, L })))
   };
+  LEVELS.filter(l => l.kind === 'word').forEach(l => { BANK[l.n] = l.words.map(w => ({ id: `w${l.n}-${w}`, lvl: l.n, kind: 'word', w })); });
+  LEVELS.filter(l => l.kind === 'sentence').forEach(l => { BANK[l.n] = l.items.map((t, i) => ({ id: `t${l.n}-${i}`, lvl: l.n, kind: 'sentence', w: t, text: t })); });
+  // Split a word into the sound units a teacher would point to: digraphs and vowel teams stay together.
+  const UNITS = ['igh', 'sh', 'ch', 'th', 'wh', 'ck', 'ng', 'ai', 'ay', 'oa', 'ee', 'ea', 'oo'];
+  function graphemes(w) {
+    const out = []; let i = 0;
+    while (i < w.length) { const u = UNITS.find(x => w.startsWith(x, i)); if (u) { out.push(u); i += u.length; } else { out.push(w[i]); i++; } }
+    return out;
+  }
+  function splitEnding(w) { const e = ['ing', 'ed', 's'].find(x => w.endsWith(x) && w.length > x.length + 2); return e ? [w.slice(0, -e.length), e] : [w, '']; }
   // b, d, p and q are mirror images; in dyslexia mode each gets its own colour and they never appear as each other's distractors.
   const MIRROR = ['B', 'D', 'P', 'Q'];
   const dysWord = w => S.dyslexia ? w.split('').map(c => /[bdpq]/.test(c) ? `<span class="lt-${c}">${c}</span>` : esc(c)).join('') : esc(w);
@@ -1098,21 +1131,21 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   function readWordAloud(item, ctx) {
     const w = item.w, t = { w, snd: w, l: letterOf(w) };
     const prog0 = readingProgress();
-    stage('Read this word out loud!', `<span class="k-level-tag">${ctx.isReview ? 'Remember this?' : `Level ${prog0.level} · ${prog0.done} of ${prog0.need}`}</span> ${LEVELS[4].name}`, `<div class="k-word-show">${dysWord(w)}</div>`, 'Read this word out loud.');
+    stage('Read this word out loud!', `<span class="k-level-tag">${ctx.isReview ? 'Remember this?' : `Level ${prog0.level} · ${prog0.done} of ${prog0.need}`}</span> ${LV(item).name} · ${LV(item).std}`, `<div class="k-word-show">${dysWord(w)}</div>`, 'Read this word out loud.');
     $('kBoard').dataset.item = item.id;
     $('kBoard').innerHTML = `<div class="k-tile" id="kReveal" aria-label="picture appears when you read it">?</div>`;
     $('kStage').insertAdjacentHTML('beforeend', `<div class="k-speak"><button type="button" class="k-mic" id="kMic" aria-label="Read the word">${micIcon}</button>
       <div class="k-speak-text"><b id="kSpeakLine">Say the word you see.</b><span class="k-heard" id="kHeard">I'll listen when I finish talking.</span></div>
       <button type="button" class="k-skip" id="kSkip">Help me</button></div><div id="kExplainSlot"></div>`);
-    let attempt = 0, done = false;
+    let attempt = 0, done = false, quiet = 0;
     const mic = $('kMic');
     const finishWord = right => {
       if (done) return; done = true; mic.disabled = true; $('kSkip').hidden = true;
-      $('kReveal').textContent = PIC[w]; $('kReveal').classList.add('right');
+      $('kReveal').textContent = PIC[w] || '⭐'; $('kReveal').classList.add('right');
       const leveled = markReading(item, right, attempt === 1 && right, ctx.isReview);
       const m = right ? (attempt === 1 ? `${praise()} You read ${w}!` : `Yes! ${w}! You did it.`) : `Great trying! This word is ${w}. We'll read it again soon.`;
       feedback(leveled ? `${m} You reached level ${readingState().level}!` : m, right ? 'good' : 'soft');
-      say(leveled ? `${m} Wow, you reached a new level!` : m); win(reading);
+      win(reading);
     };
     const explain = () => {
       const ex = explainFor(item);
@@ -1128,39 +1161,40 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       rec.onerror = e => { err = e.error; };
       rec.onend = () => {
         clearTimeout(stopT); mic.classList.remove('listening');
+        if (!mic.isConnected) return; // the child left this screen while the mic was finishing
         if (err === 'not-allowed' || err === 'service-not-allowed') { micBlocked = true; $('kHeard').textContent = 'The microphone is off. Tap the picture you think it is.'; return readingFallback(item, ctx); }
         const j = judge(t, alts, err);
-        if (j.verdict === 'silent') { $('kHeard').textContent = "I didn't hear you yet."; say("I'm still listening. Say the word when you're ready.", () => later(listen, 300)); return; }
+        if (j.verdict === 'silent') { quiet++; $('kHeard').textContent = quiet < 3 ? "I didn't hear you yet. I'm still listening." : 'Tap the microphone when you are ready.'; if (quiet < 3) later(listen, 300); return; }
         attempt++; speechStats.tries++;
         $('kHeard').textContent = `I heard: "${j.heard}"`;
         remember('speech', { word: w, verdict: j.verdict, heard: j.heard });
         if (j.verdict === 'match') { speechStats.said++; return finishWord(true); }
         moodEvent('wrong');
-        if (attempt === 1) { const sp = explain(); $('kSpeakLine').textContent = "Let's sound it out together."; say(`Good try! ${sp} Now you read it.`, () => later(listen, 300)); }
-        else if (attempt === 2) { $('kSpeakLine').textContent = `Listen: ${w}. Now you say it.`; say(`Listen to me. ${w}. Now you say it. ${w}.`, () => later(listen, 300)); }
+        if (attempt === 1) { const sp = explain(); $('kSpeakLine').textContent = "Let's sound it out together."; say(`${sp} Your turn.`, () => later(listen, 300)); }
+        else if (attempt === 2) { $('kSpeakLine').textContent = `Listen: ${w}. Now you say it.`; say(`${w}. Now you.`, () => later(listen, 300), true); }
         else finishWord(false);
       };
       const stopT = setTimeout(() => { try { rec.stop(); } catch (e) {} }, 6000);
       try { rec.start(); mic.classList.add('listening'); $('kHeard').textContent = "I'm listening…"; } catch (e) { clearTimeout(stopT); }
     };
     mic.addEventListener('click', listen);
-    $('kSkip').addEventListener('click', () => { const sp = explain(); say(sp + ' Now you read it.', () => later(listen, 300)); });
-    say('Read this word out loud.', () => later(listen, 300));
+    $('kSkip').addEventListener('click', () => { const sp = explain(); say(`${sp} Your turn.`, () => later(listen, 300), true); });
+    say('Read this word.', () => later(listen, 300), true);
   }
   // No microphone: fall back to matching the word to its picture.
-  function readingFallback(item, ctx) { playReading(item, choicesFor(item, S.dyslexia ? 2 : 3), { firstTry: true, isReview: ctx.isReview, lv: LEVELS[item.lvl - 1] }); }
+  function readingFallback(item, ctx) { playReading(item, choicesFor(item, S.dyslexia ? 2 : 3), { firstTry: true, isReview: ctx.isReview, lv: LV(item) }); }
   // Level 6: read a whole sentence aloud; stumbles get sounded out live, like Story time.
   function readSentence(item, ctx) {
     const canListen = speakingOn();
     runStory({ text: item.text, targets: [] }, {
-      title: 'Read this sentence out loud!', why: `${LEVELS[5].name} · ${canListen ? "I'm listening. Tap a word if you want to hear it." : 'Tap a word to hear it, then read it out loud.'}`,
-      spoken: 'Read this sentence out loud.',
+      title: 'Read this sentence out loud!', why: `${LV(item).name} · ${LV(item).std} · ${canListen ? "I'm listening. Tap a word if you want to hear it." : 'Tap a word to hear it, then read it out loud.'}`,
+      spoken: 'Read it out loud.',
       onDone: practice => {
         const right = practice.length === 0;
         const leveled = markReading(item, right, true, ctx.isReview);
         const m = right ? `${praise()} You read the whole sentence!` : `You read the whole sentence! Let's practice ${practice.slice(0, 2).join(' and ')} again soon.`;
         if (!right) storyLog.practice = [...new Set([...practice, ...storyLog.practice])].slice(0, 6);
-        $('kState').textContent = m; say(leveled ? `${m} You reached a new level!` : m);
+        $('kState').textContent = leveled ? `${m} You reached a new level!` : m;
         if ($('kBoard')) $('kBoard').dataset.item = item.id;
         win(reading);
       }
@@ -1172,7 +1206,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   function readingState() {
     if (RS && RS.child === P.childId) return RS;
     const saved = store.get('wren-reading-' + (P.childId || P.name)) || {};
-    RS = Object.assign({ level: S.soundsFirst ? 1 : 2, firstTry: {}, recent: {}, seen: {}, missed: [], child: P.childId }, saved);
+    RS = Object.assign({ level: startLevel(), firstTry: {}, recent: {}, seen: {}, missed: [], child: P.childId }, saved);
     RS.child = P.childId;
     return RS;
   }
@@ -1194,51 +1228,63 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     return pick(pool);
   }
   function choicesFor(item, n) {
-    if (item.lvl === 3) {
+    if (item.kind === 'word') {
+      // Picture words show pictures; words you can't draw (the, said) show the written words and Wren says which to tap.
+      const level = LV(item).words, pictures = !!PIC[item.w];
+      const pool = pictures ? [...new Set([...level, ...CVC])].filter(w => PIC[w]) : level;
+      return shuffle([item.w, ...shuffle(pool.filter(w => w !== item.w && (!pictures || letterOf(w) !== letterOf(item.w)))).slice(0, n - 1)]);
+    }
+    if (item.kind === 'rhyme') {
       const rhymeGroup = RHYMES.find(g => g.includes(item.from));
       const others = shuffle(Object.keys(PIC).filter(w => !rhymeGroup.includes(w) && w !== item.from && ending(w) !== ending(item.w))).slice(0, n - 1);
       return shuffle([item.w, ...others]);
     }
-    if (item.lvl === 4) {
+    if (item.kind === 'letter') {
       const others = shuffle(Object.keys(STARTS).filter(L => L !== item.L && !(S.dyslexia && MIRROR.includes(L) && MIRROR.includes(item.L)))).slice(0, n - 1);
       return shuffle([item.L, ...others]);
     }
-    const pool = item.lvl === 1 ? Object.keys(SOUND_OF) : item.lvl === 5 ? CVC.filter(w => PIC[w]) : Object.values(STARTS).flat();
+    const pool = item.kind === 'sound' ? Object.keys(SOUND_OF) : Object.values(STARTS).flat();
     const others = shuffle(pool.filter(w => w !== item.w && letterOf(w) !== letterOf(item.w))).slice(0, n - 1);
     return shuffle([item.w, ...others]);
   }
   function askFor(item) {
     const w = item.w;
-    if (item.lvl === 1) return { text: `Who says "${SOUND_OF[w]}"?`, spoken: `Who says ${SOUND_OF[w]}?`, extra: '' };
-    if (item.lvl === 2) return { text: `Which one starts with "${LETTER_SOUND[item.L]}"?`, spoken: `Which one starts with ${LETTER_SOUND[item.L]}? ${LETTER_SOUND[item.L]}.`, extra: `<div class="k-letter-show">${item.L}</div>` };
-    if (item.lvl === 3) return { text: `What rhymes with ${item.from}? ${PIC[item.from]}`, spoken: `What rhymes with ${item.from}?`, extra: '' };
-    if (item.lvl === 4) return { text: `What letter does ${PIC[w]} ${w} start with?`, spoken: `What letter does ${w} start with?`, extra: '' };
-    return { text: 'Read the word. Which picture is it?', spoken: 'Read the word. Which picture is it?', extra: `<div class="k-word-show">${dysWord(w)}</div>` };
+    if (item.kind === 'sound') return { text: `Who says "${SOUND_OF[w]}"?`, spoken: `Who says ${SOUND_OF[w]}?`, extra: '' };
+    if (item.kind === 'first') return { text: `Which one starts with "${LETTER_SOUND[item.L]}"?`, spoken: `Which one starts with ${LETTER_SOUND[item.L]}?`, extra: `<div class="k-letter-show">${item.L}</div>` };
+    if (item.kind === 'rhyme') return { text: `What rhymes with ${item.from}? ${PIC[item.from]}`, spoken: `What rhymes with ${item.from}?`, extra: '' };
+    if (item.kind === 'letter') return { text: `What letter does ${PIC[w]} ${w} start with?`, spoken: `What letter does ${w} start with?`, extra: '' };
+    if (!PIC[w]) return { text: 'Tap the word you hear.', spoken: `Tap the word: ${w}.`, extra: '' };
+    return { text: 'Read the word. Which picture is it?', spoken: 'Which picture is it?', extra: `<div class="k-word-show">${dysWord(w)}</div>` };
   }
   // What Wren shows and says after a miss: one idea, a picture, the answer modelled, never "wrong".
   function explainFor(item, picked) {
     const w = item.w, sayPicked = picked && picked !== w;
-    const named = sayPicked ? (item.lvl === 4 ? `You picked ${picked}. ` : `You picked the ${picked}${item.lvl === 1 && SOUND_OF[picked] ? `. The ${picked} says ${SOUND_OF[picked]}` : ''}. `) : '';
-    if (item.lvl === 1) return { pic: PIC[w], title: `The ${w} says "${SOUND_OF[w]}"!`, line: `${named}Listen: ${SOUND_OF[w]}. That's the ${w}.`, parts: '', spoken: `${named}Listen. ${SOUND_OF[w]}. That's the ${w}! The ${w} says ${SOUND_OF[w]}.` };
-    if (item.lvl === 2) {
+    const named = sayPicked ? (item.kind === 'letter' || (item.kind === 'word' && !PIC[w]) ? `You picked ${picked}. ` : `You picked the ${picked}${item.kind === 'sound' && SOUND_OF[picked] ? `. The ${picked} says ${SOUND_OF[picked]}` : ''}. `) : '';
+    if (item.kind === 'sound') return { pic: PIC[w], title: `The ${w} says "${SOUND_OF[w]}"!`, line: `${named}Listen: ${SOUND_OF[w]}. That's the ${w}.`, parts: '', spoken: `${SOUND_OF[w]}. That's the ${w}.` };
+    if (item.kind === 'first') {
       const tip = SOUND_TIPS[item.L] || '';
       return { pic: PIC[w], title: `${w[0].toUpperCase() + w.slice(1)} starts with "${LETTER_SOUND[item.L]}"`, line: `${named}Say it slowly: ${LETTER_SOUND[item.L]}... ${w}. ${tip}`,
         parts: `<div class="k-explain-parts"><span class="key">${esc(w[0])}</span><i>+</i><span>${esc(w.slice(1))}</span><i>=</i><span>${esc(w)}</span></div>`,
-        spoken: `${named}Let's say it slowly together. ${LETTER_SOUND[item.L]}... ${w}. ${w} starts with ${LETTER_SOUND[item.L]}.` };
+        spoken: `${LETTER_SOUND[item.L]}... ${w}. ${w} starts with ${LETTER_SOUND[item.L]}.` };
     }
-    if (item.lvl === 3) {
+    if (item.kind === 'rhyme') {
       const e = ending(w);
       return { pic: `${PIC[item.from]}${PIC[w]}`, title: `${item.from} and ${w} rhyme!`, line: `${named}They sound the same at the end: ${item.from.slice(0, item.from.length - e.length)}-${e}, ${w.slice(0, w.length - e.length)}-${e}.`,
         parts: `<div class="k-explain-parts"><span>${esc(item.from.slice(0, item.from.length - e.length))}</span><span class="key">${esc(e)}</span><i>and</i><span>${esc(w.slice(0, w.length - e.length))}</span><span class="key">${esc(e)}</span></div>`,
-        spoken: `${named}Listen to the end of the words. ${item.from}. ${w}. They both end with ${e}. ${item.from} and ${w} rhyme!` };
+        spoken: `${item.from}, ${w}. They both end with ${e}.` };
     }
-    if (item.lvl === 4) return { pic: PIC[w], title: `${w[0].toUpperCase() + w.slice(1)} starts with ${item.L}`, line: `${named}${item.L} says "${LETTER_SOUND[item.L]}". ${LETTER_SOUND[item.L]}... ${w}.`,
+    if (item.kind === 'letter') return { pic: PIC[w], title: `${w[0].toUpperCase() + w.slice(1)} starts with ${item.L}`, line: `${named}${item.L} says "${LETTER_SOUND[item.L]}". ${LETTER_SOUND[item.L]}... ${w}.`,
       parts: `<div class="k-explain-parts"><span class="key">${item.L}</span><i>says</i><span>${LETTER_SOUND[item.L]}</span><i>as in</i><span>${esc(w)}</span></div>`,
-      spoken: `${named}This is the letter ${item.L}. ${item.L} says ${LETTER_SOUND[item.L]}. ${LETTER_SOUND[item.L]}... ${w}. ${w} starts with ${item.L}.` };
-    const letters = w.split('');
-    return { pic: PIC[w], title: `This word says "${w}"`, line: `${named}Touch each letter and say its sound: ${letters.join(' - ')}. Then push them together: ${w}!`,
-      parts: `<div class="k-explain-parts">${letters.map(c => `<span>${dysWord(c)}</span>`).join('<i>·</i>')}<i>=</i><span class="key">${dysWord(w)}</span></div>`,
-      spoken: `${named}Let's sound it out together. ${letters.join('... ')}. Push the sounds together. ${w}!` };
+      spoken: `${item.L} says ${LETTER_SOUND[item.L]}. ${LETTER_SOUND[item.L]}... ${w}.` };
+    const focus = LV(item).focus || 'cvc', units = graphemes(w);
+    const box = (arr, keyTest) => `<div class="k-explain-parts">${arr.map(c => `<span class="${keyTest && keyTest(c) ? 'key' : ''}">${dysWord(c)}</span>`).join('<i>·</i>')}<i>=</i><span class="key">${dysWord(w)}</span></div>`;
+    const pic = PIC[w] || '🔤';
+    if (focus === 'sight') return { pic, title: `"${w}" is a heart word`, line: `${named}We learn this word by heart. Look at it, say it, spell it: ${w.split('').join(' - ')}. ${w}!`, parts: box(w.split('')), spoken: `${w}. ${w.split('').join(', ')}. ${w}.` };
+    if (focus === 'ending') { const [base, end] = splitEnding(w); return { pic, title: `${base} + ${end} = ${w}`, line: `${named}Read the main word first: ${base}. Then add the ending: ${end}. ${w}!`, parts: `<div class="k-explain-parts"><span>${dysWord(base)}</span><i>+</i><span class="key">${esc(end)}</span><i>=</i><span class="key">${dysWord(w)}</span></div>`, spoken: `${base}... ${end}. ${w}.` }; }
+    if (focus === 'magic') { const v = w.match(/[aeiou](?=[^aeiou]e$)/)[0]; return { pic, title: `The quiet e makes ${v} say its name`, line: `${named}The e at the end is quiet. It makes the ${v} say its name: ${w.slice(0, -1)}... ${w}!`, parts: box(w.split(''), c => c === v), spoken: `The e is quiet. ${v} says its name. ${w}.` }; }
+    if (focus === 'digraph' || focus === 'team') { const unit = units.find(u => u.length > 1) || w[0]; return { pic, title: `"${unit}" makes one sound`, line: `${named}${unit.split('').join(' and ')} together make one sound: ${unit}. ${units.join(' - ')}. ${w}!`, parts: box(units, c => c === unit), spoken: `${unit} makes one sound. ${units.join('... ')}. ${w}.` }; }
+    if (focus === 'blend') return { pic, title: `Say every sound in "${w}"`, line: `${named}Two letters side by side: say both sounds, quickly. ${units.join(' - ')}. ${w}!`, parts: box(units), spoken: `${units.join('... ')}. ${w}.` };
+    return { pic, title: `This word says "${w}"`, line: `${named}Touch each letter and say its sound: ${units.join(' - ')}. Then push them together: ${w}!`, parts: box(units), spoken: `${units.join('... ')}. ${w}.` };
   }
 
   let readingRoundReview = false;
@@ -1246,36 +1292,37 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const st = readingState();
     st.count = st.count || 0;
     // One question per round checks back on the level before, with a question the child hasn't seen there.
-    const isReview = st.level > 1 && round === Math.floor(S.roundLen / 2) && !readingRoundReview;
+    const isReview = st.level > 1 && round === Math.floor(roundLen() / 2) && !readingRoundReview;
     if (round === 0) readingRoundReview = false;
     if (isReview) readingRoundReview = true;
     const item = nextReadingItem(isReview);
-    const lv = LEVELS[item.lvl - 1];
-    if (item.lvl === 6) return readSentence(item, { isReview });
-    if (item.lvl === 5 && speakingOn()) return readWordAloud(item, { isReview });
-    const nChoices = (S.gentle && wrongStreak >= 2) || (S.dyslexia && item.lvl >= 4) ? 2 : 3;
+    const lv = LV(item);
+    if (item.kind === 'sentence') return readSentence(item, { isReview });
+    if (item.kind === 'word' && speakingOn()) return readWordAloud(item, { isReview });
+    const nChoices = (S.gentle && wrongStreak >= 2) || (S.dyslexia && (item.kind === 'letter' || item.kind === 'word')) ? 2 : 3;
     playReading(item, choicesFor(item, nChoices), { firstTry: true, isReview, lv });
   }
   function playReading(item, choices, ctx) {
     const st = readingState(), ask = askFor(item), prog0 = readingProgress();
     const tag = ctx.isReview ? 'Remember this?' : item.retry ? "Let's try this one again" : prog0.waitingForDay ? `Level ${prog0.level} · practice again tomorrow to move up` : `Level ${prog0.level} · ${prog0.done} of ${prog0.need}`;
-    stage(ask.text, `<span class="k-level-tag">${tag}</span> ${ctx.lv.name}`, ask.extra, ask.spoken);
+    stage(ask.text, `<span class="k-level-tag">${tag}</span> ${ctx.lv.name} · <span title="California standard">${ctx.lv.std}</span>`, ask.extra, ask.spoken, ctx.quiet);
     $('kBoard').dataset.item = item.id;
     const tiles = [];
     choices.forEach(c => {
       const b = document.createElement('button'); b.type = 'button';
-      b.className = 'k-tile' + (item.lvl === 4 ? ' letter' : '');
-      b.textContent = item.lvl === 4 ? c : PIC[c]; b.setAttribute('aria-label', c);
+      const asText = item.kind === 'letter' || (item.kind === 'word' && !PIC[item.w]);
+      b.className = 'k-tile' + (asText ? ' letter' : '') + (asText && c.length > 2 ? ' wordtile' : '');
+      b.textContent = asText ? c : PIC[c]; b.setAttribute('aria-label', c);
       b.dataset.c = c;
       if (ctx.only && c !== item.w && c !== item.L) b.disabled = true;
       b.addEventListener('click', () => answer(c, b));
       $('kBoard').appendChild(b); tiles.push(b);
     });
-    if (ctx.only) tiles.find(t => t.dataset.c === (item.lvl === 4 ? item.L : item.w)).classList.add('glow');
+    if (ctx.only) tiles.find(t => t.dataset.c === (item.kind === 'letter' ? item.L : item.w)).classList.add('glow');
     let locked = false;
     function answer(c, b) {
-      if (locked || round >= S.roundLen || b.disabled) return;
-      const right = item.lvl === 4 ? c === item.L : c === item.w;
+      if (locked || round >= roundLen() || b.disabled) return;
+      const right = item.kind === 'letter' ? c === item.L : c === item.w;
       if (right) {
         locked = true; b.classList.add('right'); tiles.forEach(x => { x.disabled = true; });
         if (ctx.firstTry) {
@@ -1291,11 +1338,11 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         const leveled = !ctx.isReview && maybeLevelUp();
         saveRS();
         remember('answer', { subject: 'reading', correct: true, firstTry: !!ctx.firstTry, level: item.lvl, item: item.id });
-        const msg = ctx.firstTry ? `${praise()} ${item.lvl === 4 ? `${item.w} starts with ${item.L}` : item.lvl === 1 ? `The ${item.w} says ${SOUND_OF[item.w]}` : item.lvl === 3 ? `${item.from} and ${item.w} rhyme` : item.lvl === 2 ? `${item.w} starts with ${LETTER_SOUND[item.L]}` : `That word is ${item.w}`}!` : `You got it! ${item.w}!`;
+        const msg = ctx.firstTry ? `${praise()} ${item.kind === 'letter' ? `${item.w} starts with ${item.L}` : item.kind === 'sound' ? `The ${item.w} says ${SOUND_OF[item.w]}` : item.kind === 'rhyme' ? `${item.from} and ${item.w} rhyme` : item.kind === 'first' ? `${item.w} starts with ${LETTER_SOUND[item.L]}` : `That word is ${item.w}`}!` : `You got it! ${item.w}!`;
         feedback(leveled ? `${msg} You reached level ${st.level}!` : msg, 'good');
         const t = { w: item.w, snd: SOUND_OF[item.w] || item.w, l: letterOf(item.w) };
-        if (ctx.firstTry && speakingOn() && item.lvl !== 4) speakTurn(t, leveled ? `${msg} You reached a new level!` : msg);
-        else { say(leveled ? `${msg} Wow, you reached a new level!` : msg); win(reading); }
+        if (ctx.firstTry && speakingOn() && item.kind !== 'letter') speakTurn(t, leveled ? `${msg} You reached a new level!` : msg);
+        else win(reading);
         return;
       }
       // A miss: name what they picked, show and explain the answer, then let them try again with fewer choices.
@@ -1309,7 +1356,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       }
       remember('answer', { subject: 'reading', correct: false, level: item.lvl, item: item.id, picked: c });
       b.classList.add('soft-miss');
-      const answerTile = tiles.find(x => x.dataset.c === (item.lvl === 4 ? item.L : item.w));
+      const answerTile = tiles.find(x => x.dataset.c === (item.kind === 'letter' ? item.L : item.w));
       answerTile.classList.add('glow');
       tiles.forEach(x => { x.disabled = true; });
       const ex = explainFor(item, c);
@@ -1319,10 +1366,10 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         <div class="k-explain-text"><b>${esc(ex.title)}</b>${ex.parts}<p>${esc(ex.line)}</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="k-btn go" id="kTryAgain">${ctx.only ? 'Tap the glowing one' : "Let's try again"}</button><button type="button" class="k-btn" id="kHearEx">Hear it again</button></div></div></div>`);
       say(ex.spoken);
-      $('kHearEx').addEventListener('click', () => say(ex.spoken));
+      $('kHearEx').addEventListener('click', () => say(ex.spoken, null, true));
       $('kTryAgain').addEventListener('click', () => {
         // First miss: 2 choices. Second miss: only the answer can be tapped, so it always ends on a success.
-        playReading(item, choicesFor(item, 2), { firstTry: false, isReview: ctx.isReview, lv: ctx.lv, only: !ctx.firstTry });
+        playReading(item, choicesFor(item, 2), { firstTry: false, isReview: ctx.isReview, lv: ctx.lv, only: !ctx.firstTry, quiet: true });
       });
     }
   }
@@ -1412,7 +1459,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       </div>`);
     const mic = $('kMic');
     const finish = () => { if (finished) return; finished = true; mic.disabled = true; $('kSkip').hidden = true; win(reading); };
-    $('kSkip').addEventListener('click', () => { say(`That's okay, ${P.name}. Let's keep going!`); finish(); });
+    $('kSkip').addEventListener('click', finish);
     // Hands-free: the mic turns on by itself after Wren asks, so a child can do this alone.
     const listen = () => {
       if (finished || mic.classList.contains('listening') || micBlocked) return;
@@ -1424,6 +1471,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       rec.onerror = e => { err = e.error; };
       rec.onend = async () => {
         clearTimeout(stopT); mic.classList.remove('listening');
+        if (!mic.isConnected) return;
         if (err === 'not-allowed' || err === 'service-not-allowed') {
           micBlocked = true; $('kHeard').textContent = 'Ask a grown-up to turn on the microphone.'; $('kSkip').textContent = 'Keep going';
           say('Ask a grown-up to turn on the microphone. We can keep going without it.'); return;
@@ -1440,14 +1488,15 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         if (verdict === 'match') speechStats.said++;
         remember('speech', { word: t.w, verdict, heard: j.heard });
         save();
-        say(c.say, done ? () => later(finish, 400) : () => later(listen, 300));
-        if (done) later(finish, 7000); // in case the voice never fires its end event
+        // A match is celebrated on screen only; Wren speaks when there is something to model.
+        if (verdict === 'match') later(finish, 900);
+        else { say(c.say, done ? () => later(finish, 400) : () => later(listen, 300)); if (done) later(finish, 7000); }
       };
       const stopT = setTimeout(() => { try { rec.stop(); } catch (e) {} }, 6000);
       try { rec.start(); mic.classList.add('listening'); $('kHeard').textContent = "I'm listening…"; } catch (e) { clearTimeout(stopT); }
     };
     mic.addEventListener('click', listen);
-    say(`${msg} Now it's your turn. Can you say, ${t.w}?`, () => later(listen, 300));
+    say(`Say it: ${t.w}.`, () => later(listen, 300), true);
   }
 
   /* ---------- Writing: trace one stroke at a time, checked stroke by stroke ---------- */
@@ -1517,12 +1566,50 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     return order.find(x => !st.done.includes(x)) || pick(order);
   }
 
+  // Spelling from sound: L.K.2d (age 5, short words) and L.1.2e (ages 6-7, blends and digraphs too).
+  function spelling() {
+    const st = writingState(), age = +P.age;
+    const bank = age >= 6 ? [...LEVELS[7].words, ...LEVELS[8].words, ...CVC] : CVC;
+    st.spelled = st.spelled || [];
+    const w = bank.find(x => !st.spelled.includes(x)) || pick(bank);
+    const letters = w.split(''), extra = shuffle('abcdefghijklmnoprstuw'.split('').filter(c => !letters.includes(c) && !(S.dyslexia && /[bdpq]/.test(c)))).slice(0, S.dyslexia ? 2 : 3);
+    stage('Spell the word', `Spelling · ${age >= 6 ? 'L.1.2e' : 'L.K.2d'}`, `<div class="k-isfor"><span class="pic">${PIC[w] || '🔊'}</span><span>Listen, then spell it</span></div>`, `Spell ${w}.`);
+    $('kBoard').outerHTML = `<div class="k-spell" id="kSlots">${letters.map(() => '<span></span>').join('')}</div><div class="k-board" id="kBoard"></div><p class="k-trace-tip" id="tTip"></p>`;
+    let at = 0, misses = 0;
+    shuffle([...letters, ...extra]).forEach(c => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'k-tile letter'; b.textContent = c; b.setAttribute('aria-label', c);
+      b.addEventListener('click', () => {
+        if (b.disabled || at >= letters.length) return;
+        if (c === letters[at]) {
+          const slot = $('kSlots').children[at]; slot.textContent = c; slot.classList.add('on');
+          b.disabled = true; b.classList.add('soft-miss'); at++; misses = 0; $('tTip').textContent = '';
+          $('kBoard').querySelectorAll('.glow').forEach(x => x.classList.remove('glow'));
+          if (at === letters.length) {
+            st.spelled = [...new Set([...st.spelled, w])]; store.set('wren-writing-' + (P.childId || P.name), st);
+            remember('answer', { subject: 'writing', correct: true, item: `spell-${w}` });
+            feedback(`${praise()} You spelled ${w}!`, 'good'); win(writing);
+          }
+          return;
+        }
+        misses++; b.classList.add('wrong'); later(() => b.classList.remove('wrong'), 450);
+        if (misses === 1) moodEvent('wrong');
+        $('tTip').textContent = misses === 1 ? `Say it slowly: ${letters.join('... ')}. What comes after "${letters.slice(0, at).join('') || '…'}"?` : `Look for the glowing letter.`;
+        if (misses === 1) say(`${letters.join('... ')}. ${w}.`);
+        if (misses >= 2) $('kBoard').querySelectorAll('button').forEach(x => { if (!x.disabled && x.textContent === letters[at]) x.classList.add('glow'); });
+      });
+      $('kBoard').appendChild(b);
+    });
+  }
+
   function writing() {
+    // Ages 6-7 spell from sound. Age 5 alternates tracing and spelling. Ages 3-4 trace.
+    const age = +P.age;
+    if (age >= 6 || (age === 5 && round % 2 === 1)) return spelling();
     const item = nextWritingItem(), isShape = !!SHAPE_NAME[item];
     const strokes = STROKES[item], isFor = IS_FOR[item];
     const title = isShape ? `Let's draw ${SHAPE_NAME[item]}!` : `Let's write ${item}!`;
     const why = isShape ? 'Getting ready to write' : (P.name.toUpperCase().includes(item) ? `A letter from your name, ${P.name}!` : 'Writing letters');
-    stage(title, why, isFor ? `<div class="k-isfor"><span class="pic">${isFor[1]}</span><span><span class="first">${item}</span> is for ${esc(isFor[0])}</span></div>` : '', isShape ? `Let's draw ${SHAPE_NAME[item]}.` : `Let's write ${item}. ${item} is for ${isFor[0]}!`);
+    stage(title, why, isFor ? `<div class="k-isfor"><span class="pic">${isFor[1]}</span><span><span class="first">${item}</span> is for ${esc(isFor[0])}</span></div>` : '', isShape ? `Draw ${SHAPE_NAME[item]}.` : `Write ${item}.`);
     $('kBoard').outerHTML = `<div class="trace-wrap"><div class="trace-box" id="tBox"><canvas id="tGuide" width="320" height="320"></canvas><canvas id="tInk" width="320" height="320"></canvas></div>
       <div class="trace-side"><div class="k-stroke-steps" id="tSteps">${strokes.map((_, i) => `<span>${i + 1}</span>`).join('')}</div>
         <p class="k-trace-tip" id="tTip">Watch me first!</p>
@@ -1585,7 +1672,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         if (cur >= strokes.length) return letterDone();
         drawGuide();
         const line = pick(['Great line!', 'Nice!', 'Beautiful!']) + ` Now line ${cur + 1}. Start at the green dot.`;
-        $('tTip').textContent = line; say(line);
+        $('tTip').textContent = line;
         return;
       }
       fails++;
@@ -1593,7 +1680,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       if (fails === 3) { widen = 1.35; }
       const tip = r.why === 'start' ? 'Start at the green dot, then follow the arrow.' : r.why === 'outside' ? 'Try to stay on the purple path. Follow the dots.' : 'Keep going, all the way to the arrow!';
       $('tTip').textContent = fails === 3 ? "I made the path wider for you. " + tip : tip;
-      say(fails === 3 ? `I made the path wider for you. ${tip}` : `Good try! ${tip}`);
+      if (fails === 1 || fails === 3) say(fails === 3 ? `I made the path wider. ${tip}` : tip); // the first tip is spoken, repeats are shown only
       remember('answer', { subject: 'writing', correct: false, item, stroke: cur + 1, why: r.why });
       setTimeout(() => { if (!finished) { ic.clearRect(0, 0, 320, 320); demo(cur); } }, 700);
     };
@@ -1604,22 +1691,22 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       finished = true; drawGuide();
       const st = writingState(); st.done = [...new Set([...st.done, item])]; store.set('wren-writing-' + (P.childId || P.name), st);
       remember('answer', { subject: 'writing', correct: true, item });
-      if (isShape) { const m = `${praise()} You drew ${SHAPE_NAME[item]}!`; $('tTip').textContent = m; feedback(m, 'good'); say(m); win(writing); return; }
+      if (isShape) { const m = `${praise()} You drew ${SHAPE_NAME[item]}!`; $('tTip').textContent = m; feedback(m, 'good'); win(writing); return; }
       // Then a quick match: which picture starts with this letter?
       const others = shuffle(Object.keys(IS_FOR).filter(l => l !== item && l !== 'X')).slice(0, 2);
       const opts = shuffle([item, ...others]);
       const m = `You wrote ${item}! ${item} is for ${isFor[0]}.`;
       $('tTip').textContent = m;
       $('kStage').insertAdjacentHTML('beforeend', `<div class="k-explain" id="tMatch"><div class="k-explain-pic" aria-hidden="true">✏️</div><div class="k-explain-text"><b>Which one starts with ${item}?</b><div class="k-board" id="tOpts" style="margin-top:4px"></div></div></div>`);
-      say(`${m} Now, which picture starts with ${item}?`);
+      say(`Which one starts with ${item}?`, null, true);
       let tries = 0;
       opts.forEach(l => {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'k-tile'; b.textContent = IS_FOR[l][1]; b.setAttribute('aria-label', IS_FOR[l][0]);
         b.addEventListener('click', () => {
           if (b.disabled) return;
-          if (l === item) { b.classList.add('right'); $('tOpts').querySelectorAll('button').forEach(x => { x.disabled = true; }); const g = `${praise()} ${isFor[0][0].toUpperCase() + isFor[0].slice(1)} starts with ${item}!`; feedback(g, 'good'); say(g); win(writing); return; }
+          if (l === item) { b.classList.add('right'); $('tOpts').querySelectorAll('button').forEach(x => { x.disabled = true; }); const g = `${praise()} ${isFor[0][0].toUpperCase() + isFor[0].slice(1)} starts with ${item}!`; feedback(g, 'good'); win(writing); return; }
           tries++; b.classList.add('soft-miss'); b.disabled = true; moodEvent('wrong');
-          const hint = `That's the ${IS_FOR[l][0]}. ${IS_FOR[l][0]} starts with ${l === 'X' ? 'F' : l}. Look for the ${isFor[0]}!`;
+          const hint = `That's the ${IS_FOR[l][0]}. Look for the ${isFor[0]}.`;
           feedback(hint, 'soft'); say(hint);
           if (tries >= 1) $('tOpts').querySelectorAll('button').forEach(x => { if (x.getAttribute('aria-label') === isFor[0]) x.classList.add('glow'); });
         });
@@ -1644,7 +1731,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     shuffle(pool).forEach(e => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'k-tile'; b.textContent = e; b.setAttribute('aria-label', NAMES[e] || 'picture');
       b.addEventListener('click', () => {
-        if (round >= S.roundLen || at >= seq.length) return;
+        if (round >= roundLen() || at >= seq.length) return;
         if (e === seq[at]) {
           clearTimers();
           $('kStage').querySelector(`.k-seq [data-i="${at}"]`).className = 'done'; at++;
@@ -1652,7 +1739,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
           else {
             memStreak++; let msg = praise();
             if (memStreak >= 3 && memLevel < 3) { memLevel++; memStreak = 0; msg += ` Next: ${memLevel} steps!`; }
-            feedback(msg, 'good'); say(msg); win(brain);
+            feedback(msg, 'good'); win(brain);
           }
         } else { b.classList.add('wrong'); feedback(S.gentle ? 'Look at the glowing card.' : 'Try again!', 'soft'); moodEvent('wrong'); remember('answer', { subject: 'brain', correct: false, steps: memLevel }); later(() => b.classList.remove('wrong'), 500); }
       });
@@ -1750,8 +1837,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       ${targets.size ? `<div class="k-story-intro">Practice words in this story: ${[...targets].map(w => `<b>${esc(w)}</b>`).join('')}</div>` : ''}
       <p class="k-story-text" id="kText">${words.map((w, i) => `<span class="k-w${targets.has(w.n) ? ' target' : ''}" data-i="${i}">${esc(w.raw)}</span>`).join(' ')}</p>
       <div class="k-story-bar">
-        ${canListen ? `<button type="button" class="k-mic" id="kMic" aria-label="Start reading">${micIcon}</button>` : ''}
-        <span class="k-listen-state" id="kState">${canListen ? 'Tap the microphone and start reading.' : ''}</span>
+        <button type="button" class="k-mic" id="kMic" aria-label="Start reading">${micIcon}</button>
+        <span class="k-listen-state" id="kState">${canListen ? 'Tap the microphone and start reading.' : 'Tap the microphone to read to Wren.'}</span>
         <button type="button" class="k-btn" id="kDone">I'm done</button>
       </div>
       <div id="kHelp"></div><div id="kSum"></div>`;
@@ -1778,16 +1865,16 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       const w = words[i].n, ch = chunksOf(w);
       $('kHelp').innerHTML = `<div class="k-soundout"><div class="k-chunks">${ch.length > 1 ? ch.map(c => `<span>${esc(c)}</span>`).join('<i>+</i>') + '<i>=</i>' : ''}<span class="whole">${esc(w)}</span></div>
         <button type="button" class="k-btn" id="kAgain">Hear it again</button></div>`;
-      $('kAgain').addEventListener('click', () => say(soundOutLine(w)));
+      $('kAgain').addEventListener('click', () => say(soundOutLine(w), null, true));
       try { if (rec) rec.abort(); } catch (e) {}
       $('kState').textContent = 'Listen…';
       let resumed = false;
       const resume = () => { if (resumed || finished) return; resumed = true; helping = false; lastMove = Date.now(); committed.misses = 0; if (listening) { $('kState').textContent = "Your turn. I'm listening…"; startRec(); } };
-      say(soundOutLine(w), resume);
+      say(soundOutLine(w), resume, true);
       setTimeout(resume, 8000); // some voices never fire their end event
     }
     $('kText').addEventListener('click', e => { const el = e.target.closest('.k-w'); if (el) { const i = +el.dataset.i; if (!canListen) stumbled.add(i); help(i, !canListen); } });
-    $('kHear').addEventListener('click', () => say(story.text));
+    $('kHear').addEventListener('click', () => say(story.text, null, true));
     function onWords(finalToks, interimToks) {
       const state = { ptr: committed.ptr, misses: committed.misses, skipped: [] };
       finalToks.forEach(t => step(state, t));
@@ -1820,13 +1907,15 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       if (!$('kText')) { clearInterval(watch); return; }
       if (listening && !helping && !finished && Date.now() - lastMove > (S.dyslexia ? 7000 : S.gentle ? 5500 : 4500)) help(ptr);
     }, 500);
-    if (canListen) $('kMic').addEventListener('click', () => {
+    $('kMic').addEventListener('click', () => {
+      if (!Recognizer) { $('kState').textContent = "This browser can't listen yet. Open Wren in Chrome, Edge or Safari to read out loud."; return; }
+      if (micBlocked) { $('kState').textContent = 'The microphone is off. Ask a grown-up to allow it in the browser, then tap again.'; micBlocked = false; return; }
       if (listening) { listening = false; $('kMic').classList.remove('listening'); $('kState').textContent = 'Paused. Tap to keep reading.'; try { rec.abort(); } catch (e) {} render(); return; }
       speechSynthesis.cancel(); listening = true; lastMove = Date.now(); $('kMic').classList.add('listening'); $('kState').textContent = "I'm listening…"; render(); startRec();
     });
     $('kDone').addEventListener('click', finish);
     render();
-    if (canListen) say(opts.spoken || "Read it out loud. I'm listening!", () => { if (!finished && !listening) $('kMic').click(); });
+    if (canListen) say(opts.spoken || 'Read it out loud.', () => { if (!finished && !listening) $('kMic').click(); }, true);
     function finish() {
       if (finished) return; finished = true; listening = false; clearInterval(watch);
       try { if (rec) rec.abort(); } catch (e) {}
@@ -1846,14 +1935,13 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         ${q ? `<div class="k-q"><p>${esc(q.prompt)}</p><div class="opts">${q.options.map((o, i) => `<button type="button" data-i="${i}">${esc(o)}</button>`).join('')}</div></div>` : ''}
         <div class="row" style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" class="k-btn go" id="kNext">Next story</button><button type="button" class="k-btn" id="kHome3">Home</button></div>
       </div>`;
-      $('kSum').querySelectorAll('.k-chip').forEach(b => b.addEventListener('click', () => say(soundOutLine(b.dataset.w))));
+      $('kSum').querySelectorAll('.k-chip').forEach(b => b.addEventListener('click', () => say(soundOutLine(b.dataset.w), null, true)));
       $('kSum').querySelectorAll('.k-q button').forEach(b => b.addEventListener('click', () => {
         const right = q.answer >= 0 ? +b.dataset.i === q.answer : true;
-        b.classList.add(right ? 'right' : 'wrong'); say(right ? `Yes! ${q.options[+b.dataset.i]}. Great remembering!` : "Hmm, let's think about the story again.");
+        b.classList.add(right ? 'right' : 'wrong'); if (!right) say("Let's think about the story again.");
       }));
       $('kNext').addEventListener('click', () => { currentStory = null; storyTime(); });
       $('kHome3').addEventListener('click', () => { currentStory = null; dashboard(); });
-      say(practice.length ? `You read the whole story! Let's remember these tricky words: ${practice.join(', ')}.` : 'You read the whole story without any help. Wow!');
       $('kSum').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest' });
     }
   }
@@ -1906,13 +1994,12 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     clearTimers();
     const st = $('kStage');
     st.insertAdjacentHTML('beforeend', `<div class="k-over" id="kBreath"><div class="k-breathe" aria-hidden="true"></div><p class="k-breathe-word" id="kBreathWord">Breathe in…</p><p>Let's take a little break together, ${esc(P.name)}.</p><div class="row"><button type="button" class="k-btn go" id="kBetter">I feel better</button></div></div>`);
-    say(`Let's take a little break, ${P.name}. Breathe in with me, and breathe out.`);
+    say("Let's breathe together.");
     let inhale = true;
     const flip = () => { inhale = !inhale; if ($('kBreathWord')) $('kBreathWord').textContent = inhale ? 'Breathe in…' : 'Breathe out…'; breathT.push(setTimeout(flip, 4000)); };
     breathT.push(setTimeout(flip, 4000));
     $('kBetter').addEventListener('click', () => {
       endBreath(); mood = 30; wrongStreak = 0; applyMood();
-      say(`Welcome back, ${P.name}. Let's try an easy one.`);
       if (cur === 'brain') memLevel = 1;
       const subj = cur; $('kBreath').remove();
       if (subj === 'story') { currentStory = currentStory; GAMES.story(); } else GAMES[subj]();
@@ -1942,7 +2029,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       $('kStage').innerHTML = `<div class="k-prompt-row"><p class="k-prompt">Catch the ${e}! Tap it 5 times.</p></div>
         <p class="k-why">Warm-up 1 of 3 · there's no wrong way to play</p>
         <div class="k-catch" id="kCatch"><button type="button" class="k-catch-target" id="kTarget" aria-label="Catch it">${e}</button></div>`;
-      say(`Let's play! Catch the ${(P.hyperfixations[0] || 'star').toLowerCase()}. Tap it five times.`);
+      say(`Tap the ${(P.hyperfixations[0] || 'star').toLowerCase()} five times.`, null, true);
       const area = $('kCatch'), tgt = $('kTarget');
       let hits = 0, misses = 0, moved = Date.now(), times = [];
       const move = () => {
@@ -1959,7 +2046,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       area.addEventListener('pointerdown', ev => {
         if (ev.target.closest('#kTarget')) {
           hits++; times.push(Date.now() - moved); tgt.classList.add('hit'); later(() => tgt.classList.remove('hit'), 250);
-          say(String(hits)); if (hits >= 5) { say('You caught it!'); end(); }
+          if (hits >= 5) end();
         } else misses++;
       });
       later(end, 25000);
@@ -1974,13 +2061,13 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         const spoken = 'Tap ' + seq.map(x => 'the ' + (NAMES[x] || 'picture')).join(', then ');
         $('kStage').innerHTML = `<div class="k-prompt-row"><button type="button" class="k-hear" id="kHear" aria-label="Hear it again">${speaker}</button><p class="k-prompt">${spoken}</p></div>
           <p class="k-why">Warm-up 2 of 3 · listening and remembering</p><div class="k-board" id="kBoard"></div><div class="k-feedback"><span id="kFbM"></span><p id="kFb"></p></div>`;
-        $('kHear').addEventListener('click', () => say(spoken)); say(spoken);
+        $('kHear').addEventListener('click', () => say(spoken, null, true)); say(spoken, null, true);
         let at = 0, over = false;
         shuffle(pool).forEach(x => {
           const b = document.createElement('button'); b.type = 'button'; b.className = 'k-tile'; b.textContent = x; b.setAttribute('aria-label', NAMES[x] || 'picture');
           b.addEventListener('click', () => {
             if (over) return;
-            if (x === seq[at]) { b.classList.add('right'); at++; if (at === seq.length) { over = true; B.steps = level; feedback(praise(), 'good'); say(praise()); if (level < 3) { level++; later(roundOf, 1400); } else later(done, 1400); } }
+            if (x === seq[at]) { b.classList.add('right'); at++; if (at === seq.length) { over = true; B.steps = level; feedback(praise(), 'good'); if (level < 3) { level++; later(roundOf, 1400); } else later(done, 1400); } }
             else { over = true; b.classList.add('wrong'); feedback('Good try!', 'soft'); later(done, 1200); }
           });
           $('kBoard').appendChild(b);
@@ -1997,7 +2084,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         const choices = shuffle([target, ...shuffle(WORDS.filter(w => w !== target && w.l !== target.l)).slice(0, 2)]);
         $('kStage').innerHTML = `<div class="k-prompt-row"><button type="button" class="k-hear" id="kHear" aria-label="Hear it again">${speaker}</button><p class="k-prompt">${q}</p></div>
           <p class="k-why">Warm-up 3 of 3 · sounds and letters</p>${extra}<div class="k-board" id="kBoard"></div><div class="k-feedback"><span id="kFbM"></span><p id="kFb"></p></div>`;
-        $('kHear').addEventListener('click', () => say(spoken)); say(spoken);
+        $('kHear').addEventListener('click', () => say(spoken, null, true)); say(spoken, null, true);
         let over = false;
         choices.forEach(c => {
           const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'k-tile'; btn.textContent = c.e; btn.setAttribute('aria-label', c.w);
@@ -2021,10 +2108,9 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         <p class="k-prompt" style="margin-top:8px">All done, ${esc(P.name)}! Your world is ready.</p>
         <div class="k-bench-sum">
           <p class="k-bench-parent"><b>For grown-ups:</b> tap accuracy ${pct}%${B.reactionMs ? `, about ${(B.reactionMs / 1000).toFixed(1)}s to react` : ''}. Followed ${B.steps}-step instructions. Matched sounds: ${B.sounds ? 'yes' : 'not yet'}. Knew a letter sound: ${B.letters ? 'yes' : 'not yet'}.<br>
-          So Wren starts Reading with ${S.soundsFirst ? 'sound matching' : 'letter sounds'}, Brain games at ${S.steps} step${S.steps > 1 ? 's' : ''}${S.big ? ', and uses bigger buttons' : ''}.</p>
+          So Wren starts Reading at "${LEVELS[startLevel() - 1].name}" (${LEVELS[startLevel() - 1].std}), Brain games at ${S.steps} step${S.steps > 1 ? 's' : ''}${S.big ? ', and uses bigger buttons' : ''}.</p>
           <div><button type="button" class="k-btn go" id="kBenchGo">Let's go!</button></div>
         </div>`;
-      say(`All done, ${P.name}! Your world is ready.`);
       $('kBenchGo').addEventListener('click', () => { cur = null; dashboard(); recall().then(changed => { if (changed && !cur) dashboard(); }); });
     }
   }
