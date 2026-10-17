@@ -1,0 +1,80 @@
+{
+  "welcome": {
+    "text": "Hi Maya. Biscuit's waiting. Read when you're ready.",
+    "hash": "41bb1d30357c",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "stumble.chunks": {
+    "text": "Let's look at the pieces.",
+    "hash": "ebf048525aa1",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "stumble.firstChunk": {
+    "text": "The first part says th. Now you.",
+    "hash": "dd489df25549",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "stumble.model": {
+    "text": "Through. Your turn.",
+    "hash": "72032e882ad3",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "stumble.wait": {
+    "text": "Take your time. Biscuit's not going anywhere.",
+    "hash": "ace1043b7753",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "clean": {
+    "text": "That one's yours now.",
+    "hash": "0582d6253a9a",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "breakOffer": {
+    "text": "Want to take a Biscuit break?",
+    "hash": "50651d49c946",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "breakReturn": {
+    "text": "Okay. Back to the story.",
+    "hash": "db760c6d1725",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "pageDone": {
+    "text": "That's the page. Biscuit's proud.",
+    "hash": "c476e3ede5e2",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "nextPage": {
+    "text": "New page. Same Biscuit.",
+    "hash": "db49284940e5",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "soundOut.through": {
+    "text": "th... rough... through.",
+    "hash": "378b51818d55",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "soundOut.think": {
+    "text": "th... ink... think.",
+    "hash": "e4a9c2308988",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  },
+  "soundOut.there": {
+    "text": "th... ere... there.",
+    "hash": "157c5d641d68",
+    "backend": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9"
+  }
+}

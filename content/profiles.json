@@ -1,0 +1,120 @@
+[
+  {
+    "id": "maya",
+    "priors": {
+      "name": "Maya",
+      "age": 7,
+      "grade_band": "early-2",
+      "diagnoses": ["Dyslexia", "ADHD-Combined"],
+      "iep_accommodations": [
+        "Extra processing wait time (minimum 6s)",
+        "Chunked text with phoneme spacing",
+        "Read-aloud audio assistance offer on stall"
+      ],
+      "interests": ["her dog Biscuit", "dinosaurs", "her little sister Priya"],
+      "sensitivities": ["Dense text blocks", "Sudden loud cues", "Time pressure"],
+      "known_difficulties": [
+        "decoding th- and sh- blends",
+        "rapid frustration when stalled",
+        "attention fades after ~8 minutes"
+      ]
+    },
+    "behavioral": {
+      "baseline_latency_ms": 4200.0,
+      "attention_window_minutes": 8.0,
+      "preferred_modality": "story",
+      "mastered_words": ["park", "duck", "pond", "bone"],
+      "struggled_words": ["through", "think", "there"],
+      "accepted_presentation_offers": ["Atkinson Hyperlegible", "wider_line_spacing"],
+      "frustration_index": 0.2
+    }
+  },
+  {
+    "id": "leo",
+    "priors": {
+      "name": "Leo",
+      "age": 9,
+      "grade_band": "grade-4",
+      "diagnoses": ["ADHD-Hyperactive/Impulsive"],
+      "iep_accommodations": [
+        "Rapid 90-second story beats with physical action breaks",
+        "Immediate process feedback instead of delayed evaluation",
+        "Visual pacing anchors"
+      ],
+      "interests": ["Minecraft redstone engineering", "volcanic eruptions", "deep space travel"],
+      "sensitivities": ["Repetitive drills", "Passive reading over 60 seconds", "Ambiguous goals"],
+      "known_difficulties": [
+        "skims text and impulsively guesses words by first letter",
+        "working memory drops on multi-clause sentences",
+        "quits rapidly if perceived stakes are zero"
+      ]
+    },
+    "behavioral": {
+      "baseline_latency_ms": 1400.0,
+      "attention_window_minutes": 5.0,
+      "preferred_modality": "visual_micro_game",
+      "mastered_words": ["lava", "stone", "craft", "planet"],
+      "struggled_words": ["circuit", "pressure", "velocity"],
+      "accepted_presentation_offers": ["high_contrast", "reduced_motion"],
+      "frustration_index": 0.35
+    }
+  },
+  {
+    "id": "samira",
+    "priors": {
+      "name": "Samira",
+      "age": 8,
+      "grade_band": "grade-3",
+      "diagnoses": ["Autism Spectrum Disorder", "Sensory Processing Sensitivity"],
+      "iep_accommodations": [
+        "Literal explicit language with zero idioms or sarcasm",
+        "Predictable narrative structures with upfront scene rules",
+        "Calm muted visual palettes"
+      ],
+      "interests": ["deep-sea bioluminescent creatures", "train transit route maps", "geometry crystals"],
+      "sensitivities": ["Metaphors or ambiguous instructions", "Unpredictable plot reversals", "Visual clutter"],
+      "known_difficulties": [
+        "interpreting social subtext in dialogue",
+        "anxiety when task rules shift mid-lesson"
+      ]
+    },
+    "behavioral": {
+      "baseline_latency_ms": 4800.0,
+      "attention_window_minutes": 15.0,
+      "preferred_modality": "story",
+      "mastered_words": ["abyss", "glow", "track", "crystal"],
+      "struggled_words": ["current", "lantern", "trench"],
+      "accepted_presentation_offers": ["calm_palette", "single_column_layout"],
+      "frustration_index": 0.1
+    }
+  },
+  {
+    "id": "julian",
+    "priors": {
+      "name": "Julian",
+      "age": 11,
+      "grade_band": "grade-5",
+      "diagnoses": ["Dyslexia", "Twice-Exceptional (2e)"],
+      "iep_accommodations": [
+        "Load-shifting: Grade 8 reasoning rigor with Grade 3 decoding load",
+        "Speech synthesis for multi-syllabic vocabulary",
+        "No babyish or simplified story premises"
+      ],
+      "interests": ["forensic crime-scene mystery solving", "mythological beast anatomy", "cryptographic ciphers"],
+      "sensitivities": ["Condescending over-praise", "Trivial multiple choice questions", "Slow pacing"],
+      "known_difficulties": [
+        "phonological decoding of unfamiliar 3+ syllable Latinate roots",
+        "spelling anxiety when prompted to type"
+      ]
+    },
+    "behavioral": {
+      "baseline_latency_ms": 3200.0,
+      "attention_window_minutes": 12.0,
+      "preferred_modality": "story",
+      "mastered_words": ["clue", "cipher", "beast", "track"],
+      "struggled_words": ["mechanism", "evidence", "hypothesis"],
+      "accepted_presentation_offers": ["Lexend", "read_aloud_on_demand"],
+      "frustration_index": 0.15
+    }
+  }
+]

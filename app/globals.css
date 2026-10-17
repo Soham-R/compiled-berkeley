@@ -1,15 +1,50 @@
 @import "tailwindcss";
 
 :root {
+  /* Reading page: cream paper, dark ink (HACKATHON_CONTEXT.md section 3). */
   --background: #fbf7ee;
   --foreground: #1f1b16;
+
+  /* Parent-facing site tokens, lifted from "Alder Learning Tutor.html" so
+     every grown-up screen matches Mihika's homepage. */
+  --bg: #ffffff;
+  --tint: #f2f8ff;
+  --tint-2: #fff8e6;
+  --text: #22314d;
+  --dim: #5b6b88;
+  --edge: #dfe8f3;
+  --accent: #3b82f6;
+  --k-sky: #e8f5ff;
+  --k-read: #ff7a59;
+  --k-read-d: #e05a39;
+  --k-brain: #22b46b;
+  --k-brain-d: #17924f;
+  --k-sun: #ffc93c;
+  --k-sun-d: #e6a817;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-cream: #fbf7ee;
+
+  --color-ink: var(--text);
+  --color-dim: var(--dim);
+  --color-edge: var(--edge);
+  --color-tint: var(--tint);
+  --color-tint-2: var(--tint-2);
+  --color-accent: var(--accent);
+  --color-sky: var(--k-sky);
+  --color-read: var(--k-read);
+  --color-read-d: var(--k-read-d);
+  --color-brain: var(--k-brain);
+  --color-brain-d: var(--k-brain-d);
+  --color-sun: var(--k-sun);
+  --color-sun-d: var(--k-sun-d);
+
   --font-sans: var(--font-lexend);
+  --font-display: var(--font-baloo), "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  --font-letter: var(--font-andika), Verdana, sans-serif;
 }
 
 body {

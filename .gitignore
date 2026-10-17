@@ -31,3 +31,14 @@ yarn-error.log*
 *.mov
 *.mp4
 !public/**/*.mp4
+
+# generated speech cache (app/api/tts); the committed clips live in public/audio/*.mp3
+/public/audio/tts/
+
+# python backend (backend/)
+backend/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
