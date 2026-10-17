@@ -12,8 +12,10 @@ export type Passage = {
 
 export type NextPageRequest = {
   day: number;
-  stumbledWords: string[];
+  stumbledWords: string[]; // legacy shape; treated as hintLevel 2 when `words` is absent
   flagged: boolean;
+  words?: WordResult[]; // preferred: carries hintLevel per word
+  previousPassage?: string; // the page just read, so the story continues
 };
 
 // Age-dependent knobs. Live in content/profile.json so /read and the parent
