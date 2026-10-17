@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Wren Learning Tutor</title>
+<title>Alder Learning Tutor</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -392,6 +392,34 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 #kid.kid-dyslexia .k-story-text { line-height: 2.2; }
 #kid.kid-dyslexia .k-w.far { opacity: 0.35; }
 .lt-b { color: #2563d6; } .lt-d { color: #e05a39; } .lt-p { color: #6d3fd6; } .lt-q { color: #17924f; }
+/* Grown-ups area: a calm, plain report inside the child's world */
+.pa { position: relative; z-index: 2; display: grid; gap: 16px; padding-bottom: 60px; font-family: var(--font-body); }
+.pa-head { display: flex; justify-content: space-between; align-items: end; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
+.pa-eyebrow { font: 700 0.9rem var(--font-kid); color: var(--k-soft); text-transform: uppercase; letter-spacing: 0.08em; }
+.pa-head h2 { font: 800 clamp(1.8rem, 4vw, 2.4rem) var(--font-kid); line-height: 1.1; }
+.pa-tabs { display: inline-flex; background: #fff; border-radius: 999px; padding: 4px; box-shadow: 0 4px 0 var(--k-line); }
+.pa-tabs button { border: 0; background: none; cursor: pointer; padding: 8px 18px; border-radius: 999px; font: 700 1rem var(--font-kid); color: var(--k-soft); }
+.pa-tabs button[aria-selected="true"] { background: var(--k-math); color: #fff; }
+.pa-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.pa-stat { background: #fff; border-radius: 20px; padding: 14px 16px; box-shadow: 0 4px 0 var(--k-line); }
+.pa-stat b { display: block; font: 800 1.7rem var(--font-kid); font-variant-numeric: tabular-nums; }
+.pa-stat span { color: var(--k-soft); font-size: 0.9rem; }
+.pa-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.pa-card { background: #fff; border-radius: 24px; padding: 18px 20px; box-shadow: 0 5px 0 var(--k-line); display: grid; gap: 8px; align-content: start; min-width: 0; }
+.pa-card h3 { font: 800 1.25rem var(--font-kid); }
+.pa-card ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.pa-dim { color: var(--k-soft); font-size: 0.92rem; }
+.pa-std { font-size: 0.8rem; color: var(--k-soft); background: var(--k-sky); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.pa-bar { height: 10px; border-radius: 99px; background: var(--k-line); overflow: hidden; }
+.pa-bar i { display: block; height: 100%; background: var(--k-brain); border-radius: 99px; }
+.pa-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pa-chips span { background: #fff4ef; color: var(--k-read-d); border-radius: 999px; padding: 4px 12px; font: 700 1rem var(--font-letter); }
+.pa-days { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.pa-days th, .pa-days td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--k-line); }
+.pa-days th { font-size: 0.8rem; color: var(--k-soft); text-transform: uppercase; letter-spacing: 0.05em; }
+.pa-tip { background: #fffaf0; box-shadow: 0 5px 0 #f1e6c8; }
+.pa-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 700px) { .pa-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pa-grid { grid-template-columns: minmax(0, 1fr); } }
 .k-explain { margin-top: 22px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: center; padding: 20px 22px; border-radius: 28px; background: #eef6ff; border: 3px solid #cfe3f5; }
 .k-explain-pic { font-size: 4.4rem; line-height: 1; width: 120px; height: 120px; border-radius: 28px; background: #fff; display: grid; place-items: center; box-shadow: 0 6px 0 var(--k-line); }
 .k-explain-text { display: grid; gap: 10px; min-width: 0; }
@@ -492,7 +520,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 <div id="site">
   <nav class="nav" aria-label="Main">
     <div class="wrap">
-      <a class="brand" href="#top"><svg viewBox="0 0 130 116" aria-hidden="true"><path d="M26 64 Q2 50 8 22 Q22 42 38 54Z" fill="#a8693f"/><ellipse cx="60" cy="70" rx="40" ry="34" fill="#c98b5e"/><ellipse cx="56" cy="80" rx="27" ry="21" fill="#f6dcbc"/><circle cx="86" cy="42" r="24" fill="#c98b5e"/><path d="M106 40 L124 46 L106 52Z" fill="#f5a524"/><circle cx="96" cy="38" r="4.5" fill="#22314d"/><circle cx="97.5" cy="36.5" r="1.5" fill="#fff"/><path d="M44 62 Q64 50 80 66 Q64 82 44 62Z" fill="#a8693f"/><circle cx="78" cy="52" r="5" fill="#ffb4a2" opacity=".7"/><path d="M54 102 l-4 10 M68 102 l-2 10" stroke="#f5a524" stroke-width="4.5" stroke-linecap="round"/></svg>Wren</a>
+      <a class="brand" href="#top"><svg viewBox="0 0 130 116" aria-hidden="true"><path d="M26 64 Q2 50 8 22 Q22 42 38 54Z" fill="#a8693f"/><ellipse cx="60" cy="70" rx="40" ry="34" fill="#c98b5e"/><ellipse cx="56" cy="80" rx="27" ry="21" fill="#f6dcbc"/><circle cx="86" cy="42" r="24" fill="#c98b5e"/><path d="M106 40 L124 46 L106 52Z" fill="#f5a524"/><circle cx="96" cy="38" r="4.5" fill="#22314d"/><circle cx="97.5" cy="36.5" r="1.5" fill="#fff"/><path d="M44 62 Q64 50 80 66 Q64 82 44 62Z" fill="#a8693f"/><circle cx="78" cy="52" r="5" fill="#ffb4a2" opacity=".7"/><path d="M54 102 l-4 10 M68 102 l-2 10" stroke="#f5a524" stroke-width="4.5" stroke-linecap="round"/></svg>Alder</a>
       <div class="nav-links">
         <a href="#learn">What they learn</a>
         <a href="#how">How it works</a>
@@ -507,8 +535,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     <div class="wrap hero-grid">
       <div>
         <span class="eyebrow">A personal tutor for ages 3 to 7</span>
-        <h1>Every child learns <span class="hl">their own way.</span> Wren teaches that way.</h1>
-        <p class="lead">Reading and writing, one-on-one. Wren listens as your child reads aloud, adapts to how they learn, and never runs out of patience.</p>
+        <h1>Every child learns <span class="hl">their own way.</span> Alder teaches that way.</h1>
+        <p class="lead">Reading and writing, one-on-one. Alder listens as your child reads aloud, adapts to how they learn, and never runs out of patience.</p>
         <div class="actions">
           <a class="cta" href="#start">Start free <span aria-hidden="true">→</span></a>
           <a class="ghost" href="#how">See how it works</a>
@@ -537,7 +565,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         <h2>The basics, taught the way your child learns</h2>
       </div>
       <div class="subjects">
-        <div class="subj"><div class="ic" style="background:var(--k-read)">Aa</div><h3>Reading</h3><p>Sounds, letters, then real words read out loud.</p><ul><li>Wren listens through the microphone</li><li>Tricky words come back in the next story</li></ul></div>
+        <div class="subj"><div class="ic" style="background:var(--k-read)">Aa</div><h3>Reading</h3><p>Sounds, letters, then real words read out loud.</p><ul><li>Alder listens through the microphone</li><li>Tricky words come back in the next story</li></ul></div>
         <div class="subj"><div class="ic" style="background:var(--k-write)">✎</div><h3>Writing</h3><p>Trace each stroke of a letter in the right order.</p><ul><li>"A is for apple" with every letter</li><li>Starts with the child's own name</li></ul></div>
         <div class="subj"><div class="ic" style="background:var(--k-brain)">★</div><h3>Focus</h3><p>Following steps and moving calmly between activities.</p><ul><li>1, 2, then 3-step instructions</li><li>Breathing breaks when it gets hard</li></ul></div>
       </div>
@@ -552,8 +580,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       </div>
       <div class="steps">
         <div class="step"><span class="n" style="background:var(--k-read)">1</span><h3>Tell us about your child</h3><p>Age, favorite things, needs, what upsets them, and your goals.</p></div>
-        <div class="step"><span class="n" style="background:var(--k-math)">2</span><h3>Three warm-up games</h3><p>Wren finds where your child is, so lessons start at the right level.</p></div>
-        <div class="step"><span class="n" style="background:var(--k-brain)">3</span><h3>They learn, Wren adapts</h3><p>It slows down, explains gently, takes breaks, and remembers what worked.</p></div>
+        <div class="step"><span class="n" style="background:var(--k-math)">2</span><h3>Three warm-up games</h3><p>Alder finds where your child is, so lessons start at the right level.</p></div>
+        <div class="step"><span class="n" style="background:var(--k-brain)">3</span><h3>They learn, Alder adapts</h3><p>It slows down, explains gently, takes breaks, and remembers what worked.</p></div>
       </div>
     </div>
   </section>
@@ -598,7 +626,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       <div class="sec-head" style="margin-bottom:0">
         <span class="eyebrow">Dyslexia support</span>
         <h2>Reading that works with a dyslexic brain</h2>
-        <p>Choose "Dyslexia or reading difficulty" in the form and Wren changes how every reading activity looks and sounds.</p>
+        <p>Choose "Dyslexia or reading difficulty" in the form and Alder changes how every reading activity looks and sounds.</p>
       </div>
       <div class="dys-card">
         <div class="dys-demo" aria-label="The word bed with b and d in different colours"><span class="lt-b">b</span>e<span class="lt-d">d</span></div>
@@ -607,7 +635,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
           <li><b>Easy-to-read letters.</b> A clear font, extra space between letters and words, and a warm, low-glare page.</li>
           <li><b>b, d, p and q in their own colours.</b> They are never shown as each other's wrong answers.</li>
           <li><b>A focus window when reading aloud.</b> Only the next few words are bright, so the eyes don't jump ahead.</li>
-          <li><b>More time and fewer choices.</b> Wren waits longer before helping and shows 2 choices instead of 3.</li>
+          <li><b>More time and fewer choices.</b> Alder waits longer before helping and shows 2 choices instead of 3.</li>
           <li><b>Every word can be heard.</b> Tap any word to hear it sounded out, then read it out loud.</li>
         </ul>
       </div>
@@ -620,7 +648,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       <div class="parents">
         <div class="pcard"><h3>Daily or weekly reports</h3><p>Plain-language progress on your goals, plus one thing to try at home.</p></div>
         <div class="pcard"><h3>Real mastery</h3><p>A skill counts as learned only when your child gets it right on different days.</p></div>
-        <div class="pcard"><h3>Private by design</h3><p>Wren doesn't diagnose. Your child's data is yours to export or delete.</p></div>
+        <div class="pcard"><h3>Private by design</h3><p>Alder doesn't diagnose. Your child's data is yours to export or delete.</p></div>
       </div>
     </div>
   </section>
@@ -630,8 +658,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       <div class="form-side">
         <span class="eyebrow" style="justify-self:start">Get started</span>
         <h2>Tell us about your child</h2>
-        <p>Four short steps. Every answer changes how Wren teaches. Skip anything you're unsure about.</p>
-        <p style="font-size:.9rem">Wren is a learning tool. It doesn't diagnose or give medical advice.</p>
+        <p>Four short steps. Every answer changes how Alder teaches. Skip anything you're unsure about.</p>
+        <p style="font-size:.9rem">Alder is a learning tool. It doesn't diagnose or give medical advice.</p>
       </div>
       <form class="wizard" id="wizard" novalidate>
         <div class="progress" aria-hidden="true"><div><i></i></div><div><i></i></div><div><i></i></div><div><i></i></div></div>
@@ -681,7 +709,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     </div>
   </section>
 
-  <footer class="site-foot"><div class="wrap">Wren is a working name for an early-stage concept. Examples are illustrative.</div></footer>
+  <footer class="site-foot"><div class="wrap">Alder is a working name for an early-stage concept. Examples are illustrative.</div></footer>
 </div>
 
 <div id="building" hidden role="status">
@@ -696,7 +724,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     <header class="k-top">
       <div class="k-brand" id="kBrand"></div>
       <div class="k-pills">
-        <span class="k-pill k-mood" id="kMood" data-level="calm" title="Wren's calm check (for grown-ups)"><i></i><span id="kMoodTxt">All good</span></span>
+        <span class="k-pill k-mood" id="kMood" data-level="calm" title="Alder's calm check (for grown-ups)"><i></i><span id="kMoodTxt">All good</span></span>
         <span class="k-pill" aria-label="Stars"><span class="star">★</span><span id="kStars">0</span></span>
         <button type="button" class="k-parent" id="kParent" title="Hold to open the parent area"><i></i><span style="position:relative">Grown-ups · hold</span></button>
       </div>
@@ -731,7 +759,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       Theme: `Every game reskinned with ${word}`,
       Voice: demo.sound ? 'Slow, low pitch, 70% volume, no sudden sounds' : 'Standard voice and sound effects',
       Rounds: demo.adhd ? '5 quick questions, instant praise, simpler choices when stuck' : '6 questions, 3 choices',
-      Answers: demo.speech ? 'Tap the picture · speaking is optional' : 'Read out loud · Wren listens',
+      Answers: demo.speech ? 'Tap the picture · speaking is optional' : 'Read out loud · Alder listens',
       Visuals: demo.bold ? 'High contrast, thick outlines, big motion' : 'Standard contrast'
     };
     $('adjust').innerHTML = Object.entries(rows).map(([k, v]) => `<li class="${prevAdjust[k] && prevAdjust[k] !== v ? 'changed' : ''}"><b>${k}</b><span>${v}</span></li>`).join('');
@@ -835,15 +863,19 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     if (same && old.benchmark) p.benchmark = old.benchmark;
     const b = $('building'); b.hidden = false;
     const lines = ['Reading your answers…', `Choosing themes: ${(p.hyperfixations.slice(0, 3).join(', ') || 'stars and balloons').toLowerCase()}…`, 'Tuning voice, visuals and pace…', `Opening ${p.name}'s world…`];
-    let i = 0; $('buildText').textContent = lines[0]; $('buildSub').textContent = 'Wren is building a learning world for one child.';
+    let i = 0; $('buildText').textContent = lines[0]; $('buildSub').textContent = 'Alder is building a learning world for one child.';
     const t = setInterval(() => { i++; if (i < lines.length) $('buildText').textContent = lines[i]; }, reduced ? 250 : 650);
     setTimeout(() => { clearInterval(t); b.hidden = true; store.set('wren-profile', p); enterKid(p); }, reduced ? 1000 : 2700);
   }
 
-  /* ================= Memory: events go to the Wren app when it serves this page ================= */
+  /* ================= Memory: events go to the Alder app when it serves this page ================= */
   const SERVED = /^https?:$/.test(location.protocol);
   function remember(type, data = {}, withProfile = false) {
-    if (!SERVED || !P || !P.childId) return;
+    if (!P) return;
+    const ev = { type, at: new Date().toISOString(), ...data };
+    const key = 'wren-log-' + (P.childId || P.name), log = store.get(key) || [];
+    log.push(ev); store.set(key, log.slice(-3000));
+    if (!SERVED || !P.childId) return;
     try {
       fetch('/api/memory', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ childId: P.childId, profile: withProfile ? P : undefined, events: [{ type, at: new Date().toISOString(), ...data }] }) }).catch(() => {});
@@ -893,7 +925,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     $('site').hidden = true; stopBg(); $('kid').hidden = false; document.body.classList.add('kid-mode');
     const k = $('kid');
     k.classList.toggle('kid-bold', S.bold); k.classList.toggle('kid-calm', S.calm); k.classList.toggle('kid-big', S.big); k.classList.toggle('kid-dyslexia', S.dyslexia);
-    document.title = `${p.name}'s Wren World`;
+    document.title = `${p.name}'s Alder World`;
     $('kBrand').innerHTML = `${MASCOT('side')}<span>${esc(p.name)}'s World</span>`;
     $('kStars').textContent = totalStars;
     scrollTo(0, 0);
@@ -906,7 +938,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   function save() { store.set('wren-progress-' + P.name.toLowerCase(), { prog, stars: totalStars, today, speech: speechStats, storyLog, dayKey: new Date().toDateString() }); }
   function exitToSite() {
     clearTimers(); if (stopStory) stopStory(); try { speechSynthesis.cancel(); } catch (e) {}
-    $('kid').hidden = true; document.body.classList.remove('kid-mode'); $('site').hidden = false; document.title = 'Wren Learning Tutor';
+    $('kid').hidden = true; document.body.classList.remove('kid-mode'); $('site').hidden = false; document.title = 'Alder Learning Tutor';
     sizeBg(); if (reduced) frame(); else startBg();
     if (P) { fill(P); showStep(1); updateResume(); }
     $('start').scrollIntoView();
@@ -915,11 +947,11 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   // Grown-ups button: press and hold to leave (keeps little fingers in the kid world)
   let holdT = null;
   const parentBtn = $('kParent');
-  const startHold = e => { e.preventDefault(); parentBtn.classList.add('holding'); holdT = setTimeout(() => { parentBtn.classList.remove('holding'); exitToSite(); }, 1200); };
+  const startHold = e => { e.preventDefault(); parentBtn.classList.add('holding'); holdT = setTimeout(() => { parentBtn.classList.remove('holding'); parentArea(); }, 1200); };
   const endHold = () => { parentBtn.classList.remove('holding'); clearTimeout(holdT); };
   parentBtn.addEventListener('pointerdown', startHold);
   ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => parentBtn.addEventListener(ev, endHold));
-  parentBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') exitToSite(); });
+  parentBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') parentArea(); });
 
   /* ---------- voice ---------- */
   // Pick the warmest voice the device has: natural/premium voices first, never the novelty or robotic ones.
@@ -986,7 +1018,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       <button type="button" class="k-card story" data-go="story">
         <div class="k-art"><span class="emo" style="font-size:3rem">📖</span></div>
         <div style="display:grid;gap:8px;position:relative;z-index:1"><h2>Story time</h2>
-          <span class="sub">Read a story out loud. Wren listens and helps with tricky words.</span>
+          <span class="sub">Read a story out loud. Alder listens and helps with tricky words.</span>
           ${storyLog.practice.length ? `<div class="k-practice"><span style="background:none;padding:0">Practice words:</span>${storyLog.practice.slice(0, 5).map(w => `<span>${esc(w)}</span>`).join('')}</div>` : ''}</div>
         <span class="k-play">Read ▶</span>
       </button>
@@ -1042,7 +1074,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   const praise = () => pick(['Oh, wonderful!', 'Yes! I knew you could!', "That's exactly right!", 'Great listening!', `Beautiful work, ${P.name}!`]);
   const retry = () => S.gentle ? pick(["Hmm, let's look again together.", "Almost! Let's try once more."]) : "Not quite. Let's try again!";
   function win(next) {
-    moodEvent('right'); remember('answer', { subject: cur, correct: true });
+    moodEvent('right'); remember('completed', { subject: cur });
     round++; prog[cur]++; totalStars++; $('kStars').textContent = totalStars;
     $('kDots').querySelectorAll('i').forEach((d, i) => d.classList.toggle('on', i < round));
     save();
@@ -1350,7 +1382,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   }
   function choicesFor(item, n) {
     if (item.kind === 'word') {
-      // Picture words show pictures; words you can't draw (the, said) show the written words and Wren says which to tap.
+      // Picture words show pictures; words you can't draw (the, said) show the written words and Alder says which to tap.
       const level = LV(item).words, pictures = !!PIC[item.w];
       const pool = pictures ? [...new Set([...level, ...CVC])].filter(w => PIC[w]) : level;
       return shuffle([item.w, ...shuffle(pool.filter(w => w !== item.w && (!pictures || letterOf(w) !== letterOf(item.w)))).slice(0, n - 1)]);
@@ -1377,7 +1409,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     if (!PIC[w]) return { text: 'Tap the word you hear.', spoken: `Tap the word: ${w}.`, extra: '' };
     return { text: 'Read the word. Which picture is it?', spoken: 'Which picture is it?', extra: `<div class="k-word-show">${dysWord(w)}</div>` };
   }
-  // What Wren shows and says after a miss: one idea, a picture, the answer modelled, never "wrong".
+  // What Alder shows and says after a miss: one idea, a picture, the answer modelled, never "wrong".
   function explainFor(item, picked) {
     const w = item.w, sayPicked = picked && picked !== w;
     const named = sayPicked ? (item.kind === 'letter' || (item.kind === 'word' && !PIC[w]) ? `You picked ${picked}. ` : `You picked the ${picked}${item.kind === 'sound' && SOUND_OF[picked] ? `. The ${picked} says ${SOUND_OF[picked]}` : ''}. `) : '';
@@ -1557,7 +1589,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     if (j.verdict === 'close') return { say: `So close! Let's say it slowly together. ${t.l.toLowerCase()}... ${t.w}.`, tip: SOUND_TIPS[t.l] };
     return { say: `Good try! Listen to me: ${t.w}. ${SOUND_TIPS[t.l]}`, tip: SOUND_TIPS[t.l] };
   }
-  // When the page is served by the Wren app, /api/coach asks Claude for the suggestion; otherwise the local coach answers.
+  // When the page is served by the Alder app, /api/coach asks Claude for the suggestion; otherwise the local coach answers.
   async function coach(t, j, alts, attempt) {
     const local = localCoach(t, j, attempt);
     if (!/^https?:$/.test(location.protocol)) return local;
@@ -1583,7 +1615,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const mic = $('kMic');
     const finish = () => { if (finished) return; finished = true; mic.disabled = true; $('kSkip').hidden = true; win(reading); };
     $('kSkip').addEventListener('click', finish);
-    // Hands-free: the mic turns on by itself after Wren asks, so a child can do this alone.
+    // Hands-free: the mic turns on by itself after Alder asks, so a child can do this alone.
     const listen = () => {
       if (finished || mic.classList.contains('listening') || micBlocked) return;
       speechSynthesis.cancel();
@@ -1611,7 +1643,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         if (verdict === 'match') speechStats.said++;
         remember('speech', { word: t.w, verdict, heard: j.heard });
         save();
-        // A match is celebrated on screen only; Wren speaks when there is something to model.
+        // A match is celebrated on screen only; Alder speaks when there is something to model.
         if (verdict === 'match') later(finish, 900);
         else { say(c.say, done ? () => later(finish, 400) : () => later(listen, 300)); if (done) later(finish, 7000); }
       };
@@ -2077,7 +2109,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       <p class="k-story-text" id="kText">${words.map((w, i) => `<span class="k-w${targets.has(w.n) ? ' target' : ''}" data-i="${i}">${esc(w.raw)}</span>`).join(' ')}</p>
       <div class="k-story-bar">
         <button type="button" class="k-mic" id="kMic" aria-label="Start reading">${micIcon}</button>
-        <span class="k-listen-state" id="kState">${canListen ? 'Tap the microphone and start reading.' : 'Tap the microphone to read to Wren.'}</span>
+        <span class="k-listen-state" id="kState">${canListen ? 'Tap the microphone and start reading.' : 'Tap the microphone to read to Alder.'}</span>
         <button type="button" class="k-btn" id="kDone">I'm done</button>
       </div>
       <div id="kHelp"></div><div id="kSum"></div>`;
@@ -2147,7 +2179,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       if (listening && !helping && !finished && Date.now() - lastMove > (S.dyslexia ? 7000 : S.gentle ? 5500 : 4500)) help(ptr);
     }, 500);
     $('kMic').addEventListener('click', () => {
-      if (!Recognizer) { $('kState').textContent = "This browser can't listen yet. Open Wren in Chrome, Edge or Safari to read out loud."; return; }
+      if (!Recognizer) { $('kState').textContent = "This browser can't listen yet. Open Alder in Chrome, Edge or Safari to read out loud."; return; }
       if (micBlocked) { $('kState').textContent = 'The microphone is off. Ask a grown-up to allow it in the browser, then tap again.'; micBlocked = false; return; }
       if (listening) { listening = false; $('kMic').classList.remove('listening'); $('kState').textContent = 'Paused. Tap to keep reading.'; try { rec.abort(); } catch (e) {} render(); return; }
       speechSynthesis.cancel(); listening = true; lastMove = Date.now(); $('kMic').classList.add('listening'); $('kState').textContent = "I'm listening…"; render(); startRec();
@@ -2347,11 +2379,98 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         <p class="k-prompt" style="margin-top:8px">All done, ${esc(P.name)}! Your world is ready.</p>
         <div class="k-bench-sum">
           <p class="k-bench-parent"><b>For grown-ups:</b> tap accuracy ${pct}%${B.reactionMs ? `, about ${(B.reactionMs / 1000).toFixed(1)}s to react` : ''}. Followed ${B.steps}-step instructions. Matched sounds: ${B.sounds ? 'yes' : 'not yet'}. Knew a letter sound: ${B.letters ? 'yes' : 'not yet'}.<br>
-          So Wren starts Reading at "${LEVELS[startLevel() - 1].name}" (${LEVELS[startLevel() - 1].std}), Brain games at ${S.steps} step${S.steps > 1 ? 's' : ''}${S.big ? ', and uses bigger buttons' : ''}.</p>
+          So Alder starts Reading at "${LEVELS[startLevel() - 1].name}" (${LEVELS[startLevel() - 1].std}), Brain games at ${S.steps} step${S.steps > 1 ? 's' : ''}${S.big ? ', and uses bigger buttons' : ''}.</p>
           <div><button type="button" class="k-btn go" id="kBenchGo">Let's go!</button></div>
         </div>`;
       $('kBenchGo').addEventListener('click', () => { cur = null; dashboard(); recall().then(changed => { if (changed && !cur) dashboard(); }); });
     }
+  }
+
+
+  /* ================= Grown-ups area: daily and weekly reports ================= */
+  const GOAL_NAMES = { Two_Step: 'Follow 2-step instructions', Transitions: 'Calmer transitions', Letter_Sounds: 'Learn letter sounds', Writing_Name: 'Write their name' };
+  const SUBJ_LABEL = { reading: 'Reading', writing: 'Writing', story: 'Story time', brain: 'Brain games' };
+  function buildReport(days) {
+    const log = store.get('wren-log-' + (P.childId || P.name)) || [];
+    const start = new Date(); start.setHours(0, 0, 0, 0); start.setDate(start.getDate() - (days - 1));
+    const ev = log.filter(e => Date.parse(e.at) >= start.getTime());
+    const of = t => ev.filter(e => e.type === t);
+    // minutes: events closer than 20 minutes apart belong to the same sitting
+    let minutes = 0, sittings = 0, prev = null, first = null;
+    ev.forEach(e => { const t = Date.parse(e.at); if (!prev || t - prev > 20 * 60000) { if (first) minutes += Math.max(1, (prev - first) / 60000); first = t; sittings++; } prev = t; });
+    if (first) minutes += Math.max(1, (prev - first) / 60000);
+    const done = of('completed'), answers = of('answer');
+    const bySubject = Object.fromEntries(Object.keys(SUBJ_LABEL).map(k => [k, done.filter(e => e.subject === k).length]));
+    const rFirst = answers.filter(e => e.subject === 'reading' && e.correct && e.firstTry).length;
+    const rMiss = answers.filter(e => e.subject === 'reading' && !e.correct).length;
+    const w = answers.filter(e => e.subject === 'writing' && e.correct);
+    const stumbles = {}; of('stumble').forEach(e => { stumbles[e.word] = (stumbles[e.word] || 0) + 1; });
+    const breaks = of('calm_break');
+    const breakSubjects = [...new Set(breaks.map(e => SUBJ_LABEL[e.subject] || e.subject).filter(Boolean))];
+    const perDay = Array.from({ length: days }, (_, i) => { const d = new Date(start); d.setDate(d.getDate() + i); const k = d.toDateString(); const de = ev.filter(e => new Date(e.at).toDateString() === k); return { d, items: de.filter(e => e.type === 'completed').length, breaks: de.filter(e => e.type === 'calm_break').length }; });
+    return {
+      empty: !ev.length, minutes: Math.round(minutes), sittings, items: done.length, bySubject,
+      readAcc: rFirst + rMiss ? Math.round(rFirst / (rFirst + rMiss) * 100) : null, rFirst,
+      spokenOk: of('speech').filter(e => e.verdict === 'match').length, spoken: of('speech').length,
+      spelled: w.filter(e => /^spell-/.test(e.item || '')).length, sentences: w.filter(e => /^sentence-/.test(e.item || '')).length,
+      vowels: w.filter(e => /^vowel-/.test(e.item || '')).length, letters: w.filter(e => /^[A-Z]$|^(line|circle|cross)$/.test(e.item || '')).length,
+      stories: of('story_done').length, levelUps: of('level_up').length,
+      tricky: Object.entries(stumbles).sort((a, b) => b[1] - a[1]).map(([x]) => x).concat(storyLog.practice).filter((x, i, a) => x && a.indexOf(x) === i).slice(0, 6),
+      breaks: breaks.length, breakSubjects, perDay,
+      brainWrong: answers.filter(e => e.subject === 'brain' && !e.correct).length
+    };
+  }
+  function goalLine(g, r) {
+    if (g === 'Two_Step') return `Brain games are at ${memInit ? memLevel : S.steps}-step instructions${r.bySubject.brain ? `; ${r.bySubject.brain} finished this period` : ''}.`;
+    if (g === 'Transitions') return r.breaks ? `${r.breaks} calm-down break${r.breaks > 1 ? 's' : ''}${r.breakSubjects.length ? ` (during ${r.breakSubjects.join(', ')})` : ''}. Alder warns ${P.name} before every switch.` : `No calm-down breaks needed. Alder warns ${P.name} before every switch.`;
+    if (g === 'Letter_Sounds') { const rp = readingProgress(); return rp.level >= 5 ? 'Letter sounds are secure; now reading whole words.' : `Working on ${rp.name.toLowerCase()} (${rp.done} of ${rp.need} toward the next level).`; }
+    if (g === 'Writing_Name') { const d = writingState().done || []; const name = [...new Set(P.name.toUpperCase().match(/[A-Z]/g) || [])]; const got = name.filter(c => d.includes(c)); return `Has written ${got.length} of the ${name.length} letters in ${P.name}${got.length ? ` (${got.join(', ')})` : ''}.`; }
+    return '';
+  }
+  function homeTip(r) {
+    if (r.tricky.length) return `Practice "${r.tricky.slice(0, 2).join('" and "')}". Say each word slowly together, then let ${P.name} find it in a book or on a sign.`;
+    if (r.breaks >= 2) return `${P.name} needed ${r.breaks} calm-down breaks${r.breakSubjects.length ? `, mostly during ${r.breakSubjects[0]}` : ''}. Try shorter sessions of about 10 minutes, starting with a favorite activity.`;
+    if (r.readAcc !== null && r.readAcc >= 85) return `Reading is going well. Read a picture book together and let ${P.name} read the short words out loud.`;
+    if (r.items === 0) return `Try a 10-minute session together this week. Start with Story time or ${P.hyperfixations[0] ? `a game about ${P.hyperfixations[0].toLowerCase()}` : 'a favorite activity'}.`;
+    return `Read together for 10 minutes a day. Let ${P.name} point to words they know.`;
+  }
+  function parentArea(tab) {
+    clearTimers(); if (stopStory) stopStory(); endBreath(); try { speechSynthesis.cancel(); } catch (e) {}
+    cur = null;
+    tab = tab || (P.report_cadence === 'daily' ? 'daily' : 'weekly');
+    const r = buildReport(tab === 'daily' ? 1 : 7), rp = readingProgress();
+    const stat = (v, l) => `<div class="pa-stat"><b>${v}</b><span>${l}</span></div>`;
+    const dayName = d => d.toLocaleDateString(undefined, { weekday: 'short' });
+    $('kview').innerHTML = `
+      <section class="pa">
+        <div class="pa-head">
+          <div><p class="pa-eyebrow">Grown-ups</p><h2>${esc(P.name)}'s ${tab === 'daily' ? 'day' : 'week'}</h2></div>
+          <div class="pa-tabs" role="tablist"><button type="button" role="tab" data-tab="daily" aria-selected="${tab === 'daily'}">Daily</button><button type="button" role="tab" data-tab="weekly" aria-selected="${tab === 'weekly'}">Weekly</button></div>
+        </div>
+        ${r.empty ? `<div class="pa-card"><h3>Nothing yet ${tab === 'daily' ? 'today' : 'this week'}</h3><p>Reports fill in as ${esc(P.name)} plays. They're saved in this browser.</p></div>` : `
+        <div class="pa-stats">${stat(r.minutes + ' min', 'learning time')}${stat(r.sittings, r.sittings === 1 ? 'session' : 'sessions')}${stat(r.items, 'activities finished')}${stat(r.levelUps, r.levelUps === 1 ? 'new level' : 'new levels')}</div>
+        <div class="pa-grid">
+          <div class="pa-card"><h3>Reading</h3>
+            <p><b>Level ${rp.level}: ${esc(rp.name)}</b> <span class="pa-std">${esc(LEVELS[rp.level - 1].std)}</span></p>
+            <div class="pa-bar"><i style="width:${Math.round(rp.done / rp.need * 100)}%"></i></div>
+            <p class="pa-dim">${rp.waitingForDay ? 'Ready to move up after one more day of practice.' : `${rp.done} of ${rp.need} right on the first try toward the next level.`}</p>
+            <ul>${r.readAcc !== null ? `<li>${r.readAcc}% right on the first try</li>` : ''}${r.spoken ? `<li>Read ${r.spokenOk} of ${r.spoken} words out loud correctly</li>` : ''}${r.stories ? `<li>Read ${r.stories} ${r.stories === 1 ? 'story' : 'stories'} out loud</li>` : ''}${r.bySubject.reading ? `<li>${r.bySubject.reading} reading questions finished</li>` : ''}</ul></div>
+          <div class="pa-card"><h3>Writing</h3><ul>
+            ${r.spelled ? `<li>Spelled ${r.spelled} word${r.spelled > 1 ? 's' : ''} without help</li>` : ''}${r.sentences ? `<li>Built ${r.sentences} sentence${r.sentences > 1 ? 's' : ''}</li>` : ''}${r.vowels ? `<li>Found ${r.vowels} middle sound${r.vowels > 1 ? 's' : ''}</li>` : ''}${r.letters ? `<li>Traced ${r.letters} letter${r.letters > 1 ? 's' : ''} or shape${r.letters > 1 ? 's' : ''}</li>` : ''}
+            ${!r.spelled && !r.sentences && !r.vowels && !r.letters ? `<li class="pa-dim">No writing finished yet.</li>` : ''}</ul></div>
+          <div class="pa-card"><h3>Tricky words</h3>${r.tricky.length ? `<div class="pa-chips">${r.tricky.map(x => `<span>${esc(x)}</span>`).join('')}</div><p class="pa-dim">Alder brings these back in the next stories.</p>` : `<p class="pa-dim">No stumbles to practice.</p>`}</div>
+          <div class="pa-card"><h3>Calm and focus</h3><p>${r.breaks ? `${r.breaks} breathing break${r.breaks > 1 ? 's' : ''}${r.breakSubjects.length ? `, during ${esc(r.breakSubjects.join(', '))}` : ''}.` : 'No breathing breaks needed.'}</p>${r.brainWrong ? `<p class="pa-dim">${r.brainWrong} missed step${r.brainWrong > 1 ? 's' : ''} in Brain games; Alder simplified when needed.</p>` : ''}</div>
+        </div>
+        ${P.parent_goals.length ? `<div class="pa-card"><h3>Your goals</h3><ul>${P.parent_goals.filter(g => GOAL_NAMES[g]).map(g => `<li><b>${GOAL_NAMES[g]}:</b> ${esc(goalLine(g, r))}</li>`).join('')}</ul></div>` : ''}
+        ${tab === 'weekly' ? `<div class="pa-card"><h3>Day by day</h3><table class="pa-days"><thead><tr><th>Day</th><th>Activities</th><th>Breaks</th></tr></thead><tbody>${r.perDay.slice().reverse().map(x => `<tr><td>${dayName(x.d)} ${x.d.getDate()}</td><td>${x.items}</td><td>${x.breaks}</td></tr>`).join('')}</tbody></table></div>` : ''}`}
+        <div class="pa-card pa-tip"><h3>Try at home</h3><p>${esc(homeTip(r))}</p></div>
+        <div class="pa-actions"><button type="button" class="k-btn go" id="paBack">Back to ${esc(P.name)}'s world</button><button type="button" class="k-btn" id="paEdit">Edit profile</button><button type="button" class="k-btn" id="paLeave">Leave to website</button></div>
+      </section>`;
+    $('kview').querySelectorAll('.pa-tabs button').forEach(b => b.addEventListener('click', () => parentArea(b.dataset.tab)));
+    $('paBack').addEventListener('click', dashboard);
+    $('paEdit').addEventListener('click', exitToSite);
+    $('paLeave').addEventListener('click', () => { exitToSite(); scrollTo(0, 0); });
+    scrollTo(0, 0);
   }
 
   /* ================= Returning visitors ================= */
