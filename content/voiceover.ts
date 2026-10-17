@@ -19,17 +19,17 @@ export const VOICEOVER: VoiceoverLine[] = [
   },
   {
     id: "05-day2-intro",
-    text: "One Claude call writes her next page: the missed words twice each, in a Biscuit story. Shorter, after yesterday's break.",
+    text: "One Claude call writes her next page around the words she missed, in a Biscuit story that picks up where yesterday's left off.",
   },
   { id: "06-day2-pieces", text: "Just the pieces this time. She does the rest." },
   {
     id: "07-day2-roadmap",
-    text: "Today's signal is a word two and a half seconds late. Prosody, frustration in her voice, is the roadmap, not this demo.",
+    text: "Today's signal is a word that comes a few seconds late. Prosody, frustration in her voice, is the roadmap, not this demo.",
   },
-  { id: "08-day5-clean", text: "Day five. Same three words, clean. Two new ones sit beside words she owns." },
+  { id: "08-day5-clean", text: "Day five. No stumbles. Two new words sit beside words she already owns." },
   {
     id: "09-parent",
-    text: "For the parent: what clicked, what's next, how long before a break. Six minutes Monday. Eleven today.",
+    text: "For the parent: what clicked, what's next, how long before a break. Six minutes Monday. Eleven by Friday.",
   },
   { id: "10-why-now", text: "Edtech never did this. It couldn't hear the kid. Now it can." },
   { id: "99-close", text: "She never typed a word. The book learned her. Built for the kids one-size-fits-most already failed." },
