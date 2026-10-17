@@ -1,4 +1,4 @@
-# Wren — a Primer for the kids the system fails
+# Alder — a Primer for the kids the system fails
 
 *(repo: compiled-berkeley hackathon — Compiled Berkeley 2026)*
 
