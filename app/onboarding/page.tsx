@@ -71,10 +71,7 @@ export default function OnboardingPage() {
     const cleaned: ParentProfile = {
       ...profile,
       name: profile.name.trim(),
-      hyperfixations: profile.hyperfixations
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
+      hyperfixations: profile.hyperfixations.map((s) => s.trim()).filter(Boolean),
     };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cleaned));
@@ -213,7 +210,7 @@ export default function OnboardingPage() {
             type="text"
             value={profile.hyperfixations.join(", ")}
             onChange={(e) =>
-              setProfile({ ...profile, hyperfixations: e.target.value })
+              setProfile({ ...profile, hyperfixations: e.target.value.split(",") })
             }
             placeholder="e.g. trains, bugs, water"
             autoComplete="off"

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing childId" }, { status: 400 });
     }
 
-    let existing = memoryStore.get(childId) || {
+    const existing = memoryStore.get(childId) || {
       events: [],
       summary: { practiceWords: ["through", "think", "there"], greeting: "" },
     };
