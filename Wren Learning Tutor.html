@@ -534,7 +534,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     <div class="wrap">
       <div class="sec-head center">
         <span class="eyebrow">What they learn</span>
-        <h2>The basics, taught the way your child learns</h2>
+        <h2>The basics, taught around how your child's attention and memory actually work</h2>
       </div>
       <div class="subjects">
         <div class="subj"><div class="ic" style="background:var(--k-read)">Aa</div><h3>Reading</h3><p>Sounds, letters, then real words read out loud.</p><ul><li>Wren listens through the microphone</li><li>Tricky words come back in the next story</li></ul></div>
@@ -618,7 +618,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     <div class="wrap">
       <div class="sec-head center"><span class="eyebrow">For parents</span><h2>Always know how they're doing</h2></div>
       <div class="parents">
-        <div class="pcard"><h3>Daily or weekly reports</h3><p>Plain-language progress on your goals, plus one thing to try at home.</p></div>
+        <div class="pcard"><h3>Daily or weekly reports</h3><p>Plain-language progress on your goals, plus one thing to try at home. <a href="/parent?day=7">See a sample note</a>.</p></div>
         <div class="pcard"><h3>Real mastery</h3><p>A skill counts as learned only when your child gets it right on different days.</p></div>
         <div class="pcard"><h3>Private by design</h3><p>Wren doesn't diagnose. Your child's data is yours to export or delete.</p></div>
       </div>
@@ -905,6 +905,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   }
   function save() { store.set('wren-progress-' + P.name.toLowerCase(), { prog, stars: totalStars, today, speech: speechStats, storyLog, dayKey: new Date().toDateString() }); }
   function exitToSite() {
+    if (SERVED) { location.href = '/parent?day=7'; return; }
     clearTimers(); if (stopStory) stopStory(); try { speechSynthesis.cancel(); } catch (e) {}
     $('kid').hidden = true; document.body.classList.remove('kid-mode'); $('site').hidden = false; document.title = 'Wren Learning Tutor';
     sizeBg(); if (reduced) frame(); else startBg();
@@ -2023,7 +2024,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     return c.length > 1 ? `Let's sound it out together. ${c.join('... ')}... ${w}!${tip} Now you try.` : `This word is ${w}. Now you try: ${w}.`;
   }
 
-  let currentStory = null, stopStory = null;
+  let currentStory = null, stopStory = null, lastStoryText = '';
   function localStory(practice) {
     const want = practice.map(norm);
     const interest = P.hyperfixations.join(' ').toLowerCase();
@@ -2047,7 +2048,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
       try {
         const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 9000);
         const res = await fetch('/api/next-page', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal,
-          body: JSON.stringify({ day: storyLog.day, stumbledWords: practice, flagged: practice.length >= 4, childId: P.childId }) });
+          body: JSON.stringify({ day: storyLog.day, stumbledWords: practice, flagged: practice.length >= 4, childId: P.childId, words: practice.map(w => ({ word: w, status: 'stumbled', hintLevel: 2 })), previousPassage: lastStoryText || undefined }) });
         clearTimeout(t);
         const data = await res.json();
         if (data.source === 'claude' && data.passage) return { text: data.passage, targets: data.targetWords || practice, question: data.question ? { ...data.question, answer: -1 } : null, source: 'claude', day: data.day };
@@ -2060,6 +2061,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const st = $('kStage');
     st.innerHTML = `<div class="k-over"><div style="width:110px;margin:0 auto">${MASCOT('side')}</div><h2>Finding a story for you…</h2>${storyLog.practice.length ? `<p>It will have your practice words: ${storyLog.practice.map(esc).join(', ')}</p>` : ''}</div>`;
     if (!currentStory) currentStory = await fetchStory(storyLog.practice);
+    lastStoryText = currentStory.text;
     if (cur !== 'story' || !$('kStage')) return;
     runStory(currentStory);
   }

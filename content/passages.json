@@ -1,7 +1,7 @@
 [
   {
     "day": 1,
-    "passage": "PLACEHOLDER (Person C replaces). Sam walked through the park. I think there is a duck by the pond. There it is!",
+    "passage": "Sam went for a walk in the park. He went through the big gate and down the path. He looked out at the pond. \"I think there is a duck,\" he said. There it was, on a big rock. Sam sat on the grass to look.",
     "targetWords": ["through", "think", "there"],
     "question": {
       "prompt": "Where did Sam walk?",
@@ -10,7 +10,7 @@
   },
   {
     "day": 2,
-    "passage": "PLACEHOLDER (Person C replaces). Shorter, about Biscuit, through/think/there 2-3x each.",
+    "passage": "Biscuit ran through the tall grass. I think he saw a frog there. There it went, hop, hop, through the fence. Biscuit sat down to think about that frog.",
     "targetWords": ["through", "think", "there"],
     "question": {
       "prompt": "What did Biscuit run through?",
@@ -19,7 +19,7 @@
   },
   {
     "day": 5,
-    "passage": "PLACEHOLDER (Person C replaces). Biscuit and Priya, same words plus where and which.",
+    "passage": "Priya hid, and I did not know where to look. Biscuit ran through the hall, and I think he knew which way to go. There she was, under the bed with her toy dinosaur. Now it was my turn, and Priya had to think where I went. I ran through the door and hid there, as still as a rock. Which one of us will Biscuit find first?",
     "targetWords": ["through", "think", "there", "where", "which"],
     "question": {
       "prompt": "Where did Priya hide?",

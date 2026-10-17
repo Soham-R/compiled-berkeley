@@ -145,8 +145,8 @@ export default function ParentPage({ searchParams }: { searchParams: SearchParam
           <Link href="/" className="font-display text-2xl font-extrabold text-ink no-underline">
             Wren
           </Link>
-          <Link href="/read" className="text-sm font-medium text-dim hover:text-ink">
-            Back to reading
+          <Link href="/" className="text-sm font-medium text-dim hover:text-ink">
+            Back to Wren
           </Link>
         </div>
         <div className="mx-auto w-full max-w-[640px] px-5 pb-3 pt-6">

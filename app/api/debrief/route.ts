@@ -23,7 +23,8 @@ export async function GET(req: NextRequest) {
           "Atkinson Hyperlegible font with wider line-spacing reduced decoding fatigue",
           "Sound-out hints (Rung 2) de-escalated stumbles without lowering cognitive challenge",
         ],
-        child_state_summary: `Attention stayed stable for ~${prof.behavioral?.attention_window_minutes || 8} minutes before decoding fatigue set in. Frustration index peaked at ${((prof.behavioral?.frustration_index || 0.2) * 100).toFixed(0)}%.`,
+        // Parent-facing text: plain minutes, no percentages or indexes.
+        child_state_summary: `Attention stayed steady for about ${prof.behavioral?.attention_window_minutes || 8} minutes before decoding got tiring.`,
         concrete_homework_technique: `When ${prof.priors?.name || "your child"} hesitates on complex th- blends, pause silently for 4 seconds before offering a gentle narrative clue instead of jumping straight to the word.`,
         stall_patterns_broken: [
           "Pre-break stall converted into narrative suspense",
