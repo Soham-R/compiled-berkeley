@@ -102,9 +102,12 @@ background process. The profile is never "filled out," it's *continuously re-est
 which also handles the fact that a 8-year-old's obsessions rotate on a monthly basis.
 A survey is a snapshot; the session stream is a live feed.
 
-**Generalizing rule (recorded 2026-10-17):** never ask the user for information their
+**Generalizing rule (recorded 2026-10-17):** never ask the *kid* for information their
 behavior with the product will reveal. If a question feels cumbersome, that's the
-design's confession that it isn't listening hard enough.
+design's confession that it isn't listening hard enough. (Note the refinement in
+Open question #4: this rule applies to the *kid's* channel — the **parent** survey is
+a legitimate, necessary intake channel for things behavior can't show, like diagnoses
+and IEP details. The two-channel rule: parent declares, behavior verifies.)
 
 ## Non-negotiable: the science of learning is the floor, not a feature
 
@@ -254,6 +257,73 @@ profile, OFF for ADHD), line re-read detection flipping a "read aloud" offer, an
 diegetic contrast trick. It's visually demonstrable in seconds and grounds the "state
 model, not settings menu" pitch: same lesson, three presentation profiles, zero
 settings touched.
+
+---
+
+## Open question #4 — Information intake: two channels, one rule
+
+**The question.** Interest discovery (OQ #1) made it sound like surveys are banned. But
+some information genuinely can't be inferred from behavior — diagnosis, IEP/504 plan
+contents, medications, what's already failed at school, the parent's own observations
+over years. The honest design has **exactly two intake channels, with a clean rule for
+what goes in each:**
+
+1. **The Parent Channel (declared, at account creation + anytime).** The parent fills
+   out an initial profile: diagnosis/labels, IEP/504 details, sensory sensitivities,
+   what's worked and what's bombed before, daily schedule constraints. Editable at any
+   time — the parent can amend or expand it whenever they notice something ("he's been
+   bouncing off the walls since his meds changed").
+2. **The Behavioral Channel (inferred, continuous).** Everything the kid's interaction
+   with the app reveals: interest signals (OQ #1), state signals (frustration, flow,
+   fatigue — OQ #2's asymmetry problem), presentation preferences (OQ #3), pacing
+   tolerance, reward responsiveness. This is the adaptive component proper.
+
+**The rule: the Parent Channel seeds priors; the Behavioral Channel updates them.**
+Parent info is treated as a *hypothesis to verify, not ground truth* — "the IEP says
+dyslexia" sets initial presentation defaults, but the session stream confirms, refines,
+or surprises. (Kids with identical labels present completely differently; the label is
+the starting guess, the kid is the dataset.) Neither channel overrides the other:
+a parent declaring "he loves dinosaurs" doesn't win against 20 sessions of measured
+flatline on dinosaurs — but it does get logged as a discrepancy worth surfacing in the
+debrief.
+
+### The "this or that" instrument — a picture-based preference probe
+
+For the basic trait dimensions (visual vs. verbal learner, tolerance for text density,
+reward style, competitive vs. cooperative framing, sensory thresholds), the instrument
+is a **forced-choice picture game that the kid experiences as a game, not an
+assessment:**
+
+- Two pictures, one question in the story's voice: *"The door needs a key. Which guard
+  do you ask?"* — one guard explaining with a diagram, one telling a story. The choice
+  silently scores a dimension. No wrong answers, no "test" framing, and it's adaptive
+  itself: each answer narrows the next question.
+- **Frequency: as a recurring ritual, not a one-time onboarding block.** A few probes
+  are woven into the first chapters (cold-start needs them — they *are* the demo's
+  interest-seeding mystery from OQ #1, unified with trait-estimation), then they recur
+  lightly: whenever the state model's confidence on a dimension drops (traits drift as
+  kids develop), or a new arc opens. The kid never notices a "survey" — just another
+  branching moment in the story. Think of it as a persistent, invisible item-recommendation
+  system (like a streaming service's cold-start + drift-correction flow), but the items
+  are learning strategies.
+- **Why pictures matter specifically for this population:** text-based instruments
+  measure reading ability along with the trait (confounded garbage for dyslexic kids),
+  add working-memory load (garbage for ADHD), and feel like school (garbage for
+  motivation). Picture forced-choice minimizes all three — and doubles as an early
+  signal itself (which modality the kid *engages with fastest* while answering is data
+  too).
+
+### Behavioral mastery as the tailoring engine
+
+Understanding the kid's behavior is the key deliverable, and it's recorded here as the
+central commitment: the app's model of the student is a **living behavioral profile**
+that feeds every tuning decision — chunk length, modality mix, escalation ladder rung
+(OQ #2), presentation defaults (OQ #3), story world (OQ #1), and reward type. The
+profile is validated the only way that matters: **does the tailored strategy outperform
+the untailored one for this specific kid, measurably, over weeks?** Every adaptation is
+logged with its rationale, so the parent debrief shows not just *what* changed but
+*why* — and the system can A/B its own adaptations (this kid responds better to time
+pressure than we thought) rather than assuming the population average.
 
 ---
 
