@@ -132,7 +132,8 @@ async function main() {
   for (const r of R) {
     const d = r.b - r.a;
     timeline.push({ at: cursor, secs: d, label: r.label, raw: `${r.a.toFixed(1)}–${r.b.toFixed(1)}` });
-    if (r.voice) cues.push({ at: cursor + r.voiceAt, file: r.voice });
+    // SOUNDOUTS_ONLY=1: Alder speaks only during the sound-out boxes; the narrator carries the rest.
+    if (r.voice && (!process.env.SOUNDOUTS_ONLY || r.voice.includes("soundout-"))) cues.push({ at: cursor + r.voiceAt, file: r.voice });
     cursor += d;
   }
   if (hasBroll) { timeline.push({ at: cursor, secs: 5, label: "b-roll" }); cursor += 5; }

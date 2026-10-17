@@ -16,4 +16,4 @@ One person reads these eleven lines over `alder-demo-90s.mp4`, each starting at 
 | **1:12** | Edtech never did this. It couldn't hear the kid. Now it can. |
 | **1:17** | She never typed a word. The book learned her. Built for the kids one-size-fits-most already failed. |
 
-Alder's voice cues already mixed in (for reference): 0:09 read.mp3, 0:14 soundout-through.mp3, 0:23 soundout-there.mp3, 0:29 soundout-think.mp3, 0:38 read.mp3, 0:44 soundout-through.mp3, 0:47 clean.mp3, 0:55 read.mp3, 1:03 pagedone.mp3.
+Alder's voice cues already mixed in (for reference): 0:14 soundout-through.mp3, 0:23 soundout-there.mp3, 0:29 soundout-think.mp3, 0:44 soundout-through.mp3.
