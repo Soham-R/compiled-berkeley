@@ -1,0 +1,29 @@
+[
+  {
+    "day": 1,
+    "passage": "PLACEHOLDER (Person C replaces). Sam walked through the park. I think there is a duck by the pond. There it is!",
+    "targetWords": ["through", "think", "there"],
+    "question": {
+      "prompt": "Where did Sam walk?",
+      "options": ["Through the park", "To the store", "Up a hill"]
+    }
+  },
+  {
+    "day": 2,
+    "passage": "PLACEHOLDER (Person C replaces). Shorter, about Biscuit, through/think/there 2-3x each.",
+    "targetWords": ["through", "think", "there"],
+    "question": {
+      "prompt": "What did Biscuit run through?",
+      "options": ["The mud", "The door", "The grass"]
+    }
+  },
+  {
+    "day": 5,
+    "passage": "PLACEHOLDER (Person C replaces). Biscuit and Priya, same words plus where and which.",
+    "targetWords": ["through", "think", "there", "where", "which"],
+    "question": {
+      "prompt": "Where did Priya hide?",
+      "options": ["Under the bed", "Behind the tree", "In the box"]
+    }
+  }
+]

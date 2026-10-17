@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbf7ee;
+  --foreground: #1f1b16;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: #fbf7ee;
+  --font-sans: var(--font-lexend);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-lexend), system-ui, sans-serif;
+}
+
+/* Dyslexia-friendly passage type: large, airy, wide tracking. */
+.passage {
+  font-size: 30px;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  word-spacing: 0.15em;
+}
