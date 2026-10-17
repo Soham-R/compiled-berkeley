@@ -1,0 +1,80 @@
+{
+  "welcome": {
+    "text": "Hi Maya. Biscuit's waiting. Read when you're ready.",
+    "hash": "2db99cb09856",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "stumble.chunks": {
+    "text": "Let's look at the pieces.",
+    "hash": "8451b5e7f9a2",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "stumble.firstChunk": {
+    "text": "The first part says th. Now you.",
+    "hash": "c2050eef8d0a",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "stumble.model": {
+    "text": "Through. Your turn.",
+    "hash": "1abb66e2f92d",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "stumble.wait": {
+    "text": "Take your time. Biscuit's not going anywhere.",
+    "hash": "8e65fdc4931b",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "clean": {
+    "text": "That one's yours now.",
+    "hash": "7ffcffdf10a6",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "breakOffer": {
+    "text": "Want to take a Biscuit break?",
+    "hash": "ed91f44644c3",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "breakReturn": {
+    "text": "Okay. Back to the story.",
+    "hash": "de4b48a798c9",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "pageDone": {
+    "text": "That's the page. Biscuit's proud.",
+    "hash": "d76de369600c",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "nextPage": {
+    "text": "New page. Same Biscuit.",
+    "hash": "783dcb470d9a",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "soundOut.through": {
+    "text": "th... rough... through.",
+    "hash": "2eb7babe2a0b",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "soundOut.think": {
+    "text": "th... ink... think.",
+    "hash": "56cf2bfa925f",
+    "backend": "say",
+    "voiceId": "Samantha"
+  },
+  "soundOut.there": {
+    "text": "th... ere... there.",
+    "hash": "a44c186dcdb9",
+    "backend": "say",
+    "voiceId": "Samantha"
+  }
+}

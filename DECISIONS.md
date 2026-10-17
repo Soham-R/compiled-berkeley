@@ -13,3 +13,6 @@ Every cut and judgment call during the build. Newest on top.
 - **2026-10-17** The BANNED list in `lib/tutor.ts` is the one place the banned phrases appear in source, by necessity. The `grep` acceptance check excludes that file.
 - **2026-10-17** `stumble.wait` recorded as a line; whether `/read` plays it is pink's call.
 - **2026-10-17** Eval not yet run: no `ANTHROPIC_API_KEY` on this machine. Tuning rounds happen once the key is in `.env.local`.
+- **2026-10-17** Spec B built: `scripts/tts.ts` (ElevenLabs → OpenAI → macOS `say`, picked from env), `scripts/record-lines.ts`, `scripts/record-voiceover.ts`, `content/voiceover.ts`. Clips written at `lineUrl()` paths with a manifest so re-runs only regenerate edited lines.
+- **2026-10-17** Current clips are the `say` fallback (Samantha for Wren, Daniel for narrator), so `AUDIO_EXT = "m4a"`. When `ELEVENLABS_API_KEY` is in `.env.local`: run `record-lines.ts --force` and `record-voiceover.ts --force`, set `AUDIO_EXT` back to `"mp3"`, delete the `.m4a` files. Wren voice ID: r1KmysJdVYZjJCm4mL3b (not yet heard).
+- **2026-10-17** Narrator will be generated too, in a second ElevenLabs voice (`ELEVENLABS_VOICE_ID_NARRATOR`).

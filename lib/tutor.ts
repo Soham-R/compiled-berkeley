@@ -81,10 +81,13 @@ export const LINES = {
 
 export type LineKey = keyof typeof LINES;
 
+// "mp3" for ElevenLabs / OpenAI clips; "m4a" while the macOS `say` fallback is in use.
+export const AUDIO_EXT = "m4a"; // `say` fallback in use; set to "mp3" after the ElevenLabs run
+
 // Lowercase, dots become dashes: "soundOut.through" -> "/audio/soundout-through.mp3".
-// Spec B's recording script writes to the same path.
+// scripts/record-lines.ts writes to the same path.
 export function lineUrl(key: LineKey): string {
-  return `/audio/${key.toLowerCase().replace(/\./g, "-")}.mp3`;
+  return `/audio/${key.toLowerCase().replace(/\./g, "-")}.${AUDIO_EXT}`;
 }
 
 // Nothing on this list reaches the kid or the parent. Whole-word, plurals and
