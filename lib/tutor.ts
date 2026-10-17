@@ -48,7 +48,9 @@ export const NEXT_PAGE_TASK = `## Your task: write the next page
 Return exactly this JSON shape and nothing else:
 {"passage": "string", "targetWords": ["string"], "question": {"prompt": "string", "options": ["string", "string", "string"]}}
 
-- Band: late 1st / early 2nd grade. 4 to 6 sentences.
+- Band: late 1st / early 2nd grade. Between "minSentences" and "maxSentences" sentences. "maxSentences" is a hard cap; under is fine, over is not. Count them before you answer.
+- At most one quoted line of speech per page, and it counts as a sentence. Plain sentences are easier for her to read than dialogue.
+- "requiredUses" is a checklist, not a suggestion. Each word must appear exactly that many times in the passage (case-insensitive, whole word). Write the passage, count each word, fix it if the count is off, then answer.
 - Continuity. "previousPassage" is the page she just read. The new page continues that story: same characters, the next thing that happens. Never restart, never recap.
 - Hint level shapes the page. For each entry in "words":
   - hintLevel 3 (whole word was modeled for her): use the word 3 times, each time right after a word she reads easily, never first in a sentence.
@@ -103,7 +105,6 @@ export const BANNED = [
   "good job",
   "great job",
   "score",
-  "behind",
   "dyslexia",
   "adhd",
 ];

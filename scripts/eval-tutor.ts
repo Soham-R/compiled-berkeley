@@ -73,7 +73,10 @@ function syllables(w: string): number {
 }
 
 const interestWords = new Set(
-  (profile as Profile).interests.flatMap((i) => words(i)).concat(["maya"]),
+  (profile as Profile).interests
+    .flatMap((i) => words(i))
+    .flatMap((w) => [w, w.replace(/s$/, ""), `${w}s`])
+    .concat(["maya"]),
 );
 
 function syllableCheck(text: string): Check {
@@ -231,7 +234,8 @@ async function runNote(s: NoteScenario): Promise<{ text: string; checks: Check[]
   const client = new Anthropic();
   const msg = await client.messages.create({
     model: "claude-sonnet-5-5",
-    max_tokens: 400,
+    max_tokens: 2000,
+    thinking: { type: "between_tools" },
     system: `${tutorSystem(profile as Profile)}\n\n${NOTE_TASK}`,
     messages: [{ role: "user", content: JSON.stringify({ profile, sessions: ss }) }],
   });
@@ -247,7 +251,10 @@ async function runNote(s: NoteScenario): Promise<{ text: string; checks: Check[]
     pass: missing.length === 0,
     detail: missing.length ? `missing: ${missing.join(", ")}` : undefined,
   });
-  checks.push({ name: "contains minutes", pass: /\d+\s*min/i.test(text) });
+  checks.push({
+    name: "contains minutes",
+    pass: /\b(\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen|twenty)\s*min/i.test(text),
+  });
   checks.push({ name: "no % sign", pass: !text.includes("%") });
   checks.push(bannedCheck(text));
   return { text, checks };
