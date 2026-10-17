@@ -154,8 +154,6 @@ body.kid-mode::before { background: var(--k-sky); }
 .pcard { background: #fff; border-radius: 24px; padding: 24px; border: 2px solid var(--edge); display: grid; gap: 8px; align-content: start; }
 .pcard h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; }
 .pcard p { color: var(--dim); }
-.quote-band { margin-top: 28px; padding: 22px 26px; border-radius: 24px; background: #fff; border: 2px dashed var(--edge); color: var(--dim); }
-.quote-band b { color: var(--text); }
 
 /* Form wizard */
 .form-shell { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr); gap: 48px; align-items: start; }
@@ -366,9 +364,19 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 .k-stroke-steps span { min-width: 44px; height: 44px; padding: 0 12px; border-radius: 14px; display: grid; place-items: center; font: 800 1.1rem var(--font-kid); background: var(--k-sky); color: var(--k-soft); border: 3px solid var(--k-line); }
 .k-stroke-steps span.now { background: #f3eeff; border-color: var(--k-write); color: var(--k-write-d); }
 .k-stroke-steps span.done { background: #e3f8ec; border-color: var(--k-brain); color: var(--k-brain-d); }
+.k-sline { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; min-height: 72px; margin-top: 22px; padding: 12px 16px; border-radius: 20px; border-bottom: 4px solid var(--k-line); background: #fffdf5; }
+.k-sword { font: 700 2rem var(--font-letter); color: var(--k-ink); padding: 0 4px; }
+.k-sword.cap { color: var(--k-brain-d); }
+.k-sword.mark { padding: 0; margin-left: -6px; color: var(--k-read-d); }
+.k-wtile { cursor: pointer; border: 4px solid var(--k-line); background: #fff; border-radius: 18px; padding: 10px 18px; font: 700 1.7rem var(--font-letter); color: var(--k-ink); box-shadow: 0 5px 0 var(--k-line); }
+.k-wtile.glow { border-color: var(--k-brain); background: #e3f8ec; }
+.k-wtile.wrong { border-color: var(--k-read); animation: wiggle .4s; }
+.k-wtile[disabled] { cursor: default; }
+.k-capbtn { font: inherit; color: var(--k-write-d); background: #f3eeff; border: 3px dashed var(--k-write); border-radius: 10px; padding: 0 6px; cursor: pointer; animation: glow 1.4s ease-in-out infinite; }
 .k-spell { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
 .k-spell span { width: 72px; height: 84px; border-radius: 18px; border: 4px dashed var(--k-line); display: grid; place-items: center; font: 700 2.8rem var(--font-letter); color: var(--k-ink); background: #fff; }
 .k-spell span.on { border-style: solid; border-color: var(--k-brain); background: #e3f8ec; }
+.k-board + .k-trace-tip { margin-top: 16px; }
 .k-trace-tip { font-family: var(--font-kid); font-weight: 800; font-size: 1.25rem; min-height: 1.6em; }
 .trace-box { position: relative; width: min(340px, 78vw); aspect-ratio: 1; max-width: 100%; border-radius: 30px; background: #f6f2ff; border: 4px dashed #d6c8ff; touch-action: none; }
 .trace-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 26px; }
@@ -397,6 +405,17 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 .k-tile.soft-miss { opacity: 0.55; }
 .k-tile[disabled] { cursor: default; }
 .k-tile.letter { font-family: var(--font-letter); font-weight: 700; color: var(--k-ink); }
+.k-look { margin-top: 14px; background: #fffdf5; border: 2px solid #f1e6c8; border-radius: 18px; padding: 10px 16px; }
+.k-look summary { cursor: pointer; font-family: var(--font-kid); font-weight: 800; font-size: 1.1rem; color: var(--k-soft); }
+.k-look p { margin-top: 8px; font-family: var(--font-letter); font-size: 1.3rem; line-height: 1.9; }
+.k-look mark { background: #ffe58a; border-radius: 6px; padding: 0 3px; }
+.k-answer { display: block; width: 100%; max-width: 560px; text-align: left; cursor: pointer; border: 4px solid var(--k-line); background: #fff; border-radius: 22px; padding: 14px 20px; font: 700 1.35rem var(--font-letter); color: var(--k-ink); box-shadow: 0 5px 0 var(--k-line); }
+.k-answer:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--k-line); }
+.k-answer.right { border-color: var(--k-brain); background: #e3f8ec; }
+.k-answer.glow { border-color: var(--k-brain); box-shadow: 0 5px 0 var(--k-brain-d), 0 0 0 8px rgba(34, 180, 107, 0.18); }
+.k-answer.soft-miss { opacity: 0.5; }
+.k-board:has(.k-answer) { flex-direction: column; }
+.k-board:has(.k-answer) .k-btn { align-self: flex-start; }
 .k-tile.wordtile { width: auto; min-width: 112px; padding: 0 18px; font-size: 2.2rem; }
 .k-word-show { font-family: var(--font-letter); font-weight: 700; font-size: clamp(3.4rem, 9vw, 5rem); letter-spacing: 0.06em; color: var(--k-ink); margin-top: 8px; }
 .k-level-tag { display: inline-block; font-family: var(--font-kid); font-weight: 800; font-size: 0.95rem; padding: 4px 12px; border-radius: 999px; background: var(--k-sky); color: var(--k-soft); }
@@ -603,7 +622,6 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         <div class="pcard"><h3>Real mastery</h3><p>A skill counts as learned only when your child gets it right on different days.</p></div>
         <div class="pcard"><h3>Private by design</h3><p>Wren doesn't diagnose. Your child's data is yours to export or delete.</p></div>
       </div>
-      <p class="quote-band">Inspired by <b>A Young Lady's Illustrated Primer</b> from Neal Stephenson's <i>The Diamond Age</i>: a book that adapts to one child and grows with them for years.</p>
     </div>
   </section>
 
@@ -962,7 +980,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         </button>
         <button type="button" class="k-card write" data-go="writing">
           <div class="k-art"><span class="big" style="color:var(--k-write)">${esc((P.name[0] || 'A').toUpperCase())}</span></div>
-          <h2>Writing</h2><span class="sub">${+P.age >= 6 ? 'Spell words' : +P.age === 5 ? 'Letters and spelling' : S.preWriting ? 'Trace lines and shapes' : 'Trace your letters'}</span>${meter('writing')}<span class="k-play">Play ▶</span>
+          <h2>Writing</h2><span class="sub">${+P.age >= 5 ? 'Spelling and sentences' : S.preWriting ? 'Trace lines and shapes' : 'Trace your letters'}</span>${meter('writing')}<span class="k-play">Play ▶</span>
         </button>
       </section>
       <button type="button" class="k-card story" data-go="story">
@@ -988,7 +1006,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 
   /* ---------- activity shell ---------- */
   let cur = null, round = 0;
-  const roundLen = () => cur === 'reading' ? S.readingRoundLen : S.roundLen;
+  const roundLen = () => cur !== 'reading' ? S.roundLen : LEVELS[readingState().level - 1].kind === 'passage' ? 5 : S.readingRoundLen;
   function openActivity(subj) {
     clearTimers(); if (stopStory) stopStory(); cur = subj; round = 0;
     $('kview').innerHTML = `
@@ -1061,6 +1079,51 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   // Codes are shown to parents on every question so teachers can check the mapping.
   const SENTENCES = ['The cat sat on a mat.', 'A big dog can run.', 'The sun is hot.', 'I see a red bus.', 'The pig is in the mud.', 'Dad has a hat.', 'The fox got in the box.', 'A hen sat on a log.', 'Mom can hop and run.', 'I can see the bug.', 'The van is red.', 'We sit in the sun.', 'The dog can dig.', 'Sam has a cup.'];
   const G1_SENTENCES = ['The ship sails on the sea.', 'Jake made a cake for Mom.', 'We play in the rain.', 'The frog can jump and swim.', 'I will ride my bike home.', 'The duck went to the pond.', 'They were looking for the boat.', 'Chad has a red shell.', 'The dog jumped in the mud.', 'We had lunch by the tree.', 'She said the kite is up high.', 'Who wants to read with me?'];
+  // Short stories with key-detail questions. ev = the sentence that holds the answer, shown when a child looks back.
+  const P_G1 = [
+    { title: 'Max and the Kite', text: "Max had a red kite. He ran to the top of the hill. The wind was strong. The kite went up, up, up! Then it got stuck in a tree. Max's dad got it down with a long stick.", qs: [
+      { q: 'What color was the kite?', a: 'Red', o: ['Blue', 'Green'], ev: 'Max had a red kite.' },
+      { q: 'Where did Max run?', a: 'To the top of the hill', o: ['To the lake', 'To school'], ev: 'He ran to the top of the hill.' },
+      { q: 'Where did the kite get stuck?', a: 'In a tree', o: ['On the roof', 'In the mud'], ev: 'Then it got stuck in a tree.' },
+      { q: 'How did Dad get the kite down?', a: 'With a long stick', o: ['With a ladder', 'He climbed up'], ev: "Max's dad got it down with a long stick." } ] },
+    { title: 'The Lost Shell', text: 'Sam and Jen went to the beach. Jen found a pink shell in the sand. She put it in her pail. When they got home, the shell was gone! Sam found it in the car under a seat.', qs: [
+      { q: 'Where did Sam and Jen go?', a: 'To the beach', o: ['To the zoo', 'To the park'], ev: 'Sam and Jen went to the beach.' },
+      { q: 'What color was the shell?', a: 'Pink', o: ['White', 'Black'], ev: 'Jen found a pink shell in the sand.' },
+      { q: 'Where did Jen put the shell?', a: 'In her pail', o: ['In her hat', 'In the sea'], ev: 'She put it in her pail.' },
+      { q: 'Where was the shell at the end?', a: 'Under a seat in the car', o: ['In the pail', 'At the beach'], ev: 'Sam found it in the car under a seat.' } ] },
+    { title: 'Frog Pond', text: 'A green frog sat on a log. A bug flew past. The frog stuck out its long tongue. Snap! It got the bug. Then the frog jumped into the pond with a splash.', qs: [
+      { q: 'Where did the frog sit?', a: 'On a log', o: ['On a rock', 'In a boat'], ev: 'A green frog sat on a log.' },
+      { q: 'What flew past?', a: 'A bug', o: ['A bird', 'A leaf'], ev: 'A bug flew past.' },
+      { q: 'How did the frog get the bug?', a: 'With its long tongue', o: ['With its feet', 'With a net'], ev: 'The frog stuck out its long tongue.' },
+      { q: 'What did the frog do at the end?', a: 'Jumped into the pond', o: ['Went to sleep', 'Sang a song'], ev: 'Then the frog jumped into the pond with a splash.' } ] },
+    { title: 'Rainy Day', text: 'It was raining, so Mia could not play outside. She was sad. Then she had an idea. She made a fort with her blankets. She read books in the fort all day. It was the best rainy day!', qs: [
+      { q: 'Why could Mia not play outside?', a: 'It was raining', o: ['It was dark', 'She was sick'], ev: 'It was raining, so Mia could not play outside.' },
+      { q: 'What did Mia make?', a: 'A fort', o: ['A cake', 'A kite'], ev: 'She made a fort with her blankets.' },
+      { q: 'What did Mia do in the fort?', a: 'She read books', o: ['She took a nap', 'She ate lunch'], ev: 'She read books in the fort all day.' },
+      { q: 'How did Mia feel at the end?', a: 'Happy', o: ['Sad', 'Angry'], ev: 'It was the best rainy day!' } ] }
+  ];
+  const P_G2 = [
+    { title: 'The Class Garden', text: "Ms. Lee's class planted a garden in the spring. Each child planted a different seed. Leo planted beans, and Ava planted sunflowers. They watered the garden every morning. By summer, Ava's sunflowers were taller than the teacher! Leo's beans climbed all the way up the fence.", qs: [
+      { q: 'When did the class plant the garden?', a: 'In the spring', o: ['In the winter', 'At night'], ev: "Ms. Lee's class planted a garden in the spring." },
+      { q: 'What did Ava plant?', a: 'Sunflowers', o: ['Beans', 'Carrots'], ev: 'Leo planted beans, and Ava planted sunflowers.' },
+      { q: 'How often did they water the garden?', a: 'Every morning', o: ['Once a week', 'Never'], ev: 'They watered the garden every morning.' },
+      { q: 'How tall did the sunflowers grow?', a: 'Taller than the teacher', o: ['As tall as a cat', 'Up to the fence'], ev: "By summer, Ava's sunflowers were taller than the teacher!" } ] },
+    { title: 'The Train Trip', text: "Grandpa took Noah on a train to the city. Noah sat by the window and counted the cows in the fields. When the train went into a dark tunnel, Noah held Grandpa's hand. Soon they came out into the bright sun. In the city, they ate lunch at a busy station.", qs: [
+      { q: 'Who went on the trip with Noah?', a: 'Grandpa', o: ['His sister', 'His teacher'], ev: 'Grandpa took Noah on a train to the city.' },
+      { q: 'What did Noah count?', a: 'Cows', o: ['Cars', 'Birds'], ev: 'Noah sat by the window and counted the cows in the fields.' },
+      { q: "Why did Noah hold Grandpa's hand?", a: 'The tunnel was dark', o: ['He was cold', 'He was hungry'], ev: "When the train went into a dark tunnel, Noah held Grandpa's hand." },
+      { q: 'Where did they eat lunch?', a: 'At a busy station', o: ['On the train', 'At home'], ev: 'In the city, they ate lunch at a busy station.' } ] },
+    { title: 'Busy Bees', text: 'Bees live together in a hive. Some bees fly out to find flowers. They drink the sweet nectar inside each flower. Back at the hive, the bees turn the nectar into honey. The honey is food for the bees in the winter.', qs: [
+      { q: 'Where do bees live?', a: 'In a hive', o: ['In a pond', 'In a cave'], ev: 'Bees live together in a hive.' },
+      { q: 'What do bees drink from flowers?', a: 'Nectar', o: ['Water', 'Milk'], ev: 'They drink the sweet nectar inside each flower.' },
+      { q: 'What do bees make from nectar?', a: 'Honey', o: ['Wax', 'Seeds'], ev: 'Back at the hive, the bees turn the nectar into honey.' },
+      { q: 'Why do bees make honey?', a: 'It is food for winter', o: ['To build the hive', 'To stay cool'], ev: 'The honey is food for the bees in the winter.' } ] },
+    { title: 'The New Puppy', text: 'Lily wanted a puppy for a long time. On her birthday, her mom gave her a box with holes in the lid. Lily heard a tiny bark. She opened the box, and a brown puppy jumped out and licked her face. Lily named him Biscuit because he was the color of a cookie.', qs: [
+      { q: 'When did Lily get the puppy?', a: 'On her birthday', o: ['At school', 'In the summer'], ev: 'On her birthday, her mom gave her a box with holes in the lid.' },
+      { q: 'What clue told Lily a puppy was in the box?', a: 'She heard a tiny bark', o: ['She saw a tail', 'The box was big'], ev: 'Lily heard a tiny bark.' },
+      { q: 'What did the puppy do when it jumped out?', a: 'Licked her face', o: ['Ran away', 'Went to sleep'], ev: 'She opened the box, and a brown puppy jumped out and licked her face.' },
+      { q: 'Why did Lily name the puppy Biscuit?', a: 'He was the color of a cookie', o: ['He liked biscuits', 'Her mom picked it'], ev: 'Lily named him Biscuit because he was the color of a cookie.' } ] }
+  ];
   const LEVELS = [
     { n: 1, kind: 'sound', name: 'Animal and thing sounds', short: 'Match the sounds', std: 'CA Preschool Foundations: listening for sounds' },
     { n: 2, kind: 'first', name: 'First sounds', short: 'First sounds', std: 'CA Preschool Foundations: beginning sounds · RF.K.2d' },
@@ -1075,7 +1138,9 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     { n: 11, kind: 'word', focus: 'team', name: 'Vowel teams', short: 'Vowel teams', std: 'RF.1.3c', words: ['rain', 'boat', 'feet', 'see', 'play', 'tree', 'road', 'mail', 'seed', 'coat', 'day', 'beach', 'team', 'soap'] },
     { n: 12, kind: 'word', focus: 'sight', name: 'Grade 1 sight words', short: 'Sight words 1', std: 'RF.1.3g', words: ['said', 'was', 'where', 'what', 'come', 'could', 'would', 'there', 'they', 'have', 'from', 'some', 'one', 'two', 'who', 'were'] },
     { n: 13, kind: 'word', focus: 'ending', name: 'Endings -s, -ed, -ing', short: 'Word endings', std: 'RF.1.3f', words: ['jumps', 'jumped', 'jumping', 'helps', 'helped', 'looking', 'played', 'plays', 'fishing', 'wished', 'runs', 'sits'] },
-    { n: 14, kind: 'sentence', name: 'Reading grade 1 sentences', short: 'Grade 1 sentences', std: 'RF.1.4', items: G1_SENTENCES }
+    { n: 14, kind: 'sentence', name: 'Reading grade 1 sentences', short: 'Grade 1 sentences', std: 'RF.1.4', items: G1_SENTENCES },
+    { n: 15, kind: 'passage', name: 'Grade 1 stories with questions', short: 'Stories + questions', std: 'RF.1.4 · RL.1.1', items: P_G1, need: 4 },
+    { n: 16, kind: 'passage', name: 'Grade 2 stories with questions', short: 'Grade 2 stories', std: 'RF.2.4 · RL.2.1 · RI.2.1', items: P_G2, need: 4 }
   ];
   const LV = item => LEVELS[item.lvl - 1];
   // Where a child starts: by age, then adjusted by the warm-up games.
@@ -1085,8 +1150,9 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     if (age === 4) return bm && bm.letters ? 4 : 2;
     if (age === 5) return bm && !bm.letters ? 3 : 4;
     if (age === 6) return bm && !bm.letters ? 4 : 8;
-    return bm && !bm.letters ? 5 : 11;
+    return bm && !bm.letters ? 11 : 16; // age 7: grade 2 stories with questions
   }
+  const needFor = lvl => LEVELS[lvl - 1].need || NEED_FIRST_TRY;
   // A level is learned when the child gets 12 right first try, 8 of the last 10 right, on at least 2 different days.
   // Set MIN_DAYS to 1 for a single-sitting demo.
   const NEED_FIRST_TRY = 12, NEED_ACCURACY = 0.8, MIN_DAYS = 2;
@@ -1098,6 +1164,7 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     4: Object.entries(STARTS).flatMap(([L, ws]) => ws.map(w => ({ id: `l-${w}`, lvl: 4, kind: 'letter', w, L })))
   };
   LEVELS.filter(l => l.kind === 'word').forEach(l => { BANK[l.n] = l.words.map(w => ({ id: `w${l.n}-${w}`, lvl: l.n, kind: 'word', w })); });
+  LEVELS.filter(l => l.kind === 'passage').forEach(l => { BANK[l.n] = l.items.map((ps, i) => ({ id: `p${l.n}-${i}`, lvl: l.n, kind: 'passage', w: ps.title, ps })); });
   LEVELS.filter(l => l.kind === 'sentence').forEach(l => { BANK[l.n] = l.items.map((t, i) => ({ id: `t${l.n}-${i}`, lvl: l.n, kind: 'sentence', w: t, text: t })); });
   // Split a word into the sound units a teacher would point to: digraphs and vowel teams stay together.
   const UNITS = ['igh', 'sh', 'ch', 'th', 'wh', 'ck', 'ng', 'ai', 'ay', 'oa', 'ee', 'ea', 'oo'];
@@ -1181,6 +1248,59 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     $('kSkip').addEventListener('click', () => { const sp = explain(); say(`${sp} Your turn.`, () => later(listen, 300), true); });
     say('Read this word.', () => later(listen, 300), true);
   }
+  // Story levels: read a short story out loud (or silently without a mic), then answer 4 questions about it.
+  // A wrong answer opens the story with the sentence that holds the answer highlighted (RL.1.1 / RL.2.1: answer from the text).
+  function readPassage(item) {
+    const ps = item.ps, lv = LV(item);
+    let missed = 0;
+    const story = `<details class="k-look" id="kLook"><summary>Look back at the story</summary><p id="kLookText">${esc(ps.text)}</p></details>`;
+    runStory({ text: ps.text, targets: [] }, {
+      title: `Read "${ps.title}" out loud`, why: `${lv.name} · ${lv.std}`, spoken: 'Read the story out loud.',
+      onDone: practice => {
+        if (practice.length) storyLog.practice = [...new Set([...practice, ...storyLog.practice])].slice(0, 6);
+        $('kState').textContent = 'Now some questions about the story.';
+        win(() => ask(0));
+      }
+    });
+    $('kStage').insertAdjacentHTML('afterbegin', `<span hidden id="kBoard" data-item="${item.id}"></span>`);
+    function ask(i, narrowed) {
+      const q = ps.qs[i];
+      const opts = narrowed || shuffle([q.a, ...q.o]);
+      stage(q.q, `Question ${i + 1} of ${ps.qs.length} · ${lv.std}`, story, q.q, !!narrowed);
+      $('kBoard').dataset.item = `${item.id}-q${i}`;
+      opts.forEach(o => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'k-answer'; b.textContent = o;
+        if (narrowed && narrowed.only && o !== q.a) b.disabled = true;
+        if (narrowed && narrowed.only && o === q.a) b.classList.add('glow');
+        b.addEventListener('click', () => {
+          if (b.disabled) return;
+          if (o === q.a) {
+            $('kBoard').querySelectorAll('button').forEach(x => { x.disabled = true; }); b.classList.add('right');
+            feedback(narrowed ? `Yes! ${q.a}.` : `${praise()} ${q.a}.`, 'good');
+            if (i < ps.qs.length - 1) win(() => ask(i + 1));
+            else { const leveled = markReading(item, missed === 0, true, false); if (leveled) feedback(`${praise()} You reached ${LEVELS[readingState().level - 1].name}!`, 'good'); win(reading); }
+            return;
+          }
+          missed++; moodEvent('wrong'); b.classList.add('soft-miss'); b.disabled = true;
+          // Look back: open the story and highlight the sentence with the answer.
+          const look = $('kLook'); look.open = true;
+          $('kLookText').innerHTML = esc(ps.text).replace(esc(q.ev), `<mark>${esc(q.ev)}</mark>`);
+          feedback('Look back at the story. The yellow sentence has the answer.', 'soft');
+          say(q.ev, null, false);
+          const tryBtn = document.createElement('button'); tryBtn.type = 'button'; tryBtn.className = 'k-btn go'; tryBtn.textContent = narrowed ? 'Tap the glowing answer' : 'Try again';
+          tryBtn.addEventListener('click', () => {
+            const two = shuffle([q.a, pick(q.o)]);
+            if (narrowed) two.only = true;
+            ask(i, two);
+            const lk = $('kLook'); lk.open = true; $('kLookText').innerHTML = esc(ps.text).replace(esc(q.ev), `<mark>${esc(q.ev)}</mark>`);
+          });
+          $('kBoard').appendChild(tryBtn);
+          $('kBoard').querySelectorAll('.k-answer').forEach(x => { x.disabled = true; });
+        });
+        $('kBoard').appendChild(b);
+      });
+    }
+  }
   // No microphone: fall back to matching the word to its picture.
   function readingFallback(item, ctx) { playReading(item, choicesFor(item, S.dyslexia ? 2 : 3), { firstTry: true, isReview: ctx.isReview, lv: LV(item) }); }
   // Level 6: read a whole sentence aloud; stumbles get sounded out live, like Story time.
@@ -1214,7 +1334,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   function readingProgress() {
     const st = readingState(), done = st.firstTry[st.level] || 0;
     const days = ((st.days || {})[st.level] || []).length;
-    return { level: st.level, done: Math.min(done, NEED_FIRST_TRY), need: NEED_FIRST_TRY, waitingForDay: done >= NEED_FIRST_TRY && days < MIN_DAYS, name: LEVELS[st.level - 1].name, short: LEVELS[st.level - 1].short };
+    const need = needFor(st.level);
+    return { level: st.level, done: Math.min(done, need), need, waitingForDay: done >= need && days < MIN_DAYS, name: LEVELS[st.level - 1].name, short: LEVELS[st.level - 1].short };
   }
   function nextReadingItem(isReview) {
     const st = readingState();
@@ -1292,11 +1413,12 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const st = readingState();
     st.count = st.count || 0;
     // One question per round checks back on the level before, with a question the child hasn't seen there.
-    const isReview = st.level > 1 && round === Math.floor(roundLen() / 2) && !readingRoundReview;
+    const isReview = st.level > 1 && LEVELS[st.level - 1].kind !== 'passage' && round === Math.floor(roundLen() / 2) && !readingRoundReview;
     if (round === 0) readingRoundReview = false;
     if (isReview) readingRoundReview = true;
     const item = nextReadingItem(isReview);
     const lv = LV(item);
+    if (item.kind === 'passage') return readPassage(item);
     if (item.kind === 'sentence') return readSentence(item, { isReview });
     if (item.kind === 'word' && speakingOn()) return readWordAloud(item, { isReview });
     const nChoices = (S.gentle && wrongStreak >= 2) || (S.dyslexia && (item.kind === 'letter' || item.kind === 'word')) ? 2 : 3;
@@ -1377,7 +1499,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const st = readingState(), recent = st.recent[st.level] || [];
     const acc = recent.length ? recent.filter(Boolean).length / recent.length : 0;
     const days = ((st.days || {})[st.level] || []).length;
-    if (st.level < LEVELS.length && (st.firstTry[st.level] || 0) >= NEED_FIRST_TRY && recent.length >= 10 && acc >= NEED_ACCURACY && days >= MIN_DAYS) {
+    const need = needFor(st.level);
+    if (st.level < LEVELS.length && (st.firstTry[st.level] || 0) >= need && recent.length >= Math.min(10, need) && acc >= NEED_ACCURACY && days >= MIN_DAYS) {
       st.level++; remember('level_up', { subject: 'reading', level: st.level });
       return true;
     }
@@ -1566,6 +1689,8 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     return order.find(x => !st.done.includes(x)) || pick(order);
   }
 
+  // The sound each letter makes in a short word, for spelling hints (said, not shown).
+  const PHONEME = { a: 'ah', b: 'buh', c: 'kuh', d: 'duh', e: 'eh', f: 'fff', g: 'guh', h: 'huh', i: 'ih', j: 'juh', k: 'kuh', l: 'lll', m: 'mmm', n: 'nnn', o: 'aw', p: 'puh', q: 'kwuh', r: 'rrr', s: 'sss', t: 'tuh', u: 'uh', v: 'vvv', w: 'wuh', x: 'ks', y: 'yuh', z: 'zzz' };
   // Spelling from sound: L.K.2d (age 5, short words) and L.1.2e (ages 6-7, blends and digraphs too).
   function spelling() {
     const st = writingState(), age = +P.age;
@@ -1575,7 +1700,9 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
     const letters = w.split(''), extra = shuffle('abcdefghijklmnoprstuw'.split('').filter(c => !letters.includes(c) && !(S.dyslexia && /[bdpq]/.test(c)))).slice(0, S.dyslexia ? 2 : 3);
     stage('Spell the word', `Spelling · ${age >= 6 ? 'L.1.2e' : 'L.K.2d'}`, `<div class="k-isfor"><span class="pic">${PIC[w] || '🔊'}</span><span>Listen, then spell it</span></div>`, `Spell ${w}.`);
     $('kBoard').outerHTML = `<div class="k-spell" id="kSlots">${letters.map(() => '<span></span>').join('')}</div><div class="k-board" id="kBoard"></div><p class="k-trace-tip" id="tTip"></p>`;
-    let at = 0, misses = 0;
+    // Hints grow one step per miss on the same letter, and never show the letters themselves:
+    // 1) hear the word and the next sound, 2) two wrong tiles fade away, 3) only then the right tile glows (and the word comes back later).
+    let at = 0, misses = 0, helped = false;
     shuffle([...letters, ...extra]).forEach(c => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'k-tile letter'; b.textContent = c; b.setAttribute('aria-label', c);
       b.addEventListener('click', () => {
@@ -1585,26 +1712,138 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
           b.disabled = true; b.classList.add('soft-miss'); at++; misses = 0; $('tTip').textContent = '';
           $('kBoard').querySelectorAll('.glow').forEach(x => x.classList.remove('glow'));
           if (at === letters.length) {
-            st.spelled = [...new Set([...st.spelled, w])]; store.set('wren-writing-' + (P.childId || P.name), st);
-            remember('answer', { subject: 'writing', correct: true, item: `spell-${w}` });
-            feedback(`${praise()} You spelled ${w}!`, 'good'); win(writing);
+            // A word only counts as spelled if the answer was never shown; otherwise it comes back for practice.
+            if (!helped) st.spelled = [...new Set([...st.spelled, w])];
+            store.set('wren-writing-' + (P.childId || P.name), st);
+            remember('answer', { subject: 'writing', correct: !helped, item: `spell-${w}` });
+            feedback(helped ? `You finished ${w}! We'll practice it again soon.` : `${praise()} You spelled ${w}!`, helped ? 'soft' : 'good'); win(writing);
           }
           return;
         }
         misses++; b.classList.add('wrong'); later(() => b.classList.remove('wrong'), 450);
         if (misses === 1) moodEvent('wrong');
-        $('tTip').textContent = misses === 1 ? `Say it slowly: ${letters.join('... ')}. What comes after "${letters.slice(0, at).join('') || '…'}"?` : `Look for the glowing letter.`;
-        if (misses === 1) say(`${letters.join('... ')}. ${w}.`);
-        if (misses >= 2) $('kBoard').querySelectorAll('button').forEach(x => { if (!x.disabled && x.textContent === letters[at]) x.classList.add('glow'); });
+        const next = PHONEME[letters[at]] || letters[at];
+        if (misses === 1) {
+          $('tTip').textContent = 'Listen for the next sound. Tap 🔊 to hear the word again.';
+          say(`${w}. The next sound is ${next}.`, null, true);
+        } else if (misses === 2) {
+          // fade two tiles the word doesn't need at all, so there are fewer to choose from
+          const spare = [...$('kBoard').querySelectorAll('button')].filter(x => !x.disabled && !letters.slice(at).includes(x.textContent)).slice(0, 2);
+          spare.forEach(x => { x.disabled = true; x.classList.add('soft-miss'); });
+          $('tTip').textContent = 'I took some letters away. Listen again and try one more time.';
+          say(`${next}.`, null, true);
+        } else {
+          helped = true;
+          $('kBoard').querySelectorAll('button').forEach(x => { if (!x.disabled && x.textContent === letters[at]) x.classList.add('glow'); });
+          $('tTip').textContent = `This one makes the "${next}" sound.`;
+        }
       });
       $('kBoard').appendChild(b);
     });
   }
 
+  // Missing middle sound in a short word, e.g. c _ t (RF.K.2d · L.K.2d). Hints are by sound, never the letter.
+  function missingVowel() {
+    const st = writingState(); st.vowels = st.vowels || [];
+    const bank = CVC.filter(w => PIC[w]);
+    const w = bank.find(x => !st.vowels.includes(x)) || pick(bank), v = w[1];
+    const choices = S.dyslexia ? shuffle([v, ...shuffle('aeiou'.split('').filter(c => c !== v)).slice(0, 2)]) : shuffle('aeiou'.split(''));
+    stage('What sound is in the middle?', 'Middle sounds · RF.K.2d · L.K.2d', `<div class="k-isfor"><span class="pic">${PIC[w]}</span><span>${esc(w[0])} _ ${esc(w[2])}</span></div>`, `${w}. What sound is in the middle?`);
+    $('kBoard').outerHTML = `<div class="k-spell" id="kSlots"><span class="on">${esc(w[0])}</span><span id="kMid"></span><span class="on">${esc(w[2])}</span></div><div class="k-board" id="kBoard"></div><p class="k-trace-tip" id="tTip"></p>`;
+    let misses = 0, helped = false;
+    choices.forEach(c => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'k-tile letter'; b.textContent = c; b.setAttribute('aria-label', c);
+      b.addEventListener('click', () => {
+        if (b.disabled) return;
+        if (c === v) {
+          $('kMid').textContent = v; $('kMid').classList.add('on'); $('kBoard').querySelectorAll('button').forEach(x => { x.disabled = true; });
+          if (!helped) st.vowels = [...new Set([...st.vowels, w])];
+          store.set('wren-writing-' + (P.childId || P.name), st);
+          remember('answer', { subject: 'writing', correct: !helped, item: `vowel-${w}` });
+          feedback(helped ? `${w}! We'll practice this one again.` : `${praise()} ${w}!`, helped ? 'soft' : 'good'); win(writing); return;
+        }
+        misses++; b.disabled = true; b.classList.add('soft-miss'); if (misses === 1) moodEvent('wrong');
+        if (misses === 1) { $('tTip').textContent = 'Say the word slowly and listen to the middle.'; say(`${w}. The middle sound is ${PHONEME[v]}.`, null, true); }
+        else if (misses === 2) { $('tTip').textContent = 'Listen again. Which letter makes that sound?'; say(`${PHONEME[v]}.`, null, true); }
+        else { helped = true; $('kBoard').querySelectorAll('button').forEach(x => { if (x.textContent === v) x.classList.add('glow'); }); $('tTip').textContent = `This one says "${PHONEME[v]}".`; }
+      });
+      $('kBoard').appendChild(b);
+    });
+  }
+
+  // Build a sentence: put the words in order, give it a capital, choose the end mark.
+  // Kindergarten: L.K.1f · L.K.2a · L.K.2b. Grade 1: L.1.1j · L.1.2b.
+  const NAMES_CAP = ['I', 'Sam', 'Mom', 'Dad', 'Jake', 'Chad', 'Max', 'Mia', 'Jen'];
+  function buildSentence() {
+    const st = writingState(); st.sentences = st.sentences || [];
+    const bank = +P.age >= 6 ? G1_SENTENCES : SENTENCES;
+    const text = bank.find(x => !st.sentences.includes(x)) || pick(bank);
+    const mark = text.slice(-1), words = text.slice(0, -1).split(' ');
+    // Tiles show every word as it would look mid-sentence, so the child has to add the capital themselves.
+    const shown = words.map((x, i) => i === 0 && !NAMES_CAP.includes(x) ? x.toLowerCase() : x);
+    const std = +P.age >= 6 ? 'L.1.1j · L.1.2b' : 'L.K.1f · L.K.2a · L.K.2b';
+    stage('Build the sentence', `Writing sentences · ${std}`, '', `Build the sentence. ${text}`);
+    $('kBoard').outerHTML = `<div class="k-sline" id="kLine"></div><div class="k-board" id="kBoard"></div><p class="k-trace-tip" id="tTip"></p>`;
+    let at = 0, misses = 0, helped = false;
+    const placed = [];
+    shuffle(shown.map((x, i) => ({ x, i }))).forEach(({ x, i }) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'k-wtile'; b.textContent = x;
+      b.addEventListener('click', () => {
+        if (b.disabled) return;
+        if (x === shown[at]) {
+          b.disabled = true; b.classList.add('soft-miss'); misses = 0; $('tTip').textContent = '';
+          $('kBoard').querySelectorAll('.glow').forEach(g => g.classList.remove('glow'));
+          const chip = document.createElement('span'); chip.className = 'k-sword'; chip.textContent = x; $('kLine').appendChild(chip); placed.push(chip);
+          at++; if (at === shown.length) capitalStep();
+          return;
+        }
+        misses++; b.classList.add('wrong'); later(() => b.classList.remove('wrong'), 450); if (misses === 1) moodEvent('wrong');
+        if (misses === 1) { $('tTip').textContent = 'Listen to the sentence again. Which word comes next?'; say(text, null, true); }
+        else if (misses === 2) { $('tTip').textContent = `So far: "${shown.slice(0, at).join(' ') || '…'}". What comes next?`; say(`${shown.slice(0, at).join(' ')}...`, null, true); }
+        else { helped = true; $('kBoard').querySelectorAll('.k-wtile:not([disabled])').forEach(t => { if (t.textContent === shown[at]) t.classList.add('glow'); }); $('tTip').textContent = 'Look for the glowing word.'; }
+      });
+      $('kBoard').appendChild(b);
+    });
+    function capitalStep() {
+      const first = placed[0];
+      if (first.textContent[0] === first.textContent[0].toUpperCase()) { $('tTip').textContent = `"${first.textContent}" already starts with a capital letter.`; return markStep(); }
+      $('tTip').textContent = 'Sentences start with a capital letter. Tap the first letter to make it a capital.';
+      say('Sentences start with a capital letter. Tap the first letter.', null, true);
+      const word = first.textContent;
+      first.innerHTML = `<button type="button" class="k-capbtn" id="kCap">${esc(word[0])}</button>${esc(word.slice(1))}`;
+      $('kBoard').querySelectorAll('.k-wtile').forEach(t => { t.disabled = true; });
+      $('kCap').addEventListener('click', () => { first.textContent = word[0].toUpperCase() + word.slice(1); first.classList.add('cap'); markStep(); });
+    }
+    function markStep() {
+      $('kBoard').innerHTML = '';
+      $('tTip').textContent = $('tTip').textContent.startsWith('"') ? $('tTip').textContent + ' How does it end?' : 'How does the sentence end?';
+      let tries = 0;
+      ['.', '?', '!'].forEach(m => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'k-tile letter'; b.textContent = m; b.setAttribute('aria-label', m === '.' ? 'period' : m === '?' ? 'question mark' : 'exclamation mark');
+        b.addEventListener('click', () => {
+          if (b.disabled) return;
+          if (m === mark) {
+            const end = document.createElement('span'); end.className = 'k-sword mark'; end.textContent = m; $('kLine').appendChild(end);
+            $('kBoard').querySelectorAll('button').forEach(x => { x.disabled = true; });
+            if (!helped && tries === 0) st.sentences = [...new Set([...st.sentences, text])];
+            store.set('wren-writing-' + (P.childId || P.name), st);
+            remember('answer', { subject: 'writing', correct: !helped && tries === 0, item: `sentence-${text}` });
+            feedback(`${praise()} You built a sentence!`, 'good'); $('tTip').textContent = ''; win(writing); return;
+          }
+          tries++; b.disabled = true; b.classList.add('soft-miss'); moodEvent('wrong');
+          const why = mark === '?' ? 'This sentence asks something, so it ends with a question mark.' : 'This sentence tells something, so it ends with a period.';
+          $('tTip').textContent = why; say(why, null, true);
+          if (tries >= 2) $('kBoard').querySelectorAll('button').forEach(x => { if (x.textContent === mark) x.classList.add('glow'); });
+        });
+        $('kBoard').appendChild(b);
+      });
+    }
+  }
+
   function writing() {
-    // Ages 6-7 spell from sound. Age 5 alternates tracing and spelling. Ages 3-4 trace.
+    // Ages 3-4 trace. Age 5 rotates spelling, middle sounds and sentences (kindergarten writing). Ages 6-7 rotate spelling and sentences.
     const age = +P.age;
-    if (age >= 6 || (age === 5 && round % 2 === 1)) return spelling();
+    if (age >= 5) { const kinds = age === 5 ? [spelling, missingVowel, buildSentence] : [spelling, buildSentence]; return kinds[round % kinds.length](); }
     const item = nextWritingItem(), isShape = !!SHAPE_NAME[item];
     const strokes = STROKES[item], isFor = IS_FOR[item];
     const title = isShape ? `Let's draw ${SHAPE_NAME[item]}!` : `Let's write ${item}!`;
