@@ -108,6 +108,24 @@ body.kid-mode::before { background: var(--k-sky); }
 .sec-head h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.9rem, 3.8vw, 2.8rem); line-height: 1.08; text-wrap: balance; }
 .sec-head p { color: var(--dim); font-size: 1.05rem; }
 
+/* Why-we-ask science button + modal */
+.sci-cta-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 30px; }
+.sci-btn { border-color: #c9d8ea; }
+.sci-hint { color: var(--dim); font-size: 0.95rem; }
+.sci-framing { max-width: 720px; margin: 26px auto 0; text-align: center; color: var(--dim); font-size: 1.05rem; line-height: 1.55; border-top: 2px dashed var(--edge); padding-top: 22px; }
+.sci-overlay { position: fixed; inset: 0; background: rgba(23, 37, 62, 0.45); backdrop-filter: blur(3px); z-index: 90; display: grid; place-items: center; padding: 24px; }
+.sci-modal { position: relative; background: #fff; border-radius: 28px; border: 2px solid var(--edge); box-shadow: 0 30px 60px -30px rgba(34, 49, 77, 0.5); max-width: 760px; width: 100%; max-height: min(86vh, 820px); display: flex; flex-direction: column; padding: 30px 32px 22px; overflow: hidden; }
+.sci-modal h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.7rem; margin-top: 10px; }
+.sci-x { position: absolute; top: 16px; right: 18px; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--edge); background: #fff; cursor: pointer; font: 700 1.3rem var(--font-body); color: var(--dim); }
+.sci-x:hover { border-color: #c9d8ea; color: var(--text); }
+.sci-scroll { overflow-y: auto; margin-top: 14px; padding-right: 6px; display: grid; gap: 14px; }
+.sci-item { border: 2px solid var(--edge); border-radius: 18px; padding: 16px 18px; display: grid; gap: 8px; }
+.sci-item h4 { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sci-tag { font: 600 0.72rem var(--font-body); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+.sci-item p { color: var(--dim); font-size: 0.96rem; line-height: 1.5; }
+.sci-item p b { color: var(--text); }
+.sci-foot { margin-top: 14px; font-size: 0.85rem; color: var(--dim); border-top: 2px dashed var(--edge); padding-top: 12px; }
+
 .subjects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .subj { border-radius: 26px; padding: 22px; background: #fff; border: 2px solid var(--edge); display: grid; gap: 8px; align-content: start; }
 .subj .ic { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; font: 800 1.7rem var(--font-letter); color: #fff; }
@@ -479,6 +497,9 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
   .hero-grid, .form-shell, .try { grid-template-columns: minmax(0, 1fr); }
   .subjects, .adapt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .steps, .parents { grid-template-columns: minmax(0, 1fr); }
+  .sci-cta-row { flex-direction: column; align-items: center; }
+  .sci-modal { padding: 22px 18px 16px; }
+  .sci-item h4 { font-size: 1rem; }
   .form-side { position: static; }
   .hero-art { max-width: 520px; }
   .nav-links a:not(.cta) { display: none; }
@@ -582,6 +603,60 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
         <div class="step"><span class="n" style="background:var(--k-read)">1</span><h3>Tell us about your child</h3><p>Age, favorite things, needs, what upsets them, and your goals.</p></div>
         <div class="step"><span class="n" style="background:var(--k-math)">2</span><h3>Three warm-up games</h3><p>Alder finds where your child is, so lessons start at the right level.</p></div>
         <div class="step"><span class="n" style="background:var(--k-brain)">3</span><h3>They learn, Alder adapts</h3><p>It slows down, explains gently, takes breaks, and remembers what worked.</p></div>
+      </div>
+      <div class="sci-cta-row">
+        <button type="button" class="ghost sci-btn" id="sciBtn" aria-haspopup="dialog">
+          <span aria-hidden="true" style="font-size:1.2rem">🔬</span>
+          Why we ask what we ask
+        </button>
+        <p class="sci-hint">The science behind every survey field — in plain language.</p>
+      </div>
+      <div class="sci-framing">"Every answer here sets Alder's starting point. Then Alder watches how your child actually learns — and adjusts from there. We ask about traits, triggers, senses, and interests because those shape how attention, memory, and motivation work — the three things every lesson runs on."</div>
+    </div>
+
+    <div class="sci-overlay" id="sciOverlay" hidden>
+      <div class="sci-modal" role="dialog" aria-modal="true" aria-labelledby="sciTitle">
+        <button type="button" class="sci-x" id="sciX" aria-label="Close">×</button>
+        <span class="eyebrow">The science behind the survey</span>
+        <h3 id="sciTitle">Why we ask what we ask</h3>
+        <div class="sci-scroll">
+          <div class="sci-item">
+            <h4>Diagnoses &amp; traits <span class="sci-tag" style="background:#ffe4de;color:var(--k-read-d)">ADHD · Autism · Speech · Dyslexia · Motor</span></h4>
+            <p><b>The science:</b> Different neurotypes have different optimal entry points for effort — working memory limits, sensory thresholds, and frustration tolerance vary enormously between kids with the same age and grade.</p>
+            <p><b>Why it helps:</b> It's the starting guess. The label seeds defaults — shorter rounds for ADHD traits, no countdowns for time-pressure triggers, tap-to-answer for speech delay — that Alder then verifies and refines against actual behavior. Kids with identical labels present completely differently: the diagnosis is the prior, not the answer.</p>
+          </div>
+          <div class="sci-item">
+            <h4>Communication mode <span class="sci-tag" style="background:#e2e8ff;color:var(--k-math-d)">Non-verbal → sentences</span></h4>
+            <p><b>The science:</b> Response modality must match expressive ability or you measure the wrong thing. Asking a non-verbal kid to answer in words tests their speech, not their thinking.</p>
+            <p><b>Why it helps:</b> Deciding whether answers come by tap or by voice keeps the learning task about learning, not about the medium.</p>
+          </div>
+          <div class="sci-item">
+            <h4>Triggers <span class="sci-tag" style="background:#fff1d1;color:#8a6a10">Loud sounds · Faces · Time pressure · Changes · Getting it wrong</span></h4>
+            <p><b>The science:</b> Anxiety and sensory overload consume the same working-memory budget that learning needs. A kid spending that budget on "that noise hurts" has none left for decoding.</p>
+            <p><b>Why it helps:</b> Knowing the triggers lets Alder remove barriers <i>before</i> they cost attention — soft voice, no timers, no faces staring — so distress never gets to eat the lesson.</p>
+          </div>
+          <div class="sci-item">
+            <h4>Sensory profile <span class="sci-tag" style="background:#dff3e9;color:var(--k-brain-d)">Auditory &amp; visual responsiveness</span></h4>
+            <p><b>The science:</b> Some kids are overwhelmed by busy screens; others are under-stimulated by calm ones and need bold, high-contrast input to engage at all.</p>
+            <p><b>Why it helps:</b> Same lesson, different presentation — calmer palette vs. bolder visuals. This changes how information <i>arrives</i>, never what the child must do with it.</p>
+          </div>
+          <div class="sci-item">
+            <h4>Interests <span class="sci-tag" style="background:#fff1d1;color:#8a6a10">Free text</span></h4>
+            <p><b>The science:</b> Attention is interest-gated — motivation and memory consolidate better when material is embedded in what a child already cares about.</p>
+            <p><b>Why it helps:</b> The story world and lesson objects get built from what they love — trains, bugs, water — so engagement is recruited instead of demanded.</p>
+          </div>
+          <div class="sci-item">
+            <h4>Your goals <span class="sci-tag" style="background:#e2e8ff;color:var(--k-math-d)">2-step instructions · Transitions · Focus</span></h4>
+            <p><b>The science:</b> These map to executive-function skills — the skills behind all learning — and they respond to graduated practice: start at the current limit, nudge one step up.</p>
+            <p><b>Why it helps:</b> It tells Alder where to aim the difficulty dial and what "progress" means for your family.</p>
+          </div>
+          <div class="sci-item">
+            <h4>Report cadence <span class="sci-tag" style="background:#dff3e9;color:var(--k-brain-d)">Weekly or daily</span></h4>
+            <p><b>The science:</b> Parent follow-through improves consistency at home; spaced, plain-language feedback beats dense reports nobody reads.</p>
+            <p><b>Why it helps:</b> You get actionable, frequency-matched summaries — one concrete technique per report, not a wall of data.</p>
+          </div>
+        </div>
+        <p class="sci-foot">Alder is a learning tool. It doesn't diagnose or give medical advice — it adapts to what you share, and to what it observes.</p>
       </div>
     </div>
   </section>
@@ -744,6 +819,15 @@ footer.site-foot { border-top: 2px solid var(--edge); padding-block: 28px 48px; 
 
   // The parents' site is static; these stay as no-ops for the kid-world code that calls them.
   const startBg = () => {}, stopBg = () => {}, sizeBg = () => {}, frame = () => {};
+
+  /* ================= Why-we-ask modal ================= */
+  const sciOverlay = $('sciOverlay');
+  const openSci = () => { sciOverlay.hidden = false; document.body.style.overflow = 'hidden'; $('sciX').focus(); };
+  const closeSci = () => { sciOverlay.hidden = true; document.body.style.overflow = ''; };
+  $('sciBtn').addEventListener('click', openSci);
+  $('sciX').addEventListener('click', closeSci);
+  sciOverlay.addEventListener('click', e => { if (e.target === sciOverlay) closeSci(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sciOverlay.hidden) closeSci(); });
 
   /* ================= Engine demo ================= */
   const THEMES = { trains: ['🚂', 'trains'], bugs: ['🐞', 'ladybugs'], space: ['🚀', 'rockets'], dinos: ['🦕', 'dinosaurs'] };
