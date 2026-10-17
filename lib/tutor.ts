@@ -84,7 +84,7 @@ export const LINES = {
 export type LineKey = keyof typeof LINES;
 
 // "mp3" for ElevenLabs / OpenAI clips; "m4a" while the macOS `say` fallback is in use.
-export const AUDIO_EXT = "m4a"; // `say` fallback in use; set to "mp3" after the ElevenLabs run
+export const AUDIO_EXT = "mp3"; // ElevenLabs clips. "m4a" only while the macOS `say` fallback is in use.
 
 // Lowercase, dots become dashes: "soundOut.through" -> "/audio/soundout-through.mp3".
 // scripts/record-lines.ts writes to the same path.

@@ -38,7 +38,9 @@ export function nextPageUserMessage(body: NextPageRequest): string {
     words,
     previousPassage,
     requiredUses: requiredUses(body),
-    maxSentences: flagged ? 4 : 6,
+    // Ask for one fewer than the real cap: the model overshoots by one or two,
+    // and the eval checks against the real cap (4 flagged / 6 otherwise).
+    maxSentences: flagged ? 3 : 5,
     minSentences: flagged ? 3 : 4,
   });
 }
@@ -77,10 +79,14 @@ export async function generateNextPage(body: NextPageRequest): Promise<NextPageR
       return { ...fallback, source: "fallback", reason: `banned: ${hit}` };
     }
 
-    // Counts land within ±1 of the checklist; a word that is missing entirely
-    // defeats the point of the page, so that one case falls back.
+    // Counts land within ±1 of the checklist; a stumbled word that is missing
+    // entirely defeats the point of the page, so that one case falls back.
+    // Clean words are nice-to-have and don't trigger it.
+    const stumbled = new Set(
+      (body.words ?? []).filter((w) => w.status === "stumbled").map((w) => w.word).concat(body.stumbledWords),
+    );
     const missing = requiredUses(body).find(
-      (r) => !new RegExp(`\\b${r.word}\\b`, "i").test(page.passage),
+      (r) => stumbled.has(r.word) && !new RegExp(`\\b${r.word}\\b`, "i").test(page.passage),
     );
     if (missing) {
       console.warn(`next-page: "${missing.word}" never used, using fallback`);
