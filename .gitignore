@@ -31,3 +31,10 @@ yarn-error.log*
 *.mov
 *.mp4
 !public/**/*.mp4
+
+# python
+backend/.venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
