@@ -1,0 +1,718 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Wren Learning Tutor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one long scroll. Intro sections, then the parent form, then the child's own learning space appears below. */
+:root {
+  --bg: #fbfbfd;
+  --surface: #ffffff;
+  --sunken: #f2f3f8;
+  --ink: #1a1d2b;
+  --muted: #646a80;
+  --line: #e3e5ee;
+  --accent: #3b5bdb;
+  --accent-soft: #e8edff;
+  --peach: #ff9f7a;
+  --peach-soft: #fff0e9;
+  --good: #2f9e6b;
+  --on-accent: #ffffff;
+  --font-display: "Lexend", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", sans-serif;
+  --r: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12141c; --surface: #1a1d28; --sunken: #222634; --ink: #eceef6; --muted: #a2a8bd; --line: #2d3242;
+    --accent: #8ea5ff; --accent-soft: #252d4d; --peach: #ffb497; --peach-soft: #3a2a25; --good: #5fcf9b; --on-accent: #12141c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12141c; --surface: #1a1d28; --sunken: #222634; --ink: #eceef6; --muted: #a2a8bd; --line: #2d3242;
+  --accent: #8ea5ff; --accent-soft: #252d4d; --peach: #ffb497; --peach-soft: #3a2a25; --good: #5fcf9b; --on-accent: #12141c; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -0.015em; }
+h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); font-weight: 600; }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 600; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none;
+  font: 600 1rem var(--font-display); border-radius: 12px; padding: 13px 22px;
+  border: 1.5px solid var(--accent); background: var(--accent); color: var(--on-accent); transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px -8px var(--accent); }
+.btn.quiet { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.quiet:hover { box-shadow: none; border-color: var(--muted); }
+
+/* Nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.logo { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 9px; }
+.logo-mark { width: 26px; height: 26px; border-radius: 8px 8px 8px 2px; background: var(--accent); position: relative; }
+.logo-mark::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--peach); right: 5px; top: 5px; }
+.nav-links { display: flex; gap: 22px; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+.nav-links a:hover { color: var(--ink); }
+.nav-links .btn { padding: 9px 16px; font-size: 0.92rem; }
+
+section { scroll-margin-top: 70px; }
+
+/* Hero */
+.hero { padding-block: 80px 70px; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+.hero p.lead { margin-top: 20px; font-size: 1.15rem; color: var(--muted); max-width: 52ch; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero small { display: block; margin-top: 16px; color: var(--muted); font-size: 0.88rem; }
+
+.preview { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 22px; box-shadow: 0 30px 60px -40px rgba(30, 40, 90, .35); min-width: 0; }
+.preview-top { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--peach-soft); display: grid; place-items: center; font-size: 1.3rem; flex: none; }
+.preview-top b { font-family: var(--font-display); font-weight: 600; display: block; }
+.preview-top span { font-size: 0.85rem; color: var(--muted); }
+.subj-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+.subj-mini { border-radius: 14px; padding: 14px 12px; background: var(--sunken); }
+.subj-mini .em { font-size: 1.6rem; }
+.subj-mini b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; margin-top: 6px; }
+.subj-mini .bar { height: 6px; border-radius: 9px; background: var(--line); margin-top: 8px; overflow: hidden; }
+.subj-mini .bar i { display: block; height: 100%; background: var(--accent); border-radius: 9px; }
+.preview-note { margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: var(--accent-soft); font-size: 0.9rem; }
+
+/* Generic sections */
+.block { padding-block: 72px; }
+.block.alt { background: var(--surface); border-block: 1px solid var(--line); }
+.head { max-width: 640px; display: grid; gap: 12px; margin-bottom: 40px; }
+.head p { color: var(--muted); font-size: 1.05rem; }
+.cols { display: grid; gap: 20px; }
+.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.step { display: grid; gap: 10px; }
+.step .num { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--accent); color: var(--accent); display: grid; place-items: center; font-family: var(--font-display); font-weight: 600; }
+.step p { color: var(--muted); }
+.subject { border: 1px solid var(--line); border-radius: var(--r); padding: 24px; background: var(--bg); display: grid; gap: 10px; align-content: start; }
+.subject .icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; }
+.i-math { background: var(--accent-soft); color: var(--accent); }
+.i-read { background: var(--peach-soft); color: var(--peach); }
+.i-mem { background: var(--sunken); color: var(--ink); }
+.subject p { color: var(--muted); }
+.subject ul { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.94rem; }
+.adapt-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.adapt-item { padding: 20px 20px 20px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 16px; }
+.adapt-item:nth-child(odd) { padding-right: 28px; }
+.adapt-item b { font-family: var(--font-display); font-weight: 600; }
+.adapt-item span { color: var(--muted); }
+.parent-card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; display: grid; gap: 8px; align-content: start; }
+.parent-card p { color: var(--muted); }
+
+/* Form */
+.form-wrap { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: 48px; align-items: start; }
+.form-side { position: sticky; top: 100px; display: grid; gap: 14px; }
+.form-side p { color: var(--muted); }
+.form-side ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.95rem; }
+form.card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 30px; display: grid; gap: 26px; }
+.q { display: grid; gap: 10px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.q legend, .q > label { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; padding: 0; }
+.q .hint { font-size: 0.88rem; color: var(--muted); margin-top: -4px; }
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 0.9rem; font-weight: 700; }
+input[type="text"], input[type="number"], select {
+  width: 100%; font: 1rem var(--font-body); color: var(--ink); background: var(--bg);
+  border: 1.5px solid var(--line); border-radius: 11px; padding: 11px 12px;
+}
+input:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chip label { display: inline-block; cursor: pointer; user-select: none; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--line); font-size: 0.94rem; background: var(--bg); transition: border-color .15s, background .15s; }
+.chip label:hover { border-color: var(--muted); }
+.chip input:checked + label { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); font-weight: 700; }
+.chip input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 2px; }
+.form-foot { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 22px; }
+.form-foot small { color: var(--muted); max-width: 40ch; }
+.err { color: #c2410c; font-size: 0.9rem; }
+
+/* Learning space */
+#learn { padding-block: 72px 90px; background: var(--surface); border-top: 1px solid var(--line); }
+.learn-head { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: end; margin-bottom: 26px; }
+.learn-head h2 span { color: var(--accent); }
+.tailor { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tailor span { font-size: 0.86rem; padding: 6px 12px; border-radius: 999px; background: var(--sunken); color: var(--ink); }
+.subj-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.subj-tab { font: 600 1rem var(--font-display); border-radius: 12px; padding: 12px 20px; cursor: pointer; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); display: flex; align-items: center; gap: 10px; }
+.subj-tab .stars { font-family: var(--font-body); font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+.subj-tab[aria-selected="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.stage { background: var(--bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px; position: relative; min-height: 420px; }
+.game-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; }
+.prompt { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3vw, 2rem); margin-top: 18px; }
+.why { font-size: 0.88rem; color: var(--muted); }
+.icon-btn { font: 600 0.9rem var(--font-display); border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+.board { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+.tile {
+  width: 96px; height: 96px; border-radius: 20px; border: 2px solid var(--line); background: var(--surface);
+  font-size: 2.8rem; display: grid; place-items: center; cursor: pointer; transition: transform .12s, border-color .12s, background .12s; position: relative;
+}
+.tile:hover { transform: translateY(-2px); }
+.tile.picked { border-color: var(--accent); background: var(--accent-soft); }
+.tile.picked::after { content: attr(data-n); position: absolute; top: -9px; right: -9px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--surface); font: 600 0.85rem var(--font-display); display: grid; place-items: center; }
+.tile.wrong { border-color: var(--peach); background: var(--peach-soft); }
+.tile.big-letter { font-family: var(--font-display); font-weight: 700; }
+.bold-visuals .tile { border-width: 3.5px; border-color: var(--ink); font-size: 3.2rem; width: 108px; height: 108px; }
+.bold-visuals .tile.picked { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.calm-visuals .tile { transition: none; }
+.calm-visuals .tile:hover { transform: none; }
+.feedback { margin-top: 22px; min-height: 2em; font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; }
+.feedback.good { color: var(--good); }
+.feedback.soft { color: var(--muted); }
+.seq { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.seq-card { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); font-family: var(--font-display); font-weight: 500; }
+.seq-card .e { font-size: 1.5rem; }
+.seq-card.now { border-color: var(--accent); background: var(--accent-soft); animation: glow 1.6s ease-in-out infinite; }
+.seq-card.done { opacity: 0.45; text-decoration: line-through; }
+@keyframes glow { 50% { box-shadow: 0 0 0 6px var(--accent-soft); } }
+.big-letter-show { font-family: var(--font-display); font-weight: 700; font-size: 5rem; line-height: 1; margin-top: 10px; color: var(--accent); }
+
+.transition { position: absolute; inset: 0; border-radius: 24px; background: var(--bg); display: grid; place-content: center; text-align: center; gap: 14px; padding: 24px; }
+.transition p { color: var(--muted); }
+.tbar { width: min(320px, 70vw); height: 10px; border-radius: 9px; background: var(--line); overflow: hidden; margin: 0 auto; }
+.tbar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 9px; }
+.learn-foot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+.mini-stat { border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; background: var(--bg); }
+.mini-stat b { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; font-variant-numeric: tabular-nums; display: block; }
+.mini-stat span { color: var(--muted); font-size: 0.9rem; }
+
+footer { padding-block: 34px 50px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
+
+@media (max-width: 880px) {
+  .hero-grid, .form-wrap { grid-template-columns: minmax(0, 1fr); }
+  .c3 { grid-template-columns: minmax(0, 1fr); }
+  .adapt-list { grid-template-columns: minmax(0, 1fr); }
+  .adapt-item:nth-child(odd) { padding-right: 0; }
+  .form-side { position: static; }
+  .nav-links a:not(.btn) { display: none; }
+  .hero { padding-block: 44px 50px; }
+}
+@media (max-width: 560px) {
+  .c2, .row, .learn-foot { grid-template-columns: minmax(0, 1fr); }
+  .adapt-item { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  form.card { padding: 20px; }
+  .stage { padding: 18px; }
+  .tile { width: 76px; height: 76px; font-size: 2.2rem; }
+  .bold-visuals .tile { width: 84px; height: 84px; font-size: 2.5rem; }
+}
+</style>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>Wren</a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#subjects">What they learn</a>
+      <a href="#parents">For parents</a>
+      <a class="btn" href="#start">Get started</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">For children ages 3 and up</p>
+        <h1 style="margin-top:14px">A patient, personal tutor for every young learner.</h1>
+        <p class="lead">Wren teaches early math, reading and memory skills one-on-one. It learns how your child thinks, what they love and what overwhelms them, then shapes every lesson around them.</p>
+        <div class="actions">
+          <a class="btn" href="#start">Build your child's plan</a>
+          <a class="btn quiet" href="#how">See how it works</a>
+        </div>
+        <small>Designed for neurodivergent and neurotypical children. A supplement to teachers and therapists, never a replacement.</small>
+      </div>
+      <div class="preview" aria-label="Example of a child's learning space">
+        <div class="preview-top">
+          <div class="avatar" aria-hidden="true">🚂</div>
+          <div><b>Maya's learning space</b><span>Example · age 3 · loves trains and bugs</span></div>
+        </div>
+        <div class="subj-row">
+          <div class="subj-mini"><div class="em" aria-hidden="true">🔢</div><b>Math</b><div class="bar"><i style="width:60%"></i></div></div>
+          <div class="subj-mini"><div class="em" aria-hidden="true">🔤</div><b>Reading</b><div class="bar"><i style="width:40%"></i></div></div>
+          <div class="subj-mini"><div class="em" aria-hidden="true">🧩</div><b>Memory</b><div class="bar"><i style="width:75%"></i></div></div>
+        </div>
+        <p class="preview-note">Today Maya counts train cars, matches the "bzzz" sound to a bee, and practices two-step instructions with picture cards.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="block alt" id="how">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">How it works</p>
+        <h2>From a five-minute form to a tutor that knows your child</h2>
+      </div>
+      <div class="cols c3">
+        <div class="step"><span class="num">1</span><h3>Tell us about your child</h3><p>Share their age, interests, any diagnoses or traits, what upsets them, and your goals.</p></div>
+        <div class="step"><span class="num">2</span><h3>Get a tailored learning space</h3><p>Lessons use your child's favorite things, sounds and visuals they're comfortable with, and a pace that fits.</p></div>
+        <div class="step"><span class="num">3</span><h3>It grows with them</h3><p>Wren tracks what your child has mastered, notices when they're getting tired, and moves on when they're ready.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBJECTS -->
+  <section class="block" id="subjects">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">What they learn</p>
+        <h2>Three foundations for school and life</h2>
+        <p>Every child works toward the same early skills. What changes is the way in.</p>
+      </div>
+      <div class="cols c3">
+        <div class="subject"><div class="icon i-math">1 2 3</div><h3>Math</h3><p>Number sense through play.</p>
+          <ul><li>Sorting by color and shape</li><li>Counting with one touch per object</li><li>Seeing small amounts at a glance</li></ul></div>
+        <div class="subject"><div class="icon i-read">Aa</div><h3>Reading</h3><p>Sounds first, then letters.</p>
+          <ul><li>Matching everyday sounds</li><li>Rhymes and first sounds</li><li>Letter sounds and blending</li></ul></div>
+        <div class="subject"><div class="icon i-mem">✦</div><h3>Memory &amp; focus</h3><p>The skills behind all learning.</p>
+          <ul><li>Following 1, 2, then 3-step instructions</li><li>Remembering sequences</li><li>Moving calmly between activities</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADAPTS -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Made for how they learn</p>
+        <h2>The same lesson, shaped for your child</h2>
+      </div>
+      <div class="adapt-list">
+        <div class="adapt-item"><b>Sensitive to sound</b><span>A slow, low voice, no sudden sound effects, and volume that fades in.</span></div>
+        <div class="adapt-item"><b>ADHD traits</b><span>Short, quick rounds built around their favorite topic, with frequent small wins.</span></div>
+        <div class="adapt-item"><b>Speech delay</b><span>Answer by tapping. Sound play like "bzzz" and "choo choo" before letter shapes.</span></div>
+        <div class="adapt-item"><b>Hard transitions</b><span>A visual bar and a short heads-up before switching activities.</span></div>
+        <div class="adapt-item"><b>Dislikes being timed</b><span>No countdowns. Wren waits, and quietly simplifies if your child is stuck.</span></div>
+        <div class="adapt-item"><b>Seeks bold visuals</b><span>High-contrast outlines and larger, clearer objects.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARENTS -->
+  <section class="block" id="parents">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">For parents</p>
+        <h2>Always know how your child is doing</h2>
+      </div>
+      <div class="cols c3">
+        <div class="parent-card"><h3>Daily or weekly reports</h3><p>A short summary in plain language, progress on your goals, and one thing to try at home.</p></div>
+        <div class="parent-card"><h3>Real mastery tracking</h3><p>A skill counts as learned only when your child gets it right on different days, not just once.</p></div>
+        <div class="parent-card"><h3>Private by design</h3><p>Wren doesn't diagnose. Your child's data stays yours, and you can delete it at any time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="block alt" id="start">
+    <div class="wrap form-wrap">
+      <div class="form-side">
+        <p class="label">Get started</p>
+        <h2>Tell us about your child</h2>
+        <p>Takes about five minutes. Every answer changes how Wren teaches. Skip anything you're unsure about.</p>
+        <ul><li>No diagnosis needed</li><li>You can change answers later</li></ul>
+      </div>
+
+      <form class="card" id="parentForm" novalidate>
+        <div class="row">
+          <div class="field"><label for="childName">Child's first name</label><input type="text" id="childName" placeholder="e.g. Maya" autocomplete="off"></div>
+          <div class="field"><label for="childAge">Age</label>
+            <select id="childAge"><option value="3">3 years</option><option value="4">4 years</option><option value="5">5 years</option><option value="6">6 years</option></select></div>
+        </div>
+
+        <fieldset class="q"><legend>Does your child have any of these?</legend>
+          <p class="hint">Diagnosed or suspected. Leave blank if none.</p>
+          <div class="chips" data-group="dx"></div></fieldset>
+
+        <div class="q"><label for="comm">How does your child usually communicate?</label>
+          <select id="comm">
+            <option value="Non_Verbal">No words yet (gestures, sounds, pointing)</option>
+            <option value="Single_Words">Single words</option>
+            <option value="Verbal_Phrases" selected>Short phrases</option>
+            <option value="Sentences">Full sentences</option>
+          </select></div>
+
+        <fieldset class="q"><legend>What tends to upset them?</legend>
+          <div class="chips" data-group="triggers"></div></fieldset>
+
+        <div class="q"><label for="interests">What do they love right now?</label>
+          <p class="hint">We'll build lessons around these. Separate with commas.</p>
+          <input type="text" id="interests" placeholder="e.g. trains, bugs, water" autocomplete="off"></div>
+
+        <fieldset class="q"><legend>Senses</legend>
+          <div class="row">
+            <div class="field"><label for="aud">Sounds</label>
+              <select id="aud"><option value="Typical">No strong reaction</option><option value="Over_Responsive">Easily bothered by sound</option><option value="Under_Responsive">Loves loud sounds</option></select></div>
+            <div class="field"><label for="vis">Visuals</label>
+              <select id="vis"><option value="Typical">No strong reaction</option><option value="Over_Responsive">Overwhelmed by busy screens</option><option value="Under_Responsive">Drawn to bold color and motion</option></select></div>
+          </div></fieldset>
+
+        <fieldset class="q"><legend>What would you most like help with?</legend>
+          <div class="chips" data-group="goals"></div></fieldset>
+
+        <div class="q"><label for="cadence">How often should we send you a progress report?</label>
+          <select id="cadence"><option value="weekly">Every week</option><option value="daily">Every day</option></select></div>
+
+        <div class="form-foot">
+          <small>By continuing you agree that Wren is a learning tool and does not give medical advice.</small>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="button" class="btn quiet" id="fillExample">Use an example</button>
+            <button type="submit" class="btn">Create my child's plan</button>
+          </div>
+        </div>
+        <p class="err" id="formErr" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- LEARNING SPACE -->
+  <section id="learn" hidden aria-live="polite">
+    <div class="wrap">
+      <div class="learn-head">
+        <div>
+          <p class="label">Learning space</p>
+          <h2 style="margin-top:8px" id="learnTitle"></h2>
+          <div class="tailor" id="tailor"></div>
+        </div>
+        <button type="button" class="btn quiet" id="editProfile">Edit profile</button>
+      </div>
+
+      <div class="subj-tabs" role="tablist" aria-label="Subjects">
+        <button class="subj-tab" role="tab" data-subj="math" aria-selected="true">Math <span class="stars" data-stars="math"></span></button>
+        <button class="subj-tab" role="tab" data-subj="reading" aria-selected="false">Reading <span class="stars" data-stars="reading"></span></button>
+        <button class="subj-tab" role="tab" data-subj="memory" aria-selected="false">Memory <span class="stars" data-stars="memory"></span></button>
+      </div>
+
+      <div class="stage" id="stage" role="tabpanel"></div>
+
+      <div class="learn-foot">
+        <div class="mini-stat"><b id="sCorrect">0</b><span>correct answers today</span></div>
+        <div class="mini-stat"><b id="sLevel">1 step</b><span>instruction level in Memory</span></div>
+        <div class="mini-stat"><b id="sReport">Weekly</b><span>parent report schedule</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Wren is a working name for an early-stage concept. The example child is illustrative.</div>
+</footer>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+
+  // ---------- Form options ----------
+  const OPTS = {
+    dx: [['ADHD_traits', 'ADHD traits'], ['Autism', 'Autism'], ['Speech_Delay', 'Speech delay'], ['Sensory_Seeking', 'Sensory seeking'], ['Dyslexia_Risk', 'Early reading difficulty'], ['Motor_Delay', 'Motor delay']],
+    triggers: [['Sudden_Loud_Sounds', 'Sudden loud sounds'], ['Direct_Eye_Contact_Visuals', 'Faces looking at them'], ['Time_Pressure', 'Being timed'], ['Unexpected_Changes', 'Unexpected changes'], ['Getting_It_Wrong', 'Getting it wrong']],
+    goals: [['Two_Step', 'Follow 2-step instructions'], ['Transitions', 'Calmer transitions'], ['Letter_Sounds', 'Learn letter sounds'], ['Counting', 'Counting'], ['Focus', 'Longer focus']]
+  };
+  Object.entries(OPTS).forEach(([g, list]) => {
+    const box = document.querySelector(`[data-group="${g}"]`);
+    box.innerHTML = list.map(([v, l]) => `<div class="chip"><input type="checkbox" id="${g}-${v}" value="${v}"><label for="${g}-${v}">${l}</label></div>`).join('');
+  });
+  const checked = g => [...document.querySelectorAll(`[data-group="${g}"] input:checked`)].map(i => i.value);
+  const setChecked = (g, vals) => document.querySelectorAll(`[data-group="${g}"] input`).forEach(i => { i.checked = vals.includes(i.value); });
+
+  const EXAMPLE = {
+    name: 'Maya', age: '3', primary_diagnoses: ['ADHD_traits', 'Sensory_Seeking', 'Speech_Delay'], communication_mode: 'Verbal_Phrases',
+    known_triggers: ['Sudden_Loud_Sounds', 'Direct_Eye_Contact_Visuals', 'Time_Pressure'], hyperfixations: ['Trains', 'Bugs', 'Water'],
+    sensory_profile: { auditory: 'Over_Responsive', visual: 'Under_Responsive' }, parent_goals: ['Two_Step', 'Transitions'], report_cadence: 'weekly'
+  };
+  function fill(p) {
+    $('childName').value = p.name; $('childAge').value = p.age; $('comm').value = p.communication_mode;
+    $('interests').value = p.hyperfixations.join(', '); $('aud').value = p.sensory_profile.auditory; $('vis').value = p.sensory_profile.visual;
+    $('cadence').value = p.report_cadence;
+    setChecked('dx', p.primary_diagnoses); setChecked('triggers', p.known_triggers); setChecked('goals', p.parent_goals);
+  }
+  function readForm() {
+    return {
+      name: $('childName').value.trim(), age: $('childAge').value,
+      primary_diagnoses: checked('dx'), communication_mode: $('comm').value, known_triggers: checked('triggers'),
+      hyperfixations: $('interests').value.split(',').map(s => s.trim()).filter(Boolean),
+      sensory_profile: { auditory: $('aud').value, visual: $('vis').value },
+      parent_goals: checked('goals'), report_cadence: $('cadence').value
+    };
+  }
+  $('fillExample').addEventListener('click', () => fill(EXAMPLE));
+
+  // ---------- Tailoring ----------
+  const THEME_EMOJI = [
+    [/train/, '🚂'], [/bug|insect|beetle|ladybug/, '🐞'], [/bee/, '🐝'], [/water|ocean|sea|rain/, '💧'], [/dino/, '🦕'],
+    [/car|truck|vehicle/, '🚗'], [/space|rocket|planet/, '🚀'], [/dog|pupp/, '🐶'], [/cat|kitt/, '🐱'], [/fish/, '🐟'],
+    [/plane|airplane/, '✈️'], [/horse/, '🐴'], [/flower/, '🌸'], [/ball|soccer|football/, '⚽'], [/music|song/, '🎵'], [/animal/, '🐘']
+  ];
+  const FILLER = ['⭐', '🍎', '🎈', '🌙'];
+  function themeEmoji(list) {
+    const out = [];
+    list.forEach(t => { const m = THEME_EMOJI.find(([re]) => re.test(t.toLowerCase())); if (m && !out.includes(m[1])) out.push(m[1]); });
+    FILLER.forEach(f => { if (out.length < 4) out.push(f); });
+    return out;
+  }
+
+  let P = null, S = null;
+  function settingsFor(p) {
+    const dx = x => p.primary_diagnoses.includes(x), tr = x => p.known_triggers.includes(x), goal = x => p.parent_goals.includes(x);
+    const age = +p.age;
+    const s = {
+      emoji: themeEmoji(p.hyperfixations),
+      softAudio: p.sensory_profile.auditory === 'Over_Responsive' || tr('Sudden_Loud_Sounds'),
+      bold: p.sensory_profile.visual === 'Under_Responsive' || dx('Sensory_Seeking'),
+      calm: p.sensory_profile.visual === 'Over_Responsive',
+      shortRounds: dx('ADHD_traits'),
+      transitionHelp: dx('Autism') || tr('Unexpected_Changes') || goal('Transitions'),
+      soundsFirst: dx('Speech_Delay') || dx('Autism') || dx('Dyslexia_Risk') || age <= 3,
+      tapOnly: p.communication_mode === 'Non_Verbal' || p.communication_mode === 'Single_Words' || dx('Speech_Delay'),
+      gentle: tr('Getting_It_Wrong') || tr('Time_Pressure') || dx('ADHD_traits'),
+      autoSimplify: dx('ADHD_traits') || goal('Two_Step'),
+      maxCount: age <= 3 ? 3 : age === 4 ? 5 : 8,
+      steps: goal('Two_Step') || age >= 5 ? 2 : 1,
+      bigTargets: dx('Motor_Delay')
+    };
+    const chips = [];
+    if (p.hyperfixations.length) chips.push(`Themed around ${p.hyperfixations.slice(0, 3).join(', ').toLowerCase()}`);
+    if (s.softAudio) chips.push('Soft, slow voice');
+    if (s.bold) chips.push('Bold, high-contrast visuals');
+    if (s.calm) chips.push('Calm, simple screens');
+    if (s.shortRounds) chips.push('Short, quick rounds');
+    if (tr('Time_Pressure')) chips.push('No timers');
+    if (s.transitionHelp) chips.push('Heads-up before switching');
+    if (s.soundsFirst) chips.push('Sounds before letters');
+    if (s.tapOnly) chips.push('Answers by tapping');
+    if (tr('Direct_Eye_Contact_Visuals')) chips.push('No faces looking at them');
+    if (s.autoSimplify) chips.push('Simplifies if stuck');
+    s.chips = chips;
+    return s;
+  }
+
+  // ---------- Voice ----------
+  let voiceOn = true;
+  function say(text) {
+    if (!voiceOn || !S) return;
+    try {
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = S.softAudio ? 0.8 : 1; u.pitch = S.softAudio ? 0.8 : 1; u.volume = S.softAudio ? 0.7 : 1;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  // ---------- Progress ----------
+  const stars = { math: 0, reading: 0, memory: 0 };
+  let correct = 0;
+  function award(subj) {
+    stars[subj]++; correct++;
+    document.querySelector(`[data-stars="${subj}"]`).textContent = '★ ' + stars[subj];
+    $('sCorrect').textContent = correct;
+  }
+  const praise = () => pick(['You did it!', 'Great job!', 'Yes, that\'s right!', 'Nice work!']);
+  const retry = () => S.gentle ? pick(['Let\'s look again together.', 'Almost! Try once more.']) : 'Not quite. Try again!';
+
+  // ---------- Games ----------
+  const stage = $('stage');
+  let timer = null;
+  const clearTimer = () => { if (timer) { clearTimeout(timer); timer = null; } };
+
+  function shell(subj, prompt, why, extra = '') {
+    stage.innerHTML = `
+      <div class="game-top"><span class="why">${why}</span>
+        <button type="button" class="icon-btn" id="hear">Hear it again</button></div>
+      <p class="prompt">${prompt}</p>${extra}
+      <div class="board" id="board"></div>
+      <p class="feedback" id="fb"></p>`;
+    $('hear').addEventListener('click', () => say(stage.querySelector('.prompt').textContent));
+  }
+
+  // Math: tap N themed objects
+  function math() {
+    clearTimer();
+    const e = S.emoji[0];
+    const n = 1 + Math.floor(Math.random() * S.maxCount);
+    const total = Math.min(n + 2 + Math.floor(Math.random() * 2), S.shortRounds ? 6 : 8);
+    const prompt = `Tap ${n} ${e}`;
+    shell('math', prompt, `Counting · up to ${S.maxCount} for age ${P.age}${S.shortRounds ? ' · short rounds' : ''}`);
+    const board = $('board'), fb = $('fb');
+    let picked = [];
+    for (let i = 0; i < total; i++) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tile'; b.textContent = e;
+      b.setAttribute('aria-label', 'object ' + (i + 1));
+      b.addEventListener('click', () => {
+        if (picked.includes(b)) { picked = picked.filter(x => x !== b); b.classList.remove('picked'); }
+        else { picked.push(b); b.classList.add('picked'); }
+        picked.forEach((x, k) => x.dataset.n = k + 1);
+        fb.className = 'feedback soft'; fb.textContent = picked.length ? `${picked.length}…` : '';
+        if (picked.length === n) {
+          fb.className = 'feedback good'; fb.textContent = `${praise()} That's ${n}.`; say(`${praise()} That's ${n}.`);
+          award('math'); setTimeout(math, 1600);
+        } else if (picked.length > n) {
+          fb.className = 'feedback soft'; fb.textContent = `That's ${picked.length}. Tap one to put it back.`;
+        }
+      });
+      board.appendChild(b);
+    }
+    say(`Tap ${n}.`);
+  }
+
+  // Reading: sounds first, or letter sounds
+  const WORDS = [
+    { e: '🐝', w: 'bee', snd: 'Bzzz', l: 'B', re: /bug|bee|insect/ },
+    { e: '🚂', w: 'train', snd: 'Choo choo', l: 'T', re: /train/ },
+    { e: '💧', w: 'water', snd: 'Drip drop', l: 'W', re: /water|rain/ },
+    { e: '🐍', w: 'snake', snd: 'Sssss', l: 'S' },
+    { e: '🐮', w: 'cow', snd: 'Moooo', l: 'M' },
+    { e: '🐶', w: 'dog', snd: 'Woof woof', l: 'D', re: /dog|pupp/ },
+    { e: '🚗', w: 'car', snd: 'Vroom', l: 'C', re: /car/ }
+  ];
+  function reading() {
+    clearTimer();
+    const favs = WORDS.filter(w => w.re && P.hyperfixations.some(h => w.re.test(h.toLowerCase())));
+    const target = favs.length && Math.random() < 0.6 ? pick(favs) : pick(WORDS);
+    const choices = shuffle([target, ...shuffle(WORDS.filter(w => w !== target && w.l !== target.l)).slice(0, 2)]);
+    let prompt, why, extra = '';
+    if (S.soundsFirst) {
+      prompt = `Who says "${target.snd}"?`; why = 'Sound matching · sounds before letters';
+    } else {
+      prompt = `Which one starts with this sound?`; why = 'Letter sounds';
+      extra = `<div class="big-letter-show" aria-label="letter ${target.l}">${target.l}</div>`;
+    }
+    shell('reading', prompt, why, extra);
+    const board = $('board'), fb = $('fb');
+    choices.forEach(c => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tile'; b.textContent = c.e; b.setAttribute('aria-label', c.w);
+      b.addEventListener('click', () => {
+        if (c === target) {
+          b.classList.add('picked'); b.dataset.n = '✓';
+          const msg = S.soundsFirst ? `${praise()} The ${c.w} says ${c.snd}.` : `${praise()} ${c.w} starts with ${c.l}.`;
+          fb.className = 'feedback good'; fb.textContent = msg; say(msg); award('reading'); setTimeout(reading, 1900);
+        } else {
+          b.classList.add('wrong'); fb.className = 'feedback soft'; fb.textContent = retry();
+          setTimeout(() => b.classList.remove('wrong'), 700);
+        }
+      });
+      board.appendChild(b);
+    });
+    say(S.soundsFirst ? `Who says ${target.snd}?` : `Which one starts with ${target.l}?`);
+  }
+
+  // Memory: follow 1–3 step instructions with step cards
+  let memLevel = 1, memStreak = 0;
+  const NAMES = { '🚂': 'train', '🐞': 'ladybug', '💧': 'water drop', '🦕': 'dinosaur', '🚗': 'car', '🚀': 'rocket', '🐶': 'dog', '🐱': 'cat', '🐟': 'fish', '✈️': 'plane', '🐴': 'horse', '🌸': 'flower', '⚽': 'ball', '🎵': 'music note', '🐘': 'elephant', '🐝': 'bee', '⭐': 'star', '🍎': 'apple', '🎈': 'balloon', '🌙': 'moon' };
+  function memory(simplified) {
+    clearTimer();
+    const pool = S.emoji.slice(0, 4);
+    const steps = shuffle(pool).slice(0, memLevel);
+    const words = steps.map(e => `the ${NAMES[e] || 'picture'}`);
+    const prompt = 'Tap ' + words.join(', then ');
+    const cards = `<div class="seq">${steps.map((e, i) => `<div class="seq-card${i === 0 ? ' now' : ''}" data-i="${i}"><span>Step ${i + 1}</span><span class="e">${e}</span></div>`).join('')}</div>`;
+    shell('memory', prompt, `Following instructions · ${memLevel} step${memLevel > 1 ? 's' : ''}${simplified ? ' · simplified to help' : ''}`, cards);
+    $('sLevel').textContent = `${memLevel} step${memLevel > 1 ? 's' : ''}`;
+    const board = $('board'), fb = $('fb');
+    let at = 0;
+    if (S.autoSimplify && memLevel > 1) {
+      timer = setTimeout(() => {
+        if (at === 0) { memLevel--; memStreak = 0; fb.className = 'feedback soft'; fb.textContent = 'Let\'s do one step at a time.'; setTimeout(() => memory(true), 1100); }
+      }, 4000);
+    }
+    shuffle(pool).forEach(e => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tile'; b.textContent = e; b.setAttribute('aria-label', NAMES[e] || 'picture');
+      b.addEventListener('click', () => {
+        if (e === steps[at]) {
+          clearTimer();
+          stage.querySelector(`.seq-card[data-i="${at}"]`).className = 'seq-card done';
+          at++;
+          if (at < steps.length) { stage.querySelector(`.seq-card[data-i="${at}"]`).classList.add('now'); fb.className = 'feedback soft'; fb.textContent = 'Now the next one.'; }
+          else {
+            memStreak++; award('memory');
+            let msg = praise();
+            if (memStreak >= 3 && memLevel < 3) { memLevel++; memStreak = 0; msg += ` Next time: ${memLevel} steps!`; }
+            fb.className = 'feedback good'; fb.textContent = msg; say(msg); setTimeout(() => memory(false), 1700);
+          }
+        } else {
+          b.classList.add('wrong'); fb.className = 'feedback soft'; fb.textContent = S.gentle ? 'Look at the glowing card.' : 'Try again!';
+          setTimeout(() => b.classList.remove('wrong'), 700);
+        }
+      });
+      board.appendChild(b);
+    });
+    say(prompt);
+  }
+
+  const GAMES = { math, reading, memory: () => memory(false) };
+  const LABELS = { math: 'Math', reading: 'Reading', memory: 'Memory' };
+  let current = 'math';
+  function switchTo(subj, instant) {
+    document.querySelectorAll('.subj-tab').forEach(t => t.setAttribute('aria-selected', t.dataset.subj === subj));
+    current = subj; clearTimer();
+    if (instant || !S.transitionHelp) { GAMES[subj](); return; }
+    const ov = document.createElement('div'); ov.className = 'transition';
+    ov.innerHTML = `<h3>Next up: ${LABELS[subj]}</h3><p>Take a breath. We'll start when the bar fills.</p><div class="tbar"><i></i></div><div><button type="button" class="btn quiet" id="readyBtn">I'm ready</button></div>`;
+    stage.appendChild(ov);
+    const bar = ov.querySelector('.tbar i');
+    requestAnimationFrame(() => { bar.style.transition = 'width 4s linear'; bar.style.width = '100%'; });
+    say(`Next up, ${LABELS[subj]}.`);
+    const go = () => { clearTimer(); if (current === subj) GAMES[subj](); };
+    ov.querySelector('#readyBtn').addEventListener('click', go);
+    timer = setTimeout(go, 4000);
+  }
+  document.querySelectorAll('.subj-tab').forEach(t => t.addEventListener('click', () => { if (t.dataset.subj !== current) switchTo(t.dataset.subj); }));
+
+  // ---------- Submit ----------
+  function openSpace(p) {
+    P = p; S = settingsFor(p);
+    const name = p.name || 'Your child';
+    $('learnTitle').innerHTML = `<span>${esc(name)}</span>'s learning space`;
+    $('tailor').innerHTML = S.chips.map(c => `<span>${esc(c)}</span>`).join('');
+    $('sReport').textContent = p.report_cadence === 'daily' ? 'Daily' : 'Weekly';
+    stage.classList.toggle('bold-visuals', S.bold);
+    stage.classList.toggle('calm-visuals', S.calm);
+    memLevel = S.steps; memStreak = 0;
+    $('learn').hidden = false;
+    switchTo('math', true);
+    try { localStorage.setItem('wren-profile', JSON.stringify(p)); } catch (e) {}
+  }
+  $('parentForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const p = readForm();
+    if (!p.name) { $('formErr').hidden = false; $('formErr').textContent = 'Add your child\'s first name so we can personalize their space.'; $('childName').focus(); return; }
+    $('formErr').hidden = true;
+    openSpace(p);
+    $('learn').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('editProfile').addEventListener('click', () => $('start').scrollIntoView({ behavior: 'smooth' }));
+
+  // Restore a saved profile for returning visitors
+  try {
+    const saved = JSON.parse(localStorage.getItem('wren-profile') || 'null');
+    if (saved && saved.name) { fill(saved); openSpace(saved); }
+  } catch (e) {}
+})();
+</script>
+
+</body></html>
