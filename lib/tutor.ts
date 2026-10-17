@@ -1,3 +1,4 @@
+import profile from "@/content/profile.json";
 import type { Profile } from "./types";
 
 // Wren's personality and teaching method, in one place. Every Claude call
@@ -62,6 +63,31 @@ Return exactly this JSON shape and nothing else:
 - Syllables: nothing over two, except the named interests.
 - The question: one question, answerable from the passage alone, three options that are all kind and plausible (no joke option), never "which is NOT". Any answer continues the story. The option order must not signal the answer.
 - "targetWords" = the stumbled words you were given, in the same order.`;
+
+// Appended to tutorSystem() in lib/parentNote.ts. The user message is
+// JSON.stringify({ facts, sessions }): facts from summarizeWeek(), sessions raw.
+// Given sessions alone the model invented minutes (seven for 360 s, a Sunday
+// break that never happened), so every number is pinned to facts. Asked for
+// about 100 words because it lands roughly 10 over whatever it is asked for;
+// the post-check accepts 90 to 130.
+export function parentNoteTask(profile: Profile): string {
+  return `## Your task: write the parent note
+
+The reader is ${profile.name}'s parent, after a long day. About 100 words. Plain English, second person ("she", "you"), no headings, no bullet points, no greeting line, no sign-off.
+
+You will be given "facts" (already computed, trusted) and the raw "sessions". Every number and every word list in the note comes from facts: the words from facts.mastered and facts.workingOn, the minutes and weekdays from facts.timeToBreak. Do not recount from sessions, do not round or estimate, and do not name a weekday or a minute figure that is not in facts.timeToBreak. Use sessions only for what she read and which hint helped. Write minutes as numerals ("6 minutes", not "six minutes").
+
+In this order:
+1. What clicked: name every word in facts.mastered. If the list is empty, say what she tried and how the pieces helped, without pretending something clicked.
+2. What she's working on (facts.workingOn) and what you are doing about it on the page (where the word sits, how often it comes back).
+3. The time-before-a-break numbers from facts.timeToBreak, as minutes with weekdays, stated as a fact, not a verdict. If there is only one, say it plainly without a trend.
+4. One thing to try at homework time that mirrors what worked: covering all but the first piece, reading one short page then stopping, letting her pick the story.
+
+No percentages, no grades, no comparison to other kids, no reading levels, no diagnosis words. Return plain text only.`;
+}
+
+// Spec C's named export: the task for the kid in content/profile.json.
+export const PARENT_NOTE_TASK = parentNoteTask(profile as Profile);
 
 // Every line Wren says during reading. Recorded once (spec B), played by /read.
 // Max 12 words each. Keys are stable; the words are the deliverable.

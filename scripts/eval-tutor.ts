@@ -12,7 +12,8 @@ import profile from "../content/profile.json";
 import passages from "../content/passages.json";
 import sessions from "../content/sessions.json";
 import { generateNextPage, type NextPageResult } from "../lib/nextPage";
-import { tutorSystem, violates } from "../lib/tutor";
+import { summarizeWeek } from "../lib/summary";
+import { PARENT_NOTE_TASK, tutorSystem, violates } from "../lib/tutor";
 import type { NextPageRequest, Passage, Profile, Session, WordResult } from "../lib/types";
 
 // --- env -------------------------------------------------------------------
@@ -211,10 +212,6 @@ function checkPage(s: PageScenario, r: NextPageResult, prev?: NextPageResult): C
 
 // --- parent-note scenarios (previews spec C) --------------------------------
 
-const NOTE_TASK = `## Your task: write the parent note
-
-The reader is the parent, after a long day. 90 to 130 words. Plain English, second person, no headings, no bullet points. In this order: (1) what clicked this week, naming the words; (2) what she's working on and what you're doing about it; (3) the time-before-a-break trend in minutes, stated as a fact, not a verdict; (4) one concrete thing to try at homework time that mirrors what worked. No percentages, no grades, no comparison to other kids. Return plain text.`;
-
 type NoteScenario = { id: number; title: string; throughDay: number };
 const noteScenarios: NoteScenario[] = [
   { id: 5, title: "parent note, day 7", throughDay: 7 },
@@ -236,8 +233,8 @@ async function runNote(s: NoteScenario): Promise<{ text: string; checks: Check[]
     model: "claude-sonnet-5-5",
     max_tokens: 2000,
     thinking: { type: "between_tools" },
-    system: `${tutorSystem(profile as Profile)}\n\n${NOTE_TASK}`,
-    messages: [{ role: "user", content: JSON.stringify({ profile, sessions: ss }) }],
+    system: `${tutorSystem(profile as Profile)}\n\n${PARENT_NOTE_TASK}`,
+    messages: [{ role: "user", content: JSON.stringify({ facts: summarizeWeek(ss, profile as Profile), sessions: ss }) }],
   });
   const text = msg.content.find((b) => b.type === "text")?.text ?? "";
 
