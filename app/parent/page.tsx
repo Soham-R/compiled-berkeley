@@ -87,7 +87,7 @@ async function Report({ searchParams }: { searchParams: SearchParams }) {
       <div className="mx-auto grid w-full max-w-[640px] gap-5 px-5 pb-16">
         <Card>
           <p className="font-display text-sm font-bold text-accent">
-            From Wren
+            From Alder
             {source === "fallback" && <span className="ml-2 font-sans font-normal text-dim">(pre-written note)</span>}
           </p>
           <p className="whitespace-pre-line text-[1.05rem] leading-[1.65] text-ink">{note}</p>
@@ -143,10 +143,10 @@ export default function ParentPage({ searchParams }: { searchParams: SearchParam
       <div className="bg-gradient-to-b from-tint to-white">
         <div className="mx-auto flex w-full max-w-[640px] items-center justify-between px-5 py-4">
           <Link href="/" className="font-display text-2xl font-extrabold text-ink no-underline">
-            Wren
+            Alder
           </Link>
           <Link href="/" className="text-sm font-medium text-dim hover:text-ink">
-            Back to Wren
+            Back to Alder
           </Link>
         </div>
         <div className="mx-auto w-full max-w-[640px] px-5 pb-3 pt-6">

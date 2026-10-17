@@ -1,5 +1,5 @@
 /**
- * Unified type definitions for Wren frontend.
+ * Unified type definitions for Alder frontend.
  */
 
 export * from "./types/profile";

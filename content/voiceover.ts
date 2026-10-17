@@ -12,10 +12,10 @@ export const VOICEOVER: VoiceoverLine[] = [
     id: "02-day1-intro",
     text: "Maya is seven. Decoding is slow; attention fades by minute eight. For kids like her, the bottleneck isn't explanation. It's state.",
   },
-  { id: "03-day1-marked", text: "Nothing is marked. Wren shows the pieces, says them once, moves on." },
+  { id: "03-day1-marked", text: "Nothing is marked. Alder shows the pieces, says them once, moves on." },
   {
     id: "04-day1-flag",
-    text: "Three stumbles: working memory is full. Wren downshifts before the meltdown. Any answer continues.",
+    text: "Three stumbles: working memory is full. Alder downshifts before the meltdown. Any answer continues.",
   },
   {
     id: "05-day2-intro",

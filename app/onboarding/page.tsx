@@ -95,7 +95,7 @@ export default function OnboardingPage() {
         <p className="text-sm uppercase tracking-wide opacity-60">Get started</p>
         <h1 className="text-3xl font-semibold">Tell us about your child</h1>
         <p className="text-lg opacity-80">
-          Takes about five minutes. Every answer changes how Wren teaches.
+          Takes about five minutes. Every answer changes how Alder teaches.
         </p>
         <ul className="text-sm opacity-60">
           <li>No diagnosis needed</li>
@@ -320,7 +320,7 @@ export default function OnboardingPage() {
           </button>
         </div>
         <small className="opacity-60">
-          By continuing you agree that Wren is a learning tool and does not give
+          By continuing you agree that Alder is a learning tool and does not give
           medical advice.
         </small>
       </form>

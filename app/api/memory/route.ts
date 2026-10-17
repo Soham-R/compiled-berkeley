@@ -133,7 +133,7 @@ export async function GET(req: NextRequest) {
   const cached = memoryStore.get(childId) || {
     summary: {
       practiceWords: ["through", "think", "there"],
-      greeting: "Welcome to Wren! Let's read together today.",
+      greeting: "Welcome to Alder! Let's read together today.",
     },
     profile: null,
   };

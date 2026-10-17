@@ -1,5 +1,5 @@
 /**
- * API client to communicate with the Wren FastAPI backend.
+ * API client to communicate with the Alder FastAPI backend.
  */
 
 import type { ChildProfile } from "./types/profile";
